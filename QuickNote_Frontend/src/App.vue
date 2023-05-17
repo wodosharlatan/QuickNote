@@ -1,8 +1,13 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import NavPanel from "./components/NavPanel.vue"
+
 </script>
 
 <template>
+  <div v-if="$route.name != 'Login'">
+    <NavPanel />
+  </div>
   <RouterView />
 </template>
 
