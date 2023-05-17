@@ -1,55 +1,39 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user_model");
-const nodemailer = require("nodemailer");
+const axios = require("axios");
 
-/*
-async function SendEmail(username, password, email) {
-	const htmlEmail = `
-    <h3>Test</h3>
-    <ul>
-        <li>Username: ${username} </li>
-        <li>Password: ${password} </li>
-    </ul>
-    `;
-
-	const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-		secure: false,
-		auth: {
-			user: "test@openjavascript.info",
-			pass: "NodeMailer123!",
-		},
-	});
-
-	try {
-		await transporter.sendMail({
-			from: `OpenJavaScript <test@openjavascript.info>`,
-			to: `${email}`,
-			subject: "Test",
-			html: htmlEmail,
-		});
-	} catch (error) {
-		console.log(error);
-	}
-}
-*/
-
+// Add env variables
+require("dotenv").config();
 
 // Make new user
 router.post("/", async (req, res) => {
-	const name = req.body.username;
-	const pass = req.body.password;
-	const email = req.body.email;
+
+	// Generate new ID
+	const currentID = await axios.get(`http://localhost:${process.env.PORT}/accounts`);
+
+	const ID_List = [];
+
+	// Get all the current user id's
+	for (let i = 0; i < currentID.data.length; i++) {
+		ID_List.push(currentID.data[i].ID);
+	}
+
+	// check if the new id is already in the database
+	let newID = 0;
+	while (ID_List.includes(newID.toString())) {
+		newID++;
+	}
+
+	newID = newID.toString();
 
 	const user = new User({
-		Username: name,
-		Password: pass,
-		Email: email,
+		Username: req.body.username,
+		Password: req.body.password,
+		ID: newID,
 	});
 
 	try {
-		// SendEmail(name, pass, email);
 		const savedUser = await user.save();
 		res.json(savedUser);
 	} catch (err) {
