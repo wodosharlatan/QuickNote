@@ -1,6 +1,10 @@
 <template>
-    <p>Login</p>
-    <button @click="login">Login</button>
+    <div class="login">
+        <p>Login</p>
+        <input type="text" placeholder="Username" v-model="username" /><br>
+        <input type="text" placeholder="Password" v-model="password" /><br>
+        <button @click="login" :disabled="canLogin">Login</button>
+    </div>
 </template>
 
 <script>
@@ -10,16 +14,18 @@ import { useLoginStore } from '../stores/login'
 
 export default {
     setup() {
+        const username = ref("");
+        const password = ref("");
+        const canLogin = computed(() => !(username.value != "" && password.value != ""));
+
         const router = useRouter()
-        const route = useRoute()
 
         const login = () => {
             const loginStore = useLoginStore();
-            loginStore.loginToken = "LOGIN15165465";
-            router.push({ name:"Home"});
-
+            loginStore.loginToken = "LOGIN_TEST_VALUE_6482148";
+            router.push({ name: "Home" });
         }
-        return { login }
+        return { username, password, canLogin, login }
     }
 }
 </script>

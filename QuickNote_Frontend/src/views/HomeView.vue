@@ -1,7 +1,6 @@
 <template>
     <p>Home</p>
     <button @click="logout">Logout</button>
-    <button @click="gologin">gologin</button>
 </template>
 
 <script>
@@ -23,7 +22,7 @@ export default {
         const gologin = () => {
             router.push({ name:"Login"});
         }
-        return { logout,gologin }
+        return { logout, gologin }
     }
 }
 </script>

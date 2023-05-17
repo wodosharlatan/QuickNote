@@ -8,6 +8,5 @@ export const useLoginStore = defineStore('login', () => {
   function Logout() {
     loginToken.value = null;
   }
-  effect
   return { loginToken, loggedIn, Logout }
 })
