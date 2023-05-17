@@ -12,7 +12,11 @@ const userSchema = mongoose.Schema({
 	ID: {
 		type: String,
 		required: true,
-	}
+	},
+	IsAdmin: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 module.exports = mongoose.model("Users", userSchema);

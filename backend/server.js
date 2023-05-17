@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
+const axios = require('axios');
 
 // Add env variables
 require('dotenv').config();
@@ -14,9 +15,11 @@ app.use(bodyParser.json());
 
 // Routes
 const userRoute = require('./routes/user');
+const loginRoute = require('./routes/login');
 
 // Sites
 app.use('/accounts', userRoute);
+app.use('/login', loginRoute);
 
 // Start server
 app.listen(port, () => {
@@ -25,4 +28,9 @@ app.listen(port, () => {
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true})
+
+/*
+const allUsers = axios.get(`http://localhost:${process.env.PORT}/accounts`)
+console.log(allUsers.data);
+*/
 
