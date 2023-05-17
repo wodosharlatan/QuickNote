@@ -1,7 +1,6 @@
 <template>
-    <p>Home</p>
-    <button @click="logout">Logout</button>
-    <button @click="gologin">gologin</button>
+    <p>Login</p>
+    <button @click="login">Login</button>
 </template>
 
 <script>
@@ -14,16 +13,13 @@ export default {
         const router = useRouter()
         const route = useRoute()
 
-        const logout = () => {
+        const login = () => {
             const loginStore = useLoginStore();
-            loginStore.Logout();
-            router.push({ name:"Login"});
-        }
+            loginStore.loginToken = "LOGIN15165465";
+            router.push({ name:"Home"});
 
-        const gologin = () => {
-            router.push({ name:"Login"});
         }
-        return { logout,gologin }
+        return { login }
     }
 }
 </script>
