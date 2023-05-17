@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
+const axios = require('axios');
 
 // Add env variables
 require('dotenv').config();
@@ -24,6 +25,10 @@ app.use('/accounts', userRoute);
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port} !`);
 });
+
+
+
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true})
