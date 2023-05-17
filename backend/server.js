@@ -8,10 +8,17 @@ const port = process.env.PORT || 3000;
 // Add env variables
 require('dotenv').config();
 
-
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
+// Routes
+const userRoute = require('./routes/user');
+
+// Sites
+app.use('/accounts', userRoute);
+
+
 
 // Start server
 app.listen(port, () => {
