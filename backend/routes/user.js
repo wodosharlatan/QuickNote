@@ -73,21 +73,21 @@ router.get("/:ID", async (req, res) => {
 	}
 });
 
-// Change Password for a specific user by ID
+// Change Password for a specific user by Token
 router.patch("/:token", async (req, res) => {
 	try {
 		await User.updateMany(
 			{ token: req.params.token },
 			{ $set: { Password: req.body.password, FirstTimeLogin: false } }
 		);
-		res.json(JSON.stringify({ message: "Password changed!" }));
+		res.json({ message: "Password changed!" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
 });
 
 // Change Last Login for a specific user by Token
-router.patch("/:token/ChangeLogin", async (req, res) => {
+router.patch("/:token/changelogin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
 			{ token: req.params.token },
@@ -101,13 +101,13 @@ router.patch("/:token/ChangeLogin", async (req, res) => {
 
 
 // Delete token for a specific user by Token on logout
-router.patch("/:token/LogOut", async (req, res) => {
+router.patch("/:token/logout", async (req, res) => {
 	try {
-		const updatedUser = await User.updateMany(
+		await User.updateMany(
 			{ token: req.params.token },
 			{ $set: { UserToken: "" } }
 		);
-		res.json(JSON.stringify({ message: "Logged out! Token Deleted" }));
+		res.json({ message: "Logged out! Token Deleted" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
@@ -116,8 +116,8 @@ router.patch("/:token/LogOut", async (req, res) => {
 // Delete a specific user by Token
 router.delete("/:token", async (req, res) => {
 	try {
-		const removedUser = await User.deleteOne({ token: req.params.token });
-		res.json(JSON.stringify({ message: "User deleted!" }));
+		await User.deleteOne({ token: req.params.token });
+		res.json({ message: "User deleted!" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
@@ -125,13 +125,13 @@ router.delete("/:token", async (req, res) => {
 
 
 // Make user Admin
-router.patch("/:token/Admin", async (req, res) => {
+router.patch("/:token/admin", async (req, res) => {
 	try {
-		const updatedUser = await User.updateMany(
+		await User.updateMany(
 			{ token: req.params.token },
 			{ $set: { IsAdmin: true } }
 		);
-		res.json(JSON.stringify({ message: "Admin privileges granted !" }));
+		res.json({ message: "Admin privileges granted !" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}

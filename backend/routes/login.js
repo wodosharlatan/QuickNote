@@ -38,11 +38,16 @@ router.post("/", async (req, res) => {
 
 			// Get updated info
 			await axios
-				.get(`http://localhost:${process.env.PORT}/users/${result[0].UserToken}`)
+				.get(
+					`http://localhost:${process.env.PORT}/users/${result[0].ID}`
+				)
 				.then((response) => {
 					// Send response as JSON
-					const json = JSON.stringify({token: response.data.UserToken,isadmin: response.data.IsAdmin,changepass: response.data.FirstTimeLogin});
-					res.json(json);
+					res.json({
+						token: `${response.data.UserToken}`,
+						isadmin: `${response.data.IsAdmin}`,
+						changepass: `${response.data.FirstTimeLogin}`,
+					});
 				});
 		} else {
 			res.json({ message: "Wrong username or password!" });
