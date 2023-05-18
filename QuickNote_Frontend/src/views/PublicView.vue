@@ -1,5 +1,5 @@
 <template>
-    <p>Admin</p>
+    <p>Public</p>
 </template>
 
 <script>

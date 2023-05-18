@@ -1,5 +1,5 @@
 <template>
-    <p>Admin</p>
+    <p>Note</p>
 </template>
 
 <script>

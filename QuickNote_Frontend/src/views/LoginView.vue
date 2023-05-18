@@ -1,5 +1,5 @@
 <template>
-    <div :class="{exiting:exiting,login:true,recBG_0:true}">
+    <div :class="{ exiting: exiting, login: true, recBG_0: true }">
         <p class="textStyle1">Login</p>
         <input class="ui_ElementT1" type="text" placeholder="Username" v-model="username" /><br>
         <input class="ui_ElementT1" type="password" placeholder="Password" v-model="password" /><br>
@@ -21,38 +21,62 @@ export default {
 
         const router = useRouter()
 
-        const login = () => {
-            const loginStore = useLoginStore();
-
-            loginToServer(username.value,password.value)
-            
-            loginStore.loginToken = "LOGIN_TEST_VALUE_6482148";
+        const login = async () => {
+            if (!await loginToServer(username.value, password.value))
+                return;
             exiting.value = true;
             setTimeout(() => {
-                router.push({ name: "Home" });
-            },1000)
-            
+                router.push({ name: "Public" });
+
+            }, 1000)
+
         }
 
-        function loginToServer(username,password) {
-            
+        //tombos4
+        //6t1uewa3
+        async function loginToServer(username, password) {
+            if (!window.useBackend) {
+                const loginStore = useLoginStore();
+                loginStore.loginToken = "TESTTOKEN456454";
+                return true;
+            }
+            const responseServer = await fetch("http://" + window.backendServer + "/login", {
+                method: "POST",
+                body: JSON.stringify({ username: username, password: password }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            const response = await responseServer.json();
+
+            if (response.message) {
+                alert(response.message);
+                return false;
+            }
+            if (!response.token || response.token.length != 22) {
+                alert("Server ERROR!!!");
+                return false;
+            }
+            console.log(response);
+            const loginStore = useLoginStore();
+            loginStore.loginToken = response.token;
+            return true;
         }
-        return { username, password, canLogin, login,exiting }
+        return { username, password, canLogin, login, exiting }
     }
 }
 </script>
 
-<style>
-
-.exiting{
+<style scoped>
+.exiting {
     display: block;
     transition: 1s;
     opacity: 0%;
-    transform: translate(-50%,-50%) scale(0.25,0.25) !important;
+    transform: translate(-50%, -50%) scale(0.25, 0.25) !important;
 }
 
-.ui_ElementT1:hover{
-    transform: scale(1.02,1.02);
+.ui_ElementT1:hover {
+    transform: scale(1.02, 1.02);
 }
 
 .login {
@@ -60,15 +84,14 @@ export default {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1,1);
+    transform: translate(-50%, -50%) scale(1, 1);
     border-radius: 30px;
 }
 
 .login button {
-    
+
     margin-top: 35px;
     opacity: 90%;
-
     margin-bottom: 20px;
 }
 

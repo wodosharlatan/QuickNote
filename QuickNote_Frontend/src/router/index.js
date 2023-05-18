@@ -5,9 +5,24 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: import('../views/HomeView.vue')
+      path: '/public',
+      name: 'Public',
+      component: import('../views/PublicView.vue')
+    },
+    {
+      path: '/private',
+      name: 'Private',
+      component: import('../views/PrivateView.vue')
+    },
+    {
+      path: '/note',
+      name: 'Note',
+      component: import('../views/NoteView.vue')
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: import('../views/AdminView.vue')
     },
     {
       path: '/login',
@@ -23,7 +38,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const loginStore = useLoginStore();
   if (to.name == "Login" && loginStore.loggedIn){
-    next({ name: 'Home' })
+    next({ name: 'Public' })
     return;
   }
   if (to.matched.some(record => !record.meta.dontUseAuth)) {
