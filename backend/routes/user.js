@@ -6,33 +6,37 @@ const axios = require("axios");
 // Add env variables
 require("dotenv").config();
 
-// Make new user
-router.post("/", async (req, res) => {
-	
-	// Generate new ID
-	async function generateID() {
-		let newID = 0;
-		const response = await axios.get(`http://localhost:${process.env.PORT}/users`);
-		const ID_List = response.data.map(user => user.ID);
-	
-		while (ID_List.includes(newID.toString())) {
-		  newID++;
-		}
-	
-		return newID.toString();
-	  }
 
-	// Generate random password
-	function generatePassword() {
-		pass =
-			Math.random().toString(36).slice(2) +
-			Math.random().toString(36).toUpperCase().slice(2);
+// Generate new ID
+async function generateID() {
+	let newID = 0;
+	const response = await axios.get(
+		`http://localhost:${process.env.PORT}/users`
+	);
+	const ID_List = response.data.map((user) => user.ID);
 
-		pass = pass.slice(0, 8);
-
-		return pass;
+	while (ID_List.includes(newID.toString())) {
+		newID++;
 	}
 
+	return newID.toString();
+}
+
+
+// Generate random password
+function generatePassword() {
+	pass =
+		Math.random().toString(36).slice(2) +
+		Math.random().toString(36).toUpperCase().slice(2);
+
+	pass = pass.slice(0, 8);
+
+	return pass;
+}
+
+
+// Make new user
+router.post("/", async (req, res) => {
 	// Create new user
 	const user = new User({
 		Username: req.body.username,
@@ -69,12 +73,25 @@ router.get("/:ID", async (req, res) => {
 	}
 });
 
-// Change Password for a specific user by ID
-router.patch("/:ID", async (req, res) => {
+// Change Password for a specific user by Token
+router.patch("/:token", async (req, res) => {
+	try {
+		await User.updateMany(
+			{ UserToken: req.params.token },
+			{ $set: { Password: req.body.password, FirstTimeLogin: false } }
+		);
+		res.json({ message: "Password changed!" });
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+// Change Last Login for a specific user by Token
+router.patch("/:token/changelogin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
-			{ ID: req.params.ID },
-			{ $set: { Password: req.body.password , FirstTimeLogin: false }}
+			{ UserToken: req.params.token },
+			{ $set: { LastLogin: Date.now() } }
 		);
 		res.json(updatedUser);
 	} catch (error) {
@@ -83,29 +100,41 @@ router.patch("/:ID", async (req, res) => {
 });
 
 
-// Change Last Login for a specific user by ID
-router.patch("/:ID/ChangeLogin", async (req, res) => {
+// Delete token for a specific user by Token on logout
+router.patch("/:token/logout", async (req, res) => {
 	try {
-		const updatedUser = await User.updateMany(
-			{ ID: req.params.ID },
-			{ $set: { LastLogin:  Date.now() }}
+		await User.updateMany(
+			{ UserToken: req.params.token },
+			{ $set: { UserToken: "" } }
 		);
-		res.json(updatedUser);
+		res.json({ message: "Logged out! Token Deleted" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
 });
 
-
-// Delete a specific user by ID
-router.delete("/:ID", async (req, res) => {
+// Delete a specific user by Token
+router.delete("/:token", async (req, res) => {
 	try {
-		const removedUser = await User.deleteOne({ ID: req.params.ID });
-		res.json(removedUser);
+		await User.deleteOne({ UserToken: req.params.token });
+		res.json({ message: "User deleted!" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
 });
 
+
+// Make user Admin
+router.patch("/:token/admin", async (req, res) => {
+	try {
+		await User.updateMany(
+			{ UserToken: req.params.token },
+			{ $set: { IsAdmin: true } }
+		);
+		res.json({ message: "Admin privileges granted !" });
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
 
 module.exports = router;
