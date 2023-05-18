@@ -129,7 +129,7 @@ router.patch("/:ID/Admin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
 			{ ID: req.params.ID },
-			{ $set: { IsAdmin: true } }
+			{ $set: { IsAdmin: true } },
 		);
 		res.json(JSON.stringify({ message: "Admin privileges granted !" }));
 	} catch (error) {
