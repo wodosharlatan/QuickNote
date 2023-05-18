@@ -77,7 +77,7 @@ router.get("/:ID", async (req, res) => {
 router.patch("/:token", async (req, res) => {
 	try {
 		await User.updateMany(
-			{ token: req.params.token },
+			{ UserToken: req.params.token },
 			{ $set: { Password: req.body.password, FirstTimeLogin: false } }
 		);
 		res.json({ message: "Password changed!" });
@@ -90,7 +90,7 @@ router.patch("/:token", async (req, res) => {
 router.patch("/:token/changelogin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
-			{ token: req.params.token },
+			{ UserToken: req.params.token },
 			{ $set: { LastLogin: Date.now() } }
 		);
 		res.json(updatedUser);
@@ -104,7 +104,7 @@ router.patch("/:token/changelogin", async (req, res) => {
 router.patch("/:token/logout", async (req, res) => {
 	try {
 		await User.updateMany(
-			{ token: req.params.token },
+			{ UserToken: req.params.token },
 			{ $set: { UserToken: "" } }
 		);
 		res.json({ message: "Logged out! Token Deleted" });
@@ -116,7 +116,7 @@ router.patch("/:token/logout", async (req, res) => {
 // Delete a specific user by Token
 router.delete("/:token", async (req, res) => {
 	try {
-		await User.deleteOne({ token: req.params.token });
+		await User.deleteOne({ UserToken: req.params.token });
 		res.json({ message: "User deleted!" });
 	} catch (error) {
 		res.json({ message: error.toString() });
@@ -128,7 +128,7 @@ router.delete("/:token", async (req, res) => {
 router.patch("/:token/admin", async (req, res) => {
 	try {
 		await User.updateMany(
-			{ token: req.params.token },
+			{ UserToken: req.params.token },
 			{ $set: { IsAdmin: true } }
 		);
 		res.json({ message: "Admin privileges granted !" });
