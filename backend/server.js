@@ -18,7 +18,7 @@ const userRoute = require('./routes/user');
 const loginRoute = require('./routes/login');
 
 // Sites
-app.use('/accounts', userRoute);
+app.use('/users', userRoute);
 app.use('/login', loginRoute);
 
 // Start server

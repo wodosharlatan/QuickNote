@@ -8,33 +8,48 @@ require("dotenv").config();
 
 // Make new user
 router.post("/", async (req, res) => {
-
-	let newID = 0;
-
+	
 	// Generate new ID
-	await axios
-		.get(`http://localhost:${process.env.PORT}/accounts`)
-		.then((response) => {
-			const ID_List = [];
+	async function generateID() {
+		let newID = 0;
 
-			// Get all the current user id's
-			for (let i = 0; i < response.data.length; i++) {
-				ID_List.push(response.data[i].ID);
-			}
+		await axios
+			.get(`http://localhost:${process.env.PORT}/users`)
+			.then((response) => {
+				const ID_List = [];
 
-			// check if the new id is already in the database
-			while (ID_List.includes(newID.toString())) {
-				newID++;
-			}
+				// Get all the current user id's
+				for (let i = 0; i < response.data.length; i++) {
+					ID_List.push(response.data[i].ID);
+				}
 
-			newID = newID.toString();
-		});
+				// check if the new id is already in the database
+				while (ID_List.includes(newID.toString())) {
+					newID++;
+				}
+
+				newID = newID.toString();
+			});
+
+		return newID;
+	}
+
+	// Generate random password
+	function generatePassword() {
+		pass =
+			Math.random().toString(36).slice(2) +
+			Math.random().toString(36).toUpperCase().slice(2);
+
+		pass = pass.slice(0, 8);
+
+		return pass;
+	}
 
 	// Create new user
 	const user = new User({
 		Username: req.body.username,
-		Password: req.body.password,
-		ID: newID,
+		Password: generatePassword(),
+		ID: await generateID(),
 	});
 
 	try {
@@ -55,12 +70,25 @@ router.get("/", async (req, res) => {
 	}
 });
 
-// Get a specific user by Email
+// Get a specific user by ID
 router.get("/:ID", async (req, res) => {
 	try {
 		const validatedUser = await User.findOne({ ID: req.params.ID });
 
 		res.send(validatedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+// Change Password for a specific user by ID
+router.patch("/:ID", async (req, res) => {
+	try {
+		const updatedUser = await User.updateMany(
+			{ ID: req.params.ID },
+			{ $set: { Password: req.body.password , FirstTimeLogin: false }}
+		);
+		res.json(updatedUser);
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}

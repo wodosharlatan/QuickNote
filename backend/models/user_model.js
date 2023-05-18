@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+
 const userSchema = mongoose.Schema({
 	Username: {
 		type: String,
@@ -16,6 +18,10 @@ const userSchema = mongoose.Schema({
 	IsAdmin: {
 		type: Boolean,
 		default: false,
+	},
+	FirstTimeLogin: {
+		type: Boolean,
+		default: true,
 	},
 });
 
