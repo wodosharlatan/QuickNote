@@ -94,4 +94,16 @@ router.patch("/:ID", async (req, res) => {
 	}
 });
 
+
+// Delete a specific user by ID
+router.delete("/:ID", async (req, res) => {
+	try {
+		const removedUser = await User.remove({ ID: req.params.ID });
+		res.json(removedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
 module.exports = router;
