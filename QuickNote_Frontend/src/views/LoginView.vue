@@ -114,10 +114,12 @@ export default {
 
 .login input[type=text]:focus {
     outline: none;
+    background-color: #FFFFFF;
 }
 
 .login input[type=password]:focus {
     outline: none;
+    background-color: #FFFFFF;
 }
 
 .login p {
