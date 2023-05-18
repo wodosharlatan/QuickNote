@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-
-
 const userSchema = mongoose.Schema({
 	Username: {
 		type: String,
@@ -22,6 +20,10 @@ const userSchema = mongoose.Schema({
 	FirstTimeLogin: {
 		type: Boolean,
 		default: true,
+	},
+	LastLogin: {
+		type: Date,
+		default: Date.now(),
 	},
 });
 

@@ -3,6 +3,8 @@ const router = express.Router();
 const axios = require("axios");
 
 router.post("/", async (req, res) => {
+	result = [];
+
 	// Get all users
 	await axios
 		.get(`http://localhost:${process.env.PORT}/users`)
@@ -15,13 +17,21 @@ router.post("/", async (req, res) => {
 					inputUsername == response.data[i].Username &&
 					inputPassword == response.data[i].Password
 				) {
-					res.json(response.data[i]);
-					return;
+					result.push(response.data[i]);
 				}
 			}
 		});
 
-	res.json({ message: "Invalid username or password" });
+	if (result.length == 1) {
+		console.log(result[0].ID);
+		await axios
+			.patch(
+				`http://localhost:${process.env.PORT}/users/${result[0].ID}/ChangeLogin`
+			)
+			.then((response) => {
+				res.json(result[0]);
+			});
+	}
 });
 
 module.exports = router;

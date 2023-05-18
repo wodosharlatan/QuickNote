@@ -95,6 +95,20 @@ router.patch("/:ID", async (req, res) => {
 });
 
 
+// Change Last Login for a specific user by ID
+router.patch("/:ID/ChangeLogin", async (req, res) => {
+	try {
+		const updatedUser = await User.updateMany(
+			{ ID: req.params.ID },
+			{ $set: { LastLogin:  Date.now() }}
+		);
+		res.json(updatedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
 // Delete a specific user by ID
 router.delete("/:ID", async (req, res) => {
 	try {
