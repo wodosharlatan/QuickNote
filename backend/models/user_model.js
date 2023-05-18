@@ -12,7 +12,19 @@ const userSchema = mongoose.Schema({
 	ID: {
 		type: String,
 		required: true,
-	}
+	},
+	IsAdmin: {
+		type: Boolean,
+		default: false,
+	},
+	FirstTimeLogin: {
+		type: Boolean,
+		default: true,
+	},
+	LastLogin: {
+		type: Date,
+		default: Date.now(),
+	},
 });
 
 module.exports = mongoose.model("Users", userSchema);

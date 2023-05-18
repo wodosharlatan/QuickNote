@@ -8,29 +8,36 @@ require("dotenv").config();
 
 // Make new user
 router.post("/", async (req, res) => {
-
+	
 	// Generate new ID
-	const currentID = await axios.get(`http://localhost:${process.env.PORT}/accounts`);
+	async function generateID() {
+		let newID = 0;
+		const response = await axios.get(`http://localhost:${process.env.PORT}/users`);
+		const ID_List = response.data.map(user => user.ID);
+	
+		while (ID_List.includes(newID.toString())) {
+		  newID++;
+		}
+	
+		return newID.toString();
+	  }
 
-	const ID_List = [];
+	// Generate random password
+	function generatePassword() {
+		pass =
+			Math.random().toString(36).slice(2) +
+			Math.random().toString(36).toUpperCase().slice(2);
 
-	// Get all the current user id's
-	for (let i = 0; i < currentID.data.length; i++) {
-		ID_List.push(currentID.data[i].ID);
+		pass = pass.slice(0, 8);
+
+		return pass;
 	}
 
-	// check if the new id is already in the database
-	let newID = 0;
-	while (ID_List.includes(newID.toString())) {
-		newID++;
-	}
-
-	newID = newID.toString();
-
+	// Create new user
 	const user = new User({
 		Username: req.body.username,
-		Password: req.body.password,
-		ID: newID,
+		Password: generatePassword(),
+		ID: await generateID(),
 	});
 
 	try {
@@ -51,15 +58,54 @@ router.get("/", async (req, res) => {
 	}
 });
 
-// Get a specific user by Email
-router.get("/:Email", async (req, res) => {
+// Get a specific user by ID
+router.get("/:ID", async (req, res) => {
 	try {
-		const validatedUser = await User.findOne({ Email: req.params.Email });
+		const validatedUser = await User.findOne({ ID: req.params.ID });
 
 		res.send(validatedUser);
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
 });
+
+// Change Password for a specific user by ID
+router.patch("/:ID", async (req, res) => {
+	try {
+		const updatedUser = await User.updateMany(
+			{ ID: req.params.ID },
+			{ $set: { Password: req.body.password , FirstTimeLogin: false }}
+		);
+		res.json(updatedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
+// Change Last Login for a specific user by ID
+router.patch("/:ID/ChangeLogin", async (req, res) => {
+	try {
+		const updatedUser = await User.updateMany(
+			{ ID: req.params.ID },
+			{ $set: { LastLogin:  Date.now() }}
+		);
+		res.json(updatedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
+// Delete a specific user by ID
+router.delete("/:ID", async (req, res) => {
+	try {
+		const removedUser = await User.deleteOne({ ID: req.params.ID });
+		res.json(removedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
 
 module.exports = router;

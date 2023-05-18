@@ -15,21 +15,16 @@ app.use(bodyParser.json());
 
 // Routes
 const userRoute = require('./routes/user');
+const loginRoute = require('./routes/login');
 
 // Sites
-app.use('/accounts', userRoute);
-
-
+app.use('/users', userRoute);
+app.use('/login', loginRoute);
 
 // Start server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port} !`);
 });
 
-
-
-
-
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true})
-
