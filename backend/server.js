@@ -28,9 +28,3 @@ app.listen(port, () => {
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true})
-
-/*
-const allUsers = axios.get(`http://localhost:${process.env.PORT}/accounts`)
-console.log(allUsers.data);
-*/
-

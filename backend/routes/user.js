@@ -12,27 +12,15 @@ router.post("/", async (req, res) => {
 	// Generate new ID
 	async function generateID() {
 		let newID = 0;
-
-		await axios
-			.get(`http://localhost:${process.env.PORT}/users`)
-			.then((response) => {
-				const ID_List = [];
-
-				// Get all the current user id's
-				for (let i = 0; i < response.data.length; i++) {
-					ID_List.push(response.data[i].ID);
-				}
-
-				// check if the new id is already in the database
-				while (ID_List.includes(newID.toString())) {
-					newID++;
-				}
-
-				newID = newID.toString();
-			});
-
-		return newID;
-	}
+		const response = await axios.get(`http://localhost:${process.env.PORT}/users`);
+		const ID_List = response.data.map(user => user.ID);
+	
+		while (ID_List.includes(newID.toString())) {
+		  newID++;
+		}
+	
+		return newID.toString();
+	  }
 
 	// Generate random password
 	function generatePassword() {
