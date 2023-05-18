@@ -10,9 +10,9 @@ This documentation provides an overview and usage guide for the backend applicat
 
 ## API Endpoints
 
-### Users
+## Users
 
-#### Create a User
+### Create a User
 
 - **Endpoint:** `/users`
 - **Method:** `POST`
@@ -41,7 +41,7 @@ This documentation provides an overview and usage guide for the backend applicat
 ```
 
 
-#### Get All Users
+### Get All Users
 
 - **Endpoint:** `/users`
 - **Method:** `GET`
@@ -80,7 +80,7 @@ This documentation provides an overview and usage guide for the backend applicat
 ]
 ```
 
-#### Get a User by ID
+### Get a User by ID
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `GET`
@@ -107,7 +107,7 @@ This documentation provides an overview and usage guide for the backend applicat
 ```
 
 
-#### Update User Password
+### Update User Password
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `PATCH`
@@ -128,7 +128,7 @@ This documentation provides an overview and usage guide for the backend applicat
 
 
 
-#### Delete a User
+### Delete a User
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `DELETE`
@@ -142,7 +142,9 @@ This documentation provides an overview and usage guide for the backend applicat
 }
 ```
 
-#### Authenticate User
+## Login
+
+### Authenticate User
 
 - **Endpoint:** `/login`
 - **Method:** `POST`
