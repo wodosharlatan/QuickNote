@@ -19,6 +19,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```Json
@@ -30,6 +31,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "FirstTimeLogin": true,
         "LastLogin": "2023-05-18T07:19:36.103Z",
         "_id": "6465d2dab1dda60f48ef10e3",
+        "UserToken": "",
         "__v": 0
     }
 ```
@@ -47,6 +49,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```JSON
@@ -59,6 +62,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "IsAdmin": false,
         "FirstTimeLogin": true,
         "LastLogin": "2023-05-18T06:52:04.654Z",
+        "UserToken": "",
         "__v": 0
     },
     {
@@ -69,6 +73,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "IsAdmin": false,
         "FirstTimeLogin": true,
         "LastLogin": "2023-05-18T06:52:04.654Z",
+        "UserToken": "",
         "__v": 0
     }
 ]
@@ -85,6 +90,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```Json
@@ -96,6 +102,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "FirstTimeLogin": false,
         "LastLogin": "2038-05-18T07:19:36.103Z",
         "_id": "6465d2dab1dda60f48ef10e3",
+        "UserToken": "",
         "__v": 0
     }
 ```
@@ -152,6 +159,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```Json
@@ -163,6 +171,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "FirstTimeLogin": true,
         "LastLogin": "2038-05-18T07:19:36.103Z",
         "_id": "6465d2dab1dda60f48ef10e3",
+        "UserToken": "d86csp57mnl1ZV8QI9HS3O",
         "__v": 0
     }
 ```
