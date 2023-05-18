@@ -1,12 +1,6 @@
 # Backend Documentation
 
-This documentation provides an overview and usage guide for the backend application. It covers the API endpoints, configuration, and deployment instructions.
-
-## Table of Contents
-
-- [API Endpoints](#api-endpoints)
-- [Configuration](#configuration)
-- [Deployment](#deployment)
+This documentation provides an overview and usage guide for the backend application. It covers the API endpoints and instructions.
 
 ## API Endpoints
 
