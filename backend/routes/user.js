@@ -80,7 +80,7 @@ router.patch("/:ID", async (req, res) => {
 			{ ID: req.params.ID },
 			{ $set: { Password: req.body.password, FirstTimeLogin: false } }
 		);
-		res.json(updatedUser);
+		res.json(JSON.stringify({ message: "Password changed!" }));
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
@@ -107,7 +107,7 @@ router.patch("/:ID/LogOut", async (req, res) => {
 			{ ID: req.params.ID },
 			{ $set: { UserToken: "" } }
 		);
-		res.json(updatedUser);
+		res.json(JSON.stringify({ message: "Logged out! Token Deleted" }));
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
@@ -117,7 +117,21 @@ router.patch("/:ID/LogOut", async (req, res) => {
 router.delete("/:ID", async (req, res) => {
 	try {
 		const removedUser = await User.deleteOne({ ID: req.params.ID });
-		res.json(removedUser);
+		res.json(JSON.stringify({ message: "User deleted!" }));
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
+// Make user Admin
+router.patch("/:ID/Admin", async (req, res) => {
+	try {
+		const updatedUser = await User.updateMany(
+			{ ID: req.params.ID },
+			{ $set: { IsAdmin: true } }
+		);
+		res.json(JSON.stringify({ message: "Admin privileges granted !" }));
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
