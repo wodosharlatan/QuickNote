@@ -1,18 +1,12 @@
 # Backend Documentation
 
-This documentation provides an overview and usage guide for the backend application. It covers the API endpoints, configuration, and deployment instructions.
-
-## Table of Contents
-
-- [API Endpoints](#api-endpoints)
-- [Configuration](#configuration)
-- [Deployment](#deployment)
+This documentation provides an overview and usage guide for the backend application. It covers the API endpoints and instructions.
 
 ## API Endpoints
 
-### Users
+## Users
 
-#### Create a User
+### Create a User
 
 - **Endpoint:** `/users`
 - **Method:** `POST`
@@ -25,6 +19,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```Json
@@ -36,12 +31,13 @@ This documentation provides an overview and usage guide for the backend applicat
         "FirstTimeLogin": true,
         "LastLogin": "2023-05-18T07:19:36.103Z",
         "_id": "6465d2dab1dda60f48ef10e3",
+        "UserToken": "",
         "__v": 0
     }
 ```
 
 
-#### Get All Users
+### Get All Users
 
 - **Endpoint:** `/users`
 - **Method:** `GET`
@@ -53,6 +49,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```JSON
@@ -65,6 +62,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "IsAdmin": false,
         "FirstTimeLogin": true,
         "LastLogin": "2023-05-18T06:52:04.654Z",
+        "UserToken": "",
         "__v": 0
     },
     {
@@ -75,12 +73,13 @@ This documentation provides an overview and usage guide for the backend applicat
         "IsAdmin": false,
         "FirstTimeLogin": true,
         "LastLogin": "2023-05-18T06:52:04.654Z",
+        "UserToken": "",
         "__v": 0
     }
 ]
 ```
 
-#### Get a User by ID
+### Get a User by ID
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `GET`
@@ -91,6 +90,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```Json
@@ -102,12 +102,13 @@ This documentation provides an overview and usage guide for the backend applicat
         "FirstTimeLogin": false,
         "LastLogin": "2038-05-18T07:19:36.103Z",
         "_id": "6465d2dab1dda60f48ef10e3",
+        "UserToken": "",
         "__v": 0
     }
 ```
 
 
-#### Update User Password
+### Update User Password
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `PATCH`
@@ -128,7 +129,7 @@ This documentation provides an overview and usage guide for the backend applicat
 
 
 
-#### Delete a User
+### Delete a User
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `DELETE`
@@ -142,7 +143,9 @@ This documentation provides an overview and usage guide for the backend applicat
 }
 ```
 
-#### Authenticate User
+## Login
+
+### Authenticate User
 
 - **Endpoint:** `/login`
 - **Method:** `POST`
@@ -156,6 +159,7 @@ This documentation provides an overview and usage guide for the backend applicat
   - `IsAdmin` (bool): The admin privileges (default is false). 
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 ```Json
@@ -167,6 +171,7 @@ This documentation provides an overview and usage guide for the backend applicat
         "FirstTimeLogin": true,
         "LastLogin": "2038-05-18T07:19:36.103Z",
         "_id": "6465d2dab1dda60f48ef10e3",
+        "UserToken": "d86csp57mnl1ZV8QI9HS3O",
         "__v": 0
     }
 ```
