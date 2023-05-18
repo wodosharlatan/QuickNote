@@ -45,8 +45,8 @@ router.post("/", async (req, res) => {
 	});
 
 	try {
-		const savedUser = await user.save();
-		res.json(savedUser);
+		await user.save();
+		res.json({message: "User created!"});
 	} catch (err) {
 		res.json({ message: err.toString() });
 	}
@@ -87,7 +87,7 @@ router.patch("/:token", async (req, res) => {
 });
 
 // Change Last Login for a specific user by Token
-router.patch("/:token/changelogin", async (req, res) => {
+router.patch("/:token/changelastlogin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
 			{ UserToken: req.params.token },
