@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 
 			// Get updated info
 			await axios
-				.get(`http://localhost:${process.env.PORT}/users/${result[0].ID}`)
+				.get(`http://localhost:${process.env.PORT}/users/${result[0].UserToken}`)
 				.then((response) => {
 					// Send response as JSON
 					const json = JSON.stringify({token: response.data.UserToken,isadmin: response.data.IsAdmin,changepass: response.data.FirstTimeLogin});

@@ -74,10 +74,10 @@ router.get("/:ID", async (req, res) => {
 });
 
 // Change Password for a specific user by ID
-router.patch("/:ID", async (req, res) => {
+router.patch("/:token", async (req, res) => {
 	try {
-		const updatedUser = await User.updateMany(
-			{ ID: req.params.ID },
+		await User.updateMany(
+			{ token: req.params.token },
 			{ $set: { Password: req.body.password, FirstTimeLogin: false } }
 		);
 		res.json(JSON.stringify({ message: "Password changed!" }));
@@ -86,11 +86,11 @@ router.patch("/:ID", async (req, res) => {
 	}
 });
 
-// Change Last Login for a specific user by ID
-router.patch("/:ID/ChangeLogin", async (req, res) => {
+// Change Last Login for a specific user by Token
+router.patch("/:token/ChangeLogin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
-			{ ID: req.params.ID },
+			{ token: req.params.token },
 			{ $set: { LastLogin: Date.now() } }
 		);
 		res.json(updatedUser);
@@ -100,11 +100,11 @@ router.patch("/:ID/ChangeLogin", async (req, res) => {
 });
 
 
-// Delete token for a specific user by ID on logout
-router.patch("/:ID/LogOut", async (req, res) => {
+// Delete token for a specific user by Token on logout
+router.patch("/:token/LogOut", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
-			{ ID: req.params.ID },
+			{ token: req.params.token },
 			{ $set: { UserToken: "" } }
 		);
 		res.json(JSON.stringify({ message: "Logged out! Token Deleted" }));
@@ -113,10 +113,10 @@ router.patch("/:ID/LogOut", async (req, res) => {
 	}
 });
 
-// Delete a specific user by ID
-router.delete("/:ID", async (req, res) => {
+// Delete a specific user by Token
+router.delete("/:token", async (req, res) => {
 	try {
-		const removedUser = await User.deleteOne({ ID: req.params.ID });
+		const removedUser = await User.deleteOne({ token: req.params.token });
 		res.json(JSON.stringify({ message: "User deleted!" }));
 	} catch (error) {
 		res.json({ message: error.toString() });
@@ -125,11 +125,11 @@ router.delete("/:ID", async (req, res) => {
 
 
 // Make user Admin
-router.patch("/:ID/Admin", async (req, res) => {
+router.patch("/:token/Admin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
-			{ ID: req.params.ID },
-			{ $set: { IsAdmin: true } },
+			{ token: req.params.token },
+			{ $set: { IsAdmin: true } }
 		);
 		res.json(JSON.stringify({ message: "Admin privileges granted !" }));
 	} catch (error) {
