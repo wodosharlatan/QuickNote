@@ -22,6 +22,9 @@ const loginRoute = require("./routes/login");
 // Sites
 app.use("/users", userRoute);
 app.use("/login", loginRoute);
+app.use("*", (req, res) => {
+	res.send("404 Not Found");
+});
 
 /* SECURE SERVER
 
