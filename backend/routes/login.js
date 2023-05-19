@@ -7,6 +7,7 @@ const uidgen = new UIDGenerator();
 
 
 router.post("/", async (req, res) => {
+	
 	// Get all users and check if the input username and password match
 	try {
 		const response = await axios.get(
