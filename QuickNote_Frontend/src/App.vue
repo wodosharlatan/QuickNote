@@ -1,10 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import NavPanel from "./components/NavPanel.vue"
-import Background01 from "./components/Background01.vue"
-
-
-
+import NavPanel from './components/NavPanel.vue'
+import Background01 from './components/Background01.vue'
 </script>
 
 <template>
@@ -16,7 +13,7 @@ import Background01 from "./components/Background01.vue"
         <NavPanel />
       </div>
       <div class="padding1"></div>
-      <RouterView/>
+      <RouterView />
       <div class="padding1"></div>
     </div>
   </div>
@@ -27,8 +24,8 @@ import Background01 from "./components/Background01.vue"
   padding-left: 20px;
   padding-right: 20px;
 }
-.padding1{
-  width:100%;
+.padding1 {
+  width: 100%;
   height: 20px;
 }
 </style>

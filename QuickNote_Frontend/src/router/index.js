@@ -36,12 +36,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const loginStore = useLoginStore();
-  if (to.name == "Login" && loginStore.loggedIn){
+  const loginStore = useLoginStore()
+  if (to.name == 'Login' && loginStore.loggedIn) {
     next({ name: 'Public' })
-    return;
+    return
   }
-  if (to.matched.some(record => !record.meta.dontUseAuth)) {
+  if (to.matched.some((record) => !record.meta.dontUseAuth)) {
     if (!loginStore.loggedIn) {
       next({ name: 'Login' })
     } else {

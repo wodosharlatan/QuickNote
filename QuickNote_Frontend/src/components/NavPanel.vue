@@ -3,9 +3,24 @@
     <p class="textStyle1">QuickNote</p>
     <div class="menubar-container">
       <div class="menubar">
-        <button @click="goTo('Admin')" class="ui_ElementT1">Admin</button>
-        <button @click="goTo('Private')" class="ui_ElementT1">Private</button>
-        <button @click="goTo('Public')" class="ui_ElementT1">Public</button>
+        <button
+          @click="goTo('Admin')"
+          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }"
+        >
+          Admin
+        </button>
+        <button
+          @click="goTo('Private')"
+          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Private' }"
+        >
+          Private
+        </button>
+        <button
+          @click="goTo('Public')"
+          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }"
+        >
+          Public
+        </button>
         <button @click="logout" class="ui_ElementT1 logoutButton">↲</button>
       </div>
     </div>
@@ -21,6 +36,7 @@ import { onMounted } from 'vue'
 export default {
   setup() {
     const router = useRouter()
+
     const logout = () => {
       const loginStore = useLoginStore()
       loginStore.Logout()
@@ -35,14 +51,18 @@ export default {
       //ADD ANIMATION EFFECT
     })
 
-    return { logout, goTo }
+    return { logout, goTo, router }
   }
-  
-  
 }
 </script>
 
 <style scoped>
+.selectedPage {
+  background-color: rgba(255, 255, 255, 0.863) !important;
+  -webkit-box-shadow: 0px 7px 11px -3px rgba(0, 0, 0, 0.822);
+  -moz-box-shadow: 0px 7px 11px -3px rgba(0, 0, 0, 0.822);
+  box-shadow: 0px 7px 11px -3px rgba(0, 0, 0, 0.822);
+}
 .navigation {
   height: 4rem;
   padding: 5px;
@@ -53,11 +73,9 @@ export default {
   align-items: center;
 }
 
-
 .navigation p {
-    margin-left: 20px;
+  margin-left: 20px;
 }
-
 
 .menubar-container {
   width: 50%;
@@ -92,7 +110,4 @@ export default {
   width: 30px;
   height: 30px;
 }
-
-
-
 </style>

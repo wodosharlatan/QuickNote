@@ -1,5 +1,5 @@
 <template>
-    <p>Note</p>
+  <p>Note</p>
 </template>
 
 <script>
@@ -8,9 +8,9 @@ import { useRouter, useRoute } from 'vue-router'
 import { useLoginStore } from '../stores/login'
 
 export default {
-    setup() {
-        return {  }
-    }
+  setup() {
+    return {}
+  }
 }
 </script>
 
