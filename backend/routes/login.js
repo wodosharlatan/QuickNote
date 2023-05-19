@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require("axios");
 const User = require("../models/user_model");
 const UIDGenerator = require("uid-generator");
+const { json } = require("body-parser");
 const uidgen = new UIDGenerator();
 
 // Add env variables
@@ -46,13 +47,36 @@ router.post("/", async (req, res) => {
 			console.log(error);
 		});
 
+	// Generate Token
 	await axios
-		.patch(
-			`http://localhost:${process.env.PORT}/tokens/${authorizedUsername}`,
-			{}
-		)
-		.then((response) => {
-			res.json(response.data);
+		.patch(`http://localhost:${process.env.PORT}/tokens/${authorizedUsername}`)
+		.catch((error) => {
+			console.log(error);
+		});
+
+	// Get and return updated info
+	await axios
+		.get(`http://localhost:${process.env.PORT}/users/${authorizedUsername}`)
+		.then(async (response) => {
+
+			// Send response as JSON
+			const json = {
+				token: `${response.data.UserToken}`,
+				isAdmin: `${response.data.IsAdmin}`,
+				ShouldChangePassword: `${response.data.FirstTimeLogin}`,
+			};
+
+			// Update last login
+			await axios
+				.patch(
+					`http://localhost:${process.env.PORT}/tokens/${json.token}/ChangeLastLogin`
+				)
+				.then(() => {
+					res.json(json);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		})
 		.catch((error) => {
 			console.log(error);
