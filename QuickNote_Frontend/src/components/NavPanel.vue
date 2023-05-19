@@ -1,24 +1,15 @@
 <template>
   <div class="navigation recBG_0">
-    <p class="textStyle1">QuickNote</p>
+    <p class="textStyle1">QuickNote - {{ $route.name }}</p>
     <div class="menubar-container">
       <div class="menubar">
-        <button
-          @click="goTo('Admin')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }"
-        >
+        <button @click="goTo('Admin')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }">
           Admin
         </button>
-        <button
-          @click="goTo('Private')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Private' }"
-        >
+        <button @click="goTo('Private')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Private' }">
           Private
         </button>
-        <button
-          @click="goTo('Public')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }"
-        >
+        <button @click="goTo('Public')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }">
           Public
         </button>
         <button @click="logout" class="ui_ElementT1 logoutButton">↲</button>
@@ -63,6 +54,7 @@ export default {
   -moz-box-shadow: 0px 7px 11px -3px rgba(0, 0, 0, 0.822);
   box-shadow: 0px 7px 11px -3px rgba(0, 0, 0, 0.822);
 }
+
 .navigation {
   height: 4rem;
   padding: 5px;
@@ -109,5 +101,23 @@ export default {
   border-radius: 50%;
   width: 30px;
   height: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .navigation {
+    height: 6rem;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navigation p {
+    margin-left: 0px;
+  }
+
+  .menubar-container {
+    width: 90%;
+    height: 100%;
+  }
 }
 </style>
