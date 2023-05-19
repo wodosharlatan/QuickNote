@@ -8,82 +8,49 @@ const uidgen = new UIDGenerator();
 // Add env variables
 require("dotenv").config();
 
-// Generate new ID
-async function generateID() {
-	let newID = 0;
-	const response = await axios.get(
-		`http://localhost:${process.env.PORT}/users`
-	);
-	const ID_List = response.data.map((user) => user.ID);
-
-	while (ID_List.includes(newID.toString())) {
-		newID++;
-	}
-
-	return newID.toString();
-}
-
-// Make new user
-router.post("/", async (req, res) => {
-
-	// Get all usernames
-	nameList = [];
-
-	await axios
-		.get(`http://localhost:${process.env.PORT}/users`)
-		.then((response) => {
-			for (let i = 0; i < response.data.length; i++) {
-				nameList.push(response.data[i].Username);
-			}
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-
-	// Check if username already exists
-	if (nameList.includes(req.body.username)) {
-		res.json({ message: "Username already exists!" });
-		return;
-	}
-
-	// Create new user
-	const user = new User({
-		Username: req.body.username,
-		Password: uidgen.generateSync(),
-		ID: await generateID(),
-	});
-
-	try {
-		await user.save();
-		res.json({ message: "User created!" });
-	} catch (err) {
-		res.json({ message: err.toString() });
-	}
-});
-
 // Get all users
 router.get("/", async (req, res) => {
 	try {
 		const users = await User.find();
-		res.json(users);
+
+		const result = users.map((user) => {
+			// Return only necessary info for each user As JSON
+			return {
+				Username: user.Username,
+				IsAdmin: user.IsAdmin,
+				LastLogin: user.LastLogin,
+				FirstTimeLogin: user.FirstTimeLogin,
+				UserToken: user.UserToken,
+			};
+		});
+
+		res.json(result);
 	} catch (err) {
 		res.json({ message: err.toString() });
 	}
 });
 
-// Get a specific user by ID
-router.get("/:ID", async (req, res) => {
+// Get a specific user by username
+router.get("/:Username", async (req, res) => {
 	try {
-		const validatedUser = await User.findOne({ ID: req.params.ID });
+		const oneUser = await User.findOne({ Username: req.params.username });
 
-		res.send(validatedUser);
+		const result = {
+			Username: oneUser.Username,
+			IsAdmin: oneUser.IsAdmin,
+			LastLogin: oneUser.LastLogin,
+			FirstTimeLogin: oneUser.FirstTimeLogin,
+			UserToken: oneUser.UserToken,
+		};
+
+		res.json(result);
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
 });
 
 // Change Password for a specific user by Token
-router.patch("/:token", async (req, res) => {
+router.patch("/:Token", async (req, res) => {
 	try {
 		await User.updateMany(
 			{ UserToken: req.params.token },
@@ -95,8 +62,9 @@ router.patch("/:token", async (req, res) => {
 	}
 });
 
+
 // Change Last Login for a specific user by Token
-router.patch("/:token/changelastlogin", async (req, res) => {
+router.patch("/:Token/ChangeLastLogin", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
 			{ UserToken: req.params.token },
@@ -108,18 +76,7 @@ router.patch("/:token/changelastlogin", async (req, res) => {
 	}
 });
 
-// Delete token for a specific user by Token on logout
-router.patch("/:token/logout", async (req, res) => {
-	try {
-		await User.updateMany(
-			{ UserToken: req.params.token },
-			{ $set: { UserToken: "" } }
-		);
-		res.json({ message: "Logged out! Token Deleted" });
-	} catch (error) {
-		res.json({ message: error.toString() });
-	}
-});
+
 
 // Delete a specific user by Token
 router.delete("/:token", async (req, res) => {
