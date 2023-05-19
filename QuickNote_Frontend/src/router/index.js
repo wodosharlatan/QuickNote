@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useLoginStore } from '../stores/login'
+import { ref } from 'vue'
+
+window.changePage = ref(false);
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,7 +48,8 @@ router.beforeEach((to, from, next) => {
     if (!loginStore.loggedIn) {
       next({ name: 'Login' })
     } else {
-      next()
+      window.changePage.value = true;
+      setTimeout(() => {next(),window.changePage.value = false;},500);
     }
   } else {
     next()

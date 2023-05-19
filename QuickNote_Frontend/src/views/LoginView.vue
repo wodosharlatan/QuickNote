@@ -24,9 +24,7 @@ export default {
     const login = async () => {
       if (!(await loginToServer(username.value, password.value))) return
       exiting.value = true
-      setTimeout(() => {
-        router.push({ name: 'Public' })
-      }, 1000)
+      router.push({ name: 'Public' })
     }
 
     //tombos4
@@ -78,10 +76,10 @@ export default {
 
 .login {
   width: 275px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1, 1);
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -75%) scale(1, 1);
   border-radius: 30px;
 }
 

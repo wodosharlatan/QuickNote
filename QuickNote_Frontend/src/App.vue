@@ -1,7 +1,10 @@
 <script setup>
+import { watchEffect } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import NavPanel from './components/NavPanel.vue'
 import Background01 from './components/Background01.vue'
+
+const changePage = window.changePage;
 </script>
 
 <template>
@@ -13,13 +16,24 @@ import Background01 from './components/Background01.vue'
         <NavPanel />
       </div>
       <div class="padding1"></div>
-      <RouterView />
+      <div :class="{routerMain: true,changePage: changePage}">
+        <RouterView/>
+      </div>
+      
       <div class="padding1"></div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.routerMain{
+  transition: 500ms;
+  transform: scale(1,1);
+}
+.changePage{
+  transform: scale(0.75,0.75);
+  opacity: 0;
+}
 .wrapper1 {
   padding-left: 20px;
   padding-right: 20px;
