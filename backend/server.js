@@ -20,12 +20,14 @@ const userRoute = require("./routes/user");
 const loginRoute = require("./routes/login");
 const newUserRoute = require("./routes/new-user");
 const logoutRoute = require("./routes/logout");
+const tokenRoute = require("./routes/tokens");
 
 // Sites
 app.use("/users", userRoute);
 app.use("/login", loginRoute);
 app.use("/new-user", newUserRoute);
 app.use("/logout", logoutRoute);
+app.use("/tokens", tokenRoute);
 
 app.use("*", (req, res) => {
 	res.send("404 Not Found");
