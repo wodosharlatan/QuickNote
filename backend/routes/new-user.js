@@ -4,6 +4,7 @@ const User = require("../models/user_model");
 const axios = require("axios");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
+const saltedSha256 = require("salted-sha256");
 
 // Add env variables
 require("dotenv").config();
@@ -31,15 +32,18 @@ router.post("/", async (req, res) => {
 		return;
 	}
 
+	const uid = await uidgen.generate();
+
 	// Create new user
 	const user = new User({
 		Username: req.body.username,
-		Password: uidgen.generateSync(),
+		Password: saltedSha256(`${uid}`, 'SUPER-SALT'),
 	});
+
 
 	try {
 		await user.save();
-		res.json({ message: "User created!" });
+		res.json({ message: "User created with temporary password: " + uid + " . Please change your password after logging in "});
 	} catch (err) {
 		res.json({ message: err.toString() });
 	}

@@ -2,9 +2,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const User = require("../models/user_model");
-const UIDGenerator = require("uid-generator");
-const { json } = require("body-parser");
-const uidgen = new UIDGenerator();
+const saltedSha256 = require("salted-sha256");
 
 // Add env variables
 require("dotenv").config();
@@ -33,12 +31,11 @@ router.post("/", async (req, res) => {
 	authorizedUsername = await axios
 		.get(`http://localhost:${process.env.PORT}/login`)
 		.then((response) => {
-			// Check if the input username and password match
-			const inputUsername = req.body.username;
-			const inputPassword = req.body.password;
+			// Check if the input username and password match any in the database
 			const result = response.data.filter(
 				(user) =>
-					user.Username === inputUsername && user.Password === inputPassword
+					user.Username === req.body.username &&
+					user.Password === saltedSha256(`${req.body.password}`, "SUPER-SALT")
 			);
 
 			return result[0].Username;
@@ -58,7 +55,6 @@ router.post("/", async (req, res) => {
 	await axios
 		.get(`http://localhost:${process.env.PORT}/users/${authorizedUsername}`)
 		.then(async (response) => {
-
 			// Send response as JSON
 			const json = {
 				token: `${response.data.UserToken}`,
@@ -82,58 +78,5 @@ router.post("/", async (req, res) => {
 			console.log(error);
 		});
 });
-
-/* 
-
-
-router.post("/", async (req, res) => {
-	
-	// Get all users and check if the input username and password match
-	try {
-		const response = await axios.get(
-			`http://localhost:${process.env.PORT}/users`
-		);
-		const inputUsername = req.body.username;
-		const inputPassword = req.body.password;
-		const result = response.data.filter(
-			(user) =>
-				user.Username === inputUsername && user.Password === inputPassword
-		);
-
-		if (result.length === 1) {
-			// Update last login
-			await axios.patch(
-				`http://localhost:${process.env.PORT}/users/${result[0].ID}/ChangeLogin`
-			);
-
-			// Update token
-			await User.updateMany(
-				{ ID: result[0].ID },
-				{ $set: { UserToken: uidgen.generateSync() } }
-			);
-
-			// Get updated info
-			await axios
-				.get(
-					`http://localhost:${process.env.PORT}/users/${result[0].ID}`
-				)
-				.then((response) => {
-					// Send response as JSON
-					res.json({
-						token: `${response.data.UserToken}`,
-						isadmin: `${response.data.IsAdmin}`,
-						changepass: `${response.data.FirstTimeLogin}`,
-					});
-				});
-		} else {
-			res.json({ message: "Wrong username or password!" });
-		}
-	} catch (error) {
-		console.log(error);
-		res.json({ message: error.toString() });
-	}
-});
-
-*/
 
 module.exports = router;
