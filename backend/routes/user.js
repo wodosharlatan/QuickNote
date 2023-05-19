@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user_model");
 const axios = require("axios");
+const UIDGenerator = require('uid-generator');
+const uidgen = new UIDGenerator();
 
 // Add env variables
 require("dotenv").config();
@@ -23,24 +25,12 @@ async function generateID() {
 }
 
 
-// Generate random password
-function generatePassword() {
-	pass =
-		Math.random().toString(36).slice(2) +
-		Math.random().toString(36).toUpperCase().slice(2);
-
-	pass = pass.slice(0, 8);
-
-	return pass;
-}
-
-
 // Make new user
 router.post("/", async (req, res) => {
 	// Create new user
 	const user = new User({
 		Username: req.body.username,
-		Password: generatePassword(),
+		Password: uidgen.generateSync(),
 		ID: await generateID(),
 	});
 

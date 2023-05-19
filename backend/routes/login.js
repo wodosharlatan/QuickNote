@@ -2,14 +2,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const User = require("../models/user_model");
+const UIDGenerator = require('uid-generator');
+const uidgen = new UIDGenerator();
 
-function generateToken() {
-	token =
-		Math.random().toString(36).slice(2) +
-		Math.random().toString(36).toUpperCase().slice(2);
-
-	return token;
-}
 
 router.post("/", async (req, res) => {
 	// Get all users and check if the input username and password match
@@ -33,7 +28,7 @@ router.post("/", async (req, res) => {
 			// Update token
 			await User.updateMany(
 				{ ID: result[0].ID },
-				{ $set: { UserToken: generateToken() } }
+				{ $set: { UserToken: uidgen.generateSync() } }
 			);
 
 			// Get updated info
