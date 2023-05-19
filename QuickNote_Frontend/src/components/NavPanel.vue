@@ -16,6 +16,7 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useLoginStore } from '../stores/login'
+import { onMounted } from 'vue'
 
 export default {
   setup() {
@@ -30,8 +31,14 @@ export default {
       router.push({ name: page })
     }
 
+    onMounted(() => {
+      //ADD ANIMATION EFFECT
+    })
+
     return { logout, goTo }
   }
+  
+  
 }
 </script>
 

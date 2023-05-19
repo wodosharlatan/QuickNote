@@ -1,54 +1,34 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import NavPanel from "./components/NavPanel.vue"
+import Background01 from "./components/Background01.vue"
+
+
 
 </script>
 
 <template>
-  <div class="background">
-
+  <Background01 />
+  <div class="wrapper1">
+    <div class="wrapper2">
+      <div class="padding1"></div>
+      <div v-if="$route.name != 'Login'">
+        <NavPanel />
+      </div>
+      <div class="padding1"></div>
+      <RouterView/>
+      <div class="padding1"></div>
+    </div>
   </div>
-  <div v-if="$route.name != 'Login'">
-    <NavPanel />
-  </div>
-  <RouterView />
 </template>
 
-<style>
-
-/* ============================ OLD GRADIENT BACKGROUND ============================ 
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #6D9ACF;
-  background-image: linear-gradient(to bottom right, #7daadf, #4a6f99);
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+<style scoped>
+.wrapper1 {
+  padding-left: 20px;
+  padding-right: 20px;
 }
- ============================ OLD GRADIENT BACKGROUND ============================ */
-
-/* ============================ NEW GRADIENT BACKGROUND ============================ */
-body {
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
+.padding1{
+  width:100%;
+  height: 20px;
 }
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
-
-
 </style>

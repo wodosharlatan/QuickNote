@@ -1,16 +1,7 @@
 <template>
     <div class="recBG_0 note_container">
-        <div class="notes" >
-            <div class="note" v-for="note in testNotes">
-                <div :class="['noteBar',('urgnt' + note.urgent)]">
-                    <h3>{{ urgencyText(note.urgent) }}</h3>
-                    <h3>{{ note.date }}</h3>
-                </div>
-                <div class="noteBottom">
-                    <h3>{{ shortenText(note.title,13) }}</h3>
-                    <p class=noteText>{{ shortenText(note.text,62) }}</p>
-                </div>
-            </div>
+        <div class="notes">
+            <NoteT1 :note="note" v-for="note in testNotes" />
         </div>
     </div>
 </template>
@@ -19,8 +10,10 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useLoginStore } from '../stores/login'
+import NoteT1 from '../components/NoteT1.vue'
 
 export default {
+    components: { NoteT1 },
     setup() {
         const testNotes = [{
             urgent: 3,
@@ -77,26 +70,15 @@ export default {
             text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent id justo in neque elementum ultrices. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Aenean vel massa quis mauris vehicula lacinia. Donec vitae arcu. Et harum quidem rerum facilis est et expedita distinctio. Nulla non arcu lacinia neque faucibus fringilla. Duis pulvinar. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Quisque porta. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         }]
 
-        const urgencyText = (id) => {
-            const urgency = ["Minor task","Crucial task","Top-priority task !"]
-            return urgency[id-1];
-        };
 
-       
-        const shortenText = (text,len) => {
-            if(text.length > len)
-                return text.substring(0,len) + " . . .";
-            return text;
-        };
-   
 
-        return { testNotes,urgencyText, shortenText }
+
+        return { testNotes }
     }
 }
 </script>
 
 <style scoped>
-
 .notes {
     padding: 0;
     margin: 0;
@@ -106,8 +88,6 @@ export default {
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-
-
 }
 
 .noteBottom {
@@ -126,7 +106,6 @@ export default {
 }
 
 .note {
-
     width: calc(30% - 10px);
 
     background-color: #ffffffb9;
@@ -136,9 +115,6 @@ export default {
     border-radius: 10px 10px 5px 5px;
 
     margin: 10px;
-
-
-
 }
 
 .noteBar {
@@ -163,7 +139,7 @@ export default {
     overflow: hidden;
 }
 
-.noteText{
+.noteText {
     height: calc(100% - 3rem);
 }
 
