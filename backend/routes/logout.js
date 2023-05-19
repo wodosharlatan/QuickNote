@@ -7,7 +7,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 // Delete token for a specific user by Token on logout
-router.patch("/:token/Logout", async (req, res) => {
+router.patch("/:Token/Logout", async (req, res) => {
 	try {
 		await User.updateMany(
 			{ UserToken: req.params.token },

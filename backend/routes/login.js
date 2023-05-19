@@ -2,8 +2,64 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const User = require("../models/user_model");
-const UIDGenerator = require('uid-generator');
+const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
+
+// Add env variables
+require("dotenv").config();
+
+// Get all names and passwords of users
+router.get("/", async (req, res) => {
+	try {
+		const users = await User.find();
+
+		const result = users.map((user) => {
+			// Return only necessary info for each user As JSON
+			return {
+				Username: user.Username,
+				Password: user.Password,
+			};
+		});
+
+		res.json(result);
+	} catch (err) {
+		res.json({ message: err.toString() });
+	}
+});
+
+router.post("/", async (req, res) => {
+	// Get all names and passwords of users
+	authorizedUsername = await axios
+		.get(`http://localhost:${process.env.PORT}/login`)
+		.then((response) => {
+			// Check if the input username and password match
+			const inputUsername = req.body.username;
+			const inputPassword = req.body.password;
+			const result = response.data.filter(
+				(user) =>
+					user.Username === inputUsername && user.Password === inputPassword
+			);
+
+			return result[0].Username;
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+
+	await axios
+		.patch(
+			`http://localhost:${process.env.PORT}/tokens/${authorizedUsername}`,
+			{}
+		)
+		.then((response) => {
+			res.json(response.data);
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+});
+
+/* 
 
 
 router.post("/", async (req, res) => {
@@ -53,5 +109,7 @@ router.post("/", async (req, res) => {
 		res.json({ message: error.toString() });
 	}
 });
+
+*/
 
 module.exports = router;

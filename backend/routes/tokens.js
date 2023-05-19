@@ -60,5 +60,18 @@ router.patch("/:Token/Admin", async (req, res) => {
 	}
 });
 
+// Generate Token for a specific user by Username on login
+router.patch("/:Username", async (req, res) => {
+	try {
+		const token = await uidgen.generate();
+		const updatedUser = await User.updateMany({ Username: req.params.Username }, { UserToken: token });
+		res.json(updatedUser);
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
+
 
 module.exports = router;
