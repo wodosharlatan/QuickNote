@@ -1,5 +1,7 @@
 <template>
-  <p>Note</p>
+  <div class="container">
+    
+  </div>
 </template>
 
 <script>
@@ -8,10 +10,17 @@ import { useRouter, useRoute } from 'vue-router'
 import { useLoginStore } from '../stores/login'
 
 export default {
+  props: ["id"],
   setup() {
     return {}
   }
 }
 </script>
 
-<style></style>
+<style>
+.container{
+  width: 100%;
+  height: auto;
+  background-color: black;
+}
+</style>

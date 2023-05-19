@@ -17,22 +17,11 @@ export default {
   setup() {
     const testNotes = [
       {
+        id:256,
         urgent: 3,
         date: '2.5.2025',
-        title: 'Tex1sdfhsdfhsdf',
-        text: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
-      },
-      {
-        urgent: 2,
-        date: '19.5.2023',
-        title: 'Tex1',
-        text: 'Lorem ipsum dolor sit amet, conid justo in neque elementum ultrices. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Aenean vel massa quis mauris vehicula lacinia. Donec vitae arcu. Et harum quidem rerum facilis est et expedita distinctio. Nulla non arcu lacinia neque faucibus fringilla. Duis pulvinar. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Quisque porta. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-      },
-      {
-        urgent: 3,
-        date: '6.8.2028',
-        title: 'Tex3',
-        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent id justo in neq justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Aenean vel massa quis mauris vehicula lacinia. Donec vitae arcu. Et harum quidem rerum facilis est et expedita distinctio. Nulla non arcu lacinia neque faucibus fringilla. Duis pulvinar. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Quisque porta. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        title: 'SomeTextAAA544',
+        text: 'Lorem Impsum'
       }
     ]
 
@@ -44,6 +33,7 @@ export default {
 <style scoped>
 .recBG_0 {
   background-color: #a195c594;
+  height: 100%;
 }
 .notes {
   padding: 0;

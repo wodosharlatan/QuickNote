@@ -1,11 +1,11 @@
 <template>
-  <div class="note">
+  <div class="note" @click="viewNote(note.id)">
     <div :class="['noteBar', 'urgnt' + note.urgent]">
       <h3>{{ urgencyText(note.urgent) }}</h3>
       <h3>{{ note.date }}</h3>
     </div>
     <div class="noteBottom">
-      <h3>{{ shortenText(note.title, 13) }}</h3>
+      <h3>{{ shortenText(note.title, 10) }}</h3>
       <p class="noteText">{{ shortenText(note.text, 57) }}</p>
     </div>
   </div>
@@ -13,10 +13,18 @@
 
 <script>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   props: ['note'],
   setup() {
+    const router = useRouter();
+
+    const viewNote = (id) => {
+      if(!id)
+        id = "ERROR";
+      router.push({ name: 'Note', params: { id: id } });
+    }
     const urgencyText = (id) => {
       const urgency = ['Minor task', 'Crucial task', 'Top-priority task !']
       return urgency[id - 1]
@@ -27,7 +35,7 @@ export default {
       return text
     }
 
-    return { urgencyText, shortenText }
+    return { urgencyText, shortenText, viewNote }
   }
 }
 </script>

@@ -29,11 +29,19 @@ const changePage = window.changePage;
 .routerMain{
   transition: 500ms;
   transform: scale(1,1);
+  flex: 1;
+  height: 100%;
+  width: 100%;
 }
 .changePage{
   transform: scale(0.75,0.75);
   opacity: 0;
 }
+.wrapper2{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} 
 .wrapper1 {
   padding-left: 20px;
   padding-right: 20px;

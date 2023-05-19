@@ -18,9 +18,11 @@ const router = createRouter({
       component: import('../views/PrivateView.vue')
     },
     {
-      path: '/note',
+      path: '/note/:id',
       name: 'Note',
-      component: import('../views/NoteView.vue')
+      component: import('../views/NoteView.vue'),
+      props: true
+      
     },
     {
       path: '/admin',
