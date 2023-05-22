@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
-const axios = require("axios");
 const https = require("https");
 const fs = require("fs");
 
@@ -23,6 +22,7 @@ const logoutRoute = require("./routes/user_routes/logout");
 const tokenRoute = require("./routes/user_routes/tokens");
 
 const entryRoute = require("./routes/entry_routes/new-entry");
+const deleteEntryRoute = require("./routes/entry_routes/delete")
 
 // Sites
 app.use("/users", userRoute);
@@ -32,6 +32,7 @@ app.use("/logout", logoutRoute);
 app.use("/tokens", tokenRoute);
 
 app.use("/new-entry", entryRoute);
+app.use("/delete-entry", deleteEntryRoute);
 
 
 app.use("*", (req, res) => {

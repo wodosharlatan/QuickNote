@@ -17,7 +17,7 @@ const entrySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    Public: {
+    IsPrivate: {
         type: Boolean,
         required: true
     },

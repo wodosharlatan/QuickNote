@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 		DeadLine: req.body.deadline,
 		Description: req.body.description,
         Text: req.body.text,
-        Public: req.body.public,
+        IsPrivate: req.body.isprivate,
         AddedBy: req.body.addedby
 	});
 
