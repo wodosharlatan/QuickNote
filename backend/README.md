@@ -67,13 +67,13 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Example:**
 
 ```Json
-    {
+  {
     "Username": "ben",
     "IsAdmin": false,
     "LastLogin": "2023-05-19T10:47:33.965Z",
     "FirstTimeLogin": true,
     "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
-}
+  }
 ```
 
 ### Update User Password
@@ -121,26 +121,15 @@ This documentation provides an overview and usage guide for the backend applicat
   - `username` (string, required): The username of the user.
   - `password` (string, required): The password of the user.
 - **Response:**
-  - `id` (string): The unique ID of the created user.
-  - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
   - `IsAdmin` (bool): The admin privileges (default is false).
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
-  - `LastLogin` (date): Unix timestamp
+  - `FirstTimeLogin` (bool): in this case it is called `ShouldChangePassword` ,
   - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 
 ```Json
-    {
-        "Username": "Jhon Doe",
-        "Password": "gxgmgmpm",
-        "ID": "6",
-        "IsAdmin": false,
-        "FirstTimeLogin": true,
-        "LastLogin": "2038-05-18T07:19:36.103Z",
-        "_id": "6465d2dab1dda60f48ef10e3",
-        "UserToken": "d86csp57mnl1ZV8QI9HS3O",
-        "__v": 0
-    }
+  {
+    "token": "5j6TBd4GhvJBkiPNwBoKrr",
+    "isAdmin": "false",
+    "ShouldChangePassword": "true"
+  }
 ```
