@@ -6,7 +6,7 @@ const axios = require("axios");
 // Add env variables
 require("dotenv").config();
 
-// Make new user
+// Make new Entry
 router.post("/", async (req, res) => {
 	async function generateID() {
 		let newID = 0;
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 			.then((response) => {
 				const ID_List = [];
 
-				// Get all the current user id's
+				// Get all the current entry id's
 				for (let i = 0; i < response.data.length; i++) {
 					ID_List.push(response.data[i].ID);
 				}
@@ -29,15 +29,16 @@ router.post("/", async (req, res) => {
 
 		return newID;
 	}
-	// Create new user
+    
+	// Create new Entry
 	const entry = new Entry({
 		ID: await generateID(),
 		Urgency: req.body.urgency,
 		DeadLine: req.body.deadline,
-		Description: req.body.description,
-		Text: req.body.text,
+		Description: req.body.description.trim(),
+		Text: req.body.text.trim(),
 		IsPrivate: req.body.isprivate,
-		AddedBy: req.body.addedby,
+		AddedBy: req.body.addedby.trim(),
 	});
 
 	try {

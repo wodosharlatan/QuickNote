@@ -5,9 +5,14 @@ const Entry = require("../../models/entry_model");
 // Add env variables
 require("dotenv").config();
 
-// Make new user
-router.delete("/", async (req, res) => {
-    res.json({message: "ola amigos"});
+// Delete Entry by ID
+router.delete("/:ID", async (req, res) => {
+	try {
+		await Entry.deleteOne({ ID: req.params.ID });
+		res.json({ message: "Entry deleted !" });
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
 });
 
 module.exports = router;
