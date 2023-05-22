@@ -12,30 +12,14 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Method:** `POST`
 - **Request Body:**
   - `username` (string, required): The username of the user.
-- **Response:**
-  - `id` (string): The unique ID of the created user.
-  - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
-  - `LastLogin` (date): Unix timestamp
-  - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
+- **Response:** -`message`: Contains information if the action was successful or not
 - **Example:**
-```Json
-    {
-        "Username": "Tom",
-        "Password": "gxgmgmpm",
-        "ID": "7",
-        "IsAdmin": false,
-        "FirstTimeLogin": true,
-        "LastLogin": "2023-05-18T07:19:36.103Z",
-        "_id": "6465d2dab1dda60f48ef10e3",
-        "UserToken": "",
-        "__v": 0
-    }
-```
 
+```Json
+  {
+    "message": "User: `jhon doe` was created with temporary password: A6VbzvLwHVZFW3c46MiEXo . Please change your password after logging in "
+  }
+```
 
 ### Get All Users
 
@@ -46,12 +30,13 @@ This documentation provides an overview and usage guide for the backend applicat
     - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
   - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
+  - `IsAdmin` (bool): The admin privileges (default is false).
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
   - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
+
 ```JSON
 [
     {
@@ -87,12 +72,13 @@ This documentation provides an overview and usage guide for the backend applicat
   - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
   - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
+  - `IsAdmin` (bool): The admin privileges (default is false).
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
   - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
+
 ```Json
     {
         "Username": "Jhon Doe",
@@ -107,7 +93,6 @@ This documentation provides an overview and usage guide for the backend applicat
     }
 ```
 
-
 ### Update User Password
 
 - **Endpoint:** `/users/{id}`
@@ -117,6 +102,7 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Response:**
   - `MongoDBSystemInfo` (string): Information about the action
 - **Example:**
+
 ```JSON
 {
     "acknowledged": true,
@@ -127,15 +113,14 @@ This documentation provides an overview and usage guide for the backend applicat
 }
 ```
 
-
-
 ### Delete a User
 
 - **Endpoint:** `/users/{id}`
 - **Method:** `DELETE`
 - **Response:**
-    - `MongoDBSystemInfo` (string): Information about the action
+  - `MongoDBSystemInfo` (string): Information about the action
 - **Example:**
+
 ```JSON
 {
     "acknowledged": true,
@@ -156,12 +141,13 @@ This documentation provides an overview and usage guide for the backend applicat
   - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
   - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
+  - `IsAdmin` (bool): The admin privileges (default is false).
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
   - `UserToken` (string): A token used for verification of the user (default is empty string).
   - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
+
 ```Json
     {
         "Username": "Jhon Doe",

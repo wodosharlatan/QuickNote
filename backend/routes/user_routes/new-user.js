@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 	try {
 		await user.save();
 		res.json({
-			message: `User: ${username} created with temporary password: ${uid} . Please change your password after logging in `,
+			message: `User: ${username} was created with temporary password: ${uid} . Please change your password after logging in `,
 		});
 	} catch (err) {
 		res.json({ message: err.toString() });
