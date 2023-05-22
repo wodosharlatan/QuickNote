@@ -29,23 +29,32 @@ router.post("/", async (req, res) => {
 
 		return newID;
 	}
-    
-	// Create new Entry
-	const entry = new Entry({
-		ID: await generateID(),
-		Urgency: req.body.urgency,
-		DeadLine: req.body.deadline,
-		Description: req.body.description.trim(),
-		Text: req.body.text.trim(),
-		IsPrivate: req.body.isprivate,
-		AddedBy: req.body.addedby.trim(),
-	});
 
-	try {
-		await entry.save();
-		res.json({ message: "Entry successfully created" });
-	} catch (err) {
-		res.json({ message: err.toString() });
+	const deadline = new Date(req.body.deadline);
+	const today = new Date();
+
+	// Check if the deadline is in the past
+	if (deadline < today) {
+		res.json({ message: "Deadline is in the past" });
+		return;
+	} else {
+		// Create new Entry
+		const entry = new Entry({
+			ID: await generateID(),
+			Urgency: req.body.urgency,
+			DeadLine: req.body.deadline,
+			Description: req.body.description.trim(),
+			Text: req.body.text.trim(),
+			IsPrivate: req.body.isprivate,
+			AddedBy: req.body.addedby.trim(),
+		});
+
+		try {
+			await entry.save();
+			res.json({ message: "Entry successfully created" });
+		} catch (err) {
+			res.json({ message: err.toString() });
+		}
 	}
 });
 
