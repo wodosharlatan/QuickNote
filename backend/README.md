@@ -17,7 +17,7 @@ This documentation provides an overview and usage guide for the backend applicat
 
 ```Json
   {
-    "message": "User: `jhon doe` was created with temporary password: A6VbzvLwHVZFW3c46MiEXo . Please change your password after logging in "
+    "message": "User created with temporary password: A6VbzvLwHVZFW3c46MiEXo."
   }
 ```
 
