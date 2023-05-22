@@ -56,7 +56,7 @@ export default {
 }
 
 .navigation {
-  height: 4rem;
+  height: 65px;
   padding: 5px;
   /* Center childrend divs one to the left one to the right */
   display: flex;
@@ -105,7 +105,7 @@ export default {
 
 @media only screen and (max-width: 600px) {
   .navigation {
-    height: 6rem;
+    height: 100px;
     flex-flow: column;
     justify-content: center;
     align-items: center;

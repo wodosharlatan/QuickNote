@@ -25,6 +25,13 @@ const router = createRouter({
       
     },
     {
+      path: '/new_note',
+      name: 'New Note',
+      component: import('../views/NewNote.vue'),
+      props: true
+      
+    },
+    {
       path: '/admin',
       name: 'Admin',
       component: import('../views/AdminView.vue')
@@ -35,7 +42,12 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue'),
       meta: {
         dontUseAuth: true
-      }
+      },
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: import('../views/PageNotFound.vue')
     }
   ]
 })

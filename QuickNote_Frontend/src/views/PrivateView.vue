@@ -1,9 +1,12 @@
 <template>
-  <div class="recBG_0 note_container">
+  <div class="recBG_0">
+    <div class="menubar">
+      <button  @click="$router.push({ name: 'New Note' })" class="ui_ElementT1 roundButton">+</button>
+    </div>
     <div class="notes">
       <NoteT1 :note="note" v-for="note in testNotes" class="note" />
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -31,13 +34,29 @@ export default {
 </script>
 
 <style scoped>
+.menubar{
+  display: flex;
+  flex-flow: row-reverse;
+  border-width: 0px 0px 1px 0px;
+  border-color: rgba(255, 255, 255, 0.76);
+  border-style: solid;
+  padding-bottom:10px;
+}
+
+.roundButton {
+  background-color: rgba(255, 255, 255, 0.726);
+  margin-right: 10px;
+  padding: 0 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
 .recBG_0 {
   background-color: #a195c594;
   height: 100%;
 }
 .notes {
   padding: 0;
-  margin: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

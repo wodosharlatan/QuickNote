@@ -1,0 +1,48 @@
+<template>
+  <div class="recBG_0">
+    <h2>Title</h2>
+    <input class="ui_ElementT1" type="text" placeholder="" v-model="text" /><br />
+    <h2>Text</h2>
+    <textarea class="ui_ElementT1" type="text" placeholder="" v-model="text"
+      oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea><br />
+      <h2>Urgency</h2>
+      <UrgencySelect></UrgencySelect>
+      <h2>Deadline</h2>
+      <DeadlineSelect></DeadlineSelect>
+  </div>
+</template>
+  
+<script>
+import UrgencySelect from '../components/Custom/UrgencySelect.vue'
+import DeadlineSelect from '../components/Custom/DeadlineSelect.vue'
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useLoginStore } from '../stores/login'
+
+export default {
+  components: { UrgencySelect,DeadlineSelect },
+  setup() {
+    return {}
+  }
+}
+</script>
+<style scoped>
+h2{
+  user-select:none;
+}
+
+input[type='text']:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  max-height: 500px;
+  transition: 0s;
+}
+
+textarea:focus {
+  outline: none;
+}
+</style>
+  

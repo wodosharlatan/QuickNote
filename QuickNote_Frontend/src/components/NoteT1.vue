@@ -21,8 +21,7 @@ export default {
     const router = useRouter();
 
     const viewNote = (id) => {
-      if(!id)
-        id = "ERROR";
+      if (!id) { router.push({ name: '404' }); return; }
       router.push({ name: 'Note', params: { id: id } });
     }
     const urgencyText = (id) => {
