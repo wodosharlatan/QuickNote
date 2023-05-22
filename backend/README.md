@@ -11,7 +11,7 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Endpoint:** `/users`
 - **Method:** `POST`
 - **Request Body:**
-  - `username` (string, required): The username of the user.
+- `username` (string, required): The username of the user.
 - **Response:** -`message`: Contains information if the action was successful or not
 - **Example:**
 
@@ -27,39 +27,28 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Method:** `GET`
 - **Response:**
   - Array of user objects, each containing:
-    - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
   - `IsAdmin` (bool): The admin privileges (default is false).
   - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
   - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 
 ```JSON
 [
     {
-        "_id": "6465cb22c902ff58c9caf692",
-        "Username": "Hello",
-        "Password": "gxgmgmpm",
-        "ID": "7",
+        "Username": "blob",
         "IsAdmin": false,
+        "LastLogin": "2023-05-19T09:14:42.494Z",
         "FirstTimeLogin": true,
-        "LastLogin": "2023-05-18T06:52:04.654Z",
-        "UserToken": "",
-        "__v": 0
+        "UserToken": ""
     },
     {
-        "_id": "6465cb27c902ff58c9caf695",
-        "Username": "World",
-        "Password": "p721nvw0",
-        "ID": "1",
+        "Username": "ben",
         "IsAdmin": false,
+        "LastLogin": "2023-05-19T10:47:33.965Z",
         "FirstTimeLogin": true,
-        "LastLogin": "2023-05-18T06:52:04.654Z",
-        "UserToken": "",
-        "__v": 0
+        "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
     }
 ]
 ```
