@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const entrySchema = mongoose.Schema({
     Urgency: {
-        type: String,
+        type: Number,
         required: true
     },
     DeadLine: {

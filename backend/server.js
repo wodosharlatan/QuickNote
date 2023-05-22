@@ -22,12 +22,17 @@ const newUserRoute = require("./routes/user_routes/new-user");
 const logoutRoute = require("./routes/user_routes/logout");
 const tokenRoute = require("./routes/user_routes/tokens");
 
+const entryRoute = require("./routes/entry_routes/new-entry");
+
 // Sites
 app.use("/users", userRoute);
 app.use("/login", loginRoute);
 app.use("/new-user", newUserRoute);
 app.use("/logout", logoutRoute);
 app.use("/tokens", tokenRoute);
+
+app.use("/new-entry", entryRoute);
+
 
 app.use("*", (req, res) => {
 	res.send("404 Not Found");
