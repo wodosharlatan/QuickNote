@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const User = require("../models/user_model");
+const User = require("../../models/user_model");
 const saltedSha256 = require("salted-sha256");
 
 // Add env variables

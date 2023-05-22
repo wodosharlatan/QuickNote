@@ -16,11 +16,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-const userRoute = require("./routes/user");
-const loginRoute = require("./routes/login");
-const newUserRoute = require("./routes/new-user");
-const logoutRoute = require("./routes/logout");
-const tokenRoute = require("./routes/tokens");
+const userRoute = require("./routes/user_routes/user");
+const loginRoute = require("./routes/user_routes/login");
+const newUserRoute = require("./routes/user_routes/new-user");
+const logoutRoute = require("./routes/user_routes/logout");
+const tokenRoute = require("./routes/user_routes/tokens");
 
 // Sites
 app.use("/users", userRoute);

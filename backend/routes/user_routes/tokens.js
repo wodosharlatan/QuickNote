@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user_model");
+const User = require("../../models/user_model");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
 const saltedSha256 = require("salted-sha256");
