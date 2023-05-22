@@ -11,6 +11,7 @@ require("dotenv").config();
 
 // Make new user
 router.post("/", async (req, res) => {
+	const username = req.body.username.trim();
 
 	// Get all usernames
 	nameList = [];
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
 		});
 
 	// Check if username already exists
-	if (nameList.includes(req.body.username)) {
+	if (nameList.includes(username)) {
 		res.json({ message: "Username already exists!" });
 		return;
 	}
@@ -36,14 +37,15 @@ router.post("/", async (req, res) => {
 
 	// Create new user
 	const user = new User({
-		Username: req.body.username,
-		Password: saltedSha256(`${uid}`, 'SUPER-SALT'),
+		Username: username,
+		Password: saltedSha256(`${uid}`, "SUPER-SALT"),
 	});
-
 
 	try {
 		await user.save();
-		res.json({ message: "User created with temporary password: " + uid + " . Please change your password after logging in "});
+		res.json({
+			message: `User: ${username} created with temporary password: ${uid} . Please change your password after logging in `,
+		});
 	} catch (err) {
 		res.json({ message: err.toString() });
 	}
