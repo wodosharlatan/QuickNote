@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const entrySchema = mongoose.Schema({
+    ID: {
+        type: Number,
+        required: true,
+    },
     Urgency: {
         type: Number,
         required: true

@@ -22,7 +22,8 @@ const logoutRoute = require("./routes/user_routes/logout");
 const tokenRoute = require("./routes/user_routes/tokens");
 
 const entryRoute = require("./routes/entry_routes/new-entry");
-const deleteEntryRoute = require("./routes/entry_routes/delete")
+const deleteEntryRoute = require("./routes/entry_routes/delete");
+const entriesRoute = require("./routes/entry_routes/entries");
 
 // Sites
 app.use("/users", userRoute);
@@ -33,7 +34,7 @@ app.use("/tokens", tokenRoute);
 
 app.use("/new-entry", entryRoute);
 app.use("/delete-entry", deleteEntryRoute);
-
+app.use("/entries", entriesRoute);
 
 app.use("*", (req, res) => {
 	res.send("404 Not Found");
