@@ -77,7 +77,7 @@ This documentation provides an overview and usage guide for the backend applicat
 ```
 
 ### Update User Password
-- **Endpoint:** `/users/{Token}`
+- **Endpoint:** `/tokens/{Token}`
 - **Method:** `PATCH`
 - **Request Body:**
   - `password` (string, required): The new password for the user.
