@@ -12,7 +12,8 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Method:** `POST`
 - **Request Body:**
 - `username` (string, required): The username of the user.
-- **Response:** -`message`: Contains information if the action was successful or not
+- **Response:** 
+-`message`: Contains information if the action was successful or not
 - **Example:**
 
 ```Json
@@ -29,8 +30,8 @@ This documentation provides an overview and usage guide for the backend applicat
   - Array of user objects, each containing:
   - `username` (string): The username of the created user.
   - `IsAdmin` (bool): The admin privileges (default is false).
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `UserToken` (string): A token used for verification of the user (default is empty string).
 - **Example:**
 
@@ -53,33 +54,26 @@ This documentation provides an overview and usage guide for the backend applicat
 ]
 ```
 
-### Get a User by ID
+### Get a User by Username
 
-- **Endpoint:** `/users/{id}`
+- **Endpoint:** `/users/{Username}`
 - **Method:** `GET`
 - **Response:**
-  - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
   - `IsAdmin` (bool): The admin privileges (default is false).
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `LastLogin` (date): Unix timestamp
+  - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
 
 ```Json
     {
-        "Username": "Jhon Doe",
-        "Password": "gxgmgmpm",
-        "ID": "125",
-        "IsAdmin": true,
-        "FirstTimeLogin": false,
-        "LastLogin": "2038-05-18T07:19:36.103Z",
-        "_id": "6465d2dab1dda60f48ef10e3",
-        "UserToken": "",
-        "__v": 0
-    }
+    "Username": "ben",
+    "IsAdmin": false,
+    "LastLogin": "2023-05-19T10:47:33.965Z",
+    "FirstTimeLogin": true,
+    "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
+}
 ```
 
 ### Update User Password
