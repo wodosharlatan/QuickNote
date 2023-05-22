@@ -33,28 +33,48 @@ router.post("/", async (req, res) => {
 	const deadline = new Date(req.body.deadline);
 	const today = new Date();
 
+	const urgency = req.body.urgency;
+	const textlength = req.body.text.trim().length;
+	const descriptionlength = req.body.description.trim().length;
+
+	if(textlength < 10 || textlength > 1000){
+		res.json({ message: "Text must be between 10 and 1000 characters" });
+		return;
+	}
+
+	if(descriptionlength < 5 || descriptionlength > 50){
+		res.json({ message: "Description must be between 5 and 50 characters" });
+		return;
+	}
+
+	// check if urgency is a number between 1 and 3
+	if (urgency < 1 || urgency > 3) {
+		res.json({ message: "Urgency must be a number between 1 and 3" });
+		return;
+	}
+
 	// Check if the deadline is in the past
 	if (deadline < today) {
 		res.json({ message: "Deadline is in the past" });
 		return;
-	} else {
-		// Create new Entry
-		const entry = new Entry({
-			ID: await generateID(),
-			Urgency: req.body.urgency,
-			DeadLine: req.body.deadline,
-			Description: req.body.description.trim(),
-			Text: req.body.text.trim(),
-			IsPrivate: req.body.isprivate,
-			AddedBy: req.body.addedby.trim(),
-		});
+	}
 
-		try {
-			await entry.save();
-			res.json({ message: "Entry successfully created" });
-		} catch (err) {
-			res.json({ message: err.toString() });
-		}
+	// Create new Entry
+	const entry = new Entry({
+		ID: await generateID(),
+		Urgency: urgency,
+		DeadLine: deadline,
+		Description: req.body.description.trim(),
+		Text: req.body.text.trim(),
+		IsPrivate: req.body.isprivate,
+		AddedBy: req.body.addedby.trim(),
+	});
+
+	try {
+		await entry.save();
+		res.json({ message: "Entry successfully created" });
+	} catch (err) {
+		res.json({ message: err.toString() });
 	}
 });
 
