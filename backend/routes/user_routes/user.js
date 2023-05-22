@@ -46,4 +46,14 @@ router.get("/:Username", async (req, res) => {
 	}
 });
 
+// Delete a specific user by username
+router.delete("/:Username", async (req, res) => {
+	try {
+		await User.deleteOne({ Username: req.params.Username });
+		res.json({ message: "User deleted !" });
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
 module.exports = router;

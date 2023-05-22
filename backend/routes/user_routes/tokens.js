@@ -39,15 +39,7 @@ router.patch("/:Token/ChangeLastLogin", async (req, res) => {
 	}
 });
 
-// Delete a specific user by Token
-router.delete("/:Token", async (req, res) => {
-	try {
-		await User.deleteOne({ UserToken: req.params.Token });
-		res.json({ message: "User deleted !" });
-	} catch (error) {
-		res.json({ message: error.toString() });
-	}
-});
+
 
 // Make user Admin
 router.patch("/:Token/Admin", async (req, res) => {

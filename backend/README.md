@@ -77,38 +77,32 @@ This documentation provides an overview and usage guide for the backend applicat
 ```
 
 ### Update User Password
-
-- **Endpoint:** `/users/{id}`
+- **Endpoint:** `/users/{Token}`
 - **Method:** `PATCH`
 - **Request Body:**
   - `password` (string, required): The new password for the user.
 - **Response:**
-  - `MongoDBSystemInfo` (string): Information about the action
+- `message`: Contains information if the action was successful or not
 - **Example:**
 
 ```JSON
-{
-    "acknowledged": true,
-    "modifiedCount": 1,
-    "upsertedId": null,
-    "upsertedCount": 0,
-    "matchedCount": 1
-}
+  { 
+    "message": "Password changed !" 
+  }
 ```
 
 ### Delete a User
 
-- **Endpoint:** `/users/{id}`
+- **Endpoint:** `/users/{Username}`
 - **Method:** `DELETE`
 - **Response:**
-  - `MongoDBSystemInfo` (string): Information about the action
+- `message`: Contains information if the action was successful or not
 - **Example:**
 
 ```JSON
-{
-    "acknowledged": true,
-    "deletedCount": 1
-}
+  { 
+    "message": "User deleted !" 
+  }
 ```
 
 ## Login
@@ -123,7 +117,7 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Response:**
   - `IsAdmin` (bool): The admin privileges (default is false).
   - `FirstTimeLogin` (bool): in this case it is called `ShouldChangePassword` ,
-  - `UserToken` (string): A token used for verification of the user (default is empty string).
+  - `UserToken` (string): A token used for verification of the user.
 - **Example:**
 
 ```Json
