@@ -9,10 +9,6 @@ const userSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	ID: {
-		type: String,
-		required: true,
-	},
 	IsAdmin: {
 		type: Boolean,
 		default: false,

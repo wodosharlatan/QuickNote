@@ -11,31 +11,16 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Endpoint:** `/users`
 - **Method:** `POST`
 - **Request Body:**
-  - `username` (string, required): The username of the user.
-- **Response:**
-  - `id` (string): The unique ID of the created user.
-  - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
-  - `LastLogin` (date): Unix timestamp
-  - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
+- `username` (string, required): The username of the user.
+- **Response:** 
+-`message`: Contains information if the action was successful or not
 - **Example:**
-```Json
-    {
-        "Username": "Tom",
-        "Password": "gxgmgmpm",
-        "ID": "7",
-        "IsAdmin": false,
-        "FirstTimeLogin": true,
-        "LastLogin": "2023-05-18T07:19:36.103Z",
-        "_id": "6465d2dab1dda60f48ef10e3",
-        "UserToken": "",
-        "__v": 0
-    }
-```
 
+```Json
+  {
+    "message": "User created with temporary password: A6VbzvLwHVZFW3c46MiEXo."
+  }
+```
 
 ### Get All Users
 
@@ -43,104 +28,81 @@ This documentation provides an overview and usage guide for the backend applicat
 - **Method:** `GET`
 - **Response:**
   - Array of user objects, each containing:
-    - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
+  - `IsAdmin` (bool): The admin privileges (default is false).
   - `LastLogin` (date): Unix timestamp
+  - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
+
 ```JSON
 [
     {
-        "_id": "6465cb22c902ff58c9caf692",
-        "Username": "Hello",
-        "Password": "gxgmgmpm",
-        "ID": "7",
+        "Username": "blob",
         "IsAdmin": false,
+        "LastLogin": "2023-05-19T09:14:42.494Z",
         "FirstTimeLogin": true,
-        "LastLogin": "2023-05-18T06:52:04.654Z",
-        "UserToken": "",
-        "__v": 0
+        "UserToken": ""
     },
     {
-        "_id": "6465cb27c902ff58c9caf695",
-        "Username": "World",
-        "Password": "p721nvw0",
-        "ID": "1",
+        "Username": "ben",
         "IsAdmin": false,
+        "LastLogin": "2023-05-19T10:47:33.965Z",
         "FirstTimeLogin": true,
-        "LastLogin": "2023-05-18T06:52:04.654Z",
-        "UserToken": "",
-        "__v": 0
+        "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
     }
 ]
 ```
 
-### Get a User by ID
+### Get a User by Username
 
-- **Endpoint:** `/users/{id}`
+- **Endpoint:** `/users/{Username}`
 - **Method:** `GET`
 - **Response:**
-  - `id` (string): The unique ID of the created user.
   - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
+  - `IsAdmin` (bool): The admin privileges (default is false).
   - `LastLogin` (date): Unix timestamp
+  - `FirstTimeLogin` (bool): Returns true if user never logged in,
   - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
 - **Example:**
+
 ```Json
-    {
-        "Username": "Jhon Doe",
-        "Password": "gxgmgmpm",
-        "ID": "125",
-        "IsAdmin": true,
-        "FirstTimeLogin": false,
-        "LastLogin": "2038-05-18T07:19:36.103Z",
-        "_id": "6465d2dab1dda60f48ef10e3",
-        "UserToken": "",
-        "__v": 0
-    }
+  {
+    "Username": "ben",
+    "IsAdmin": false,
+    "LastLogin": "2023-05-19T10:47:33.965Z",
+    "FirstTimeLogin": true,
+    "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
+  }
 ```
 
-
 ### Update User Password
-
-- **Endpoint:** `/users/{id}`
+- **Endpoint:** `/tokens/{Token}`
 - **Method:** `PATCH`
 - **Request Body:**
   - `password` (string, required): The new password for the user.
 - **Response:**
-  - `MongoDBSystemInfo` (string): Information about the action
+- `message`: Contains information if the action was successful or not
 - **Example:**
+
 ```JSON
-{
-    "acknowledged": true,
-    "modifiedCount": 1,
-    "upsertedId": null,
-    "upsertedCount": 0,
-    "matchedCount": 1
-}
+  { 
+    "message": "Password changed !" 
+  }
 ```
-
-
 
 ### Delete a User
 
-- **Endpoint:** `/users/{id}`
+- **Endpoint:** `/users/{Username}`
 - **Method:** `DELETE`
 - **Response:**
-    - `MongoDBSystemInfo` (string): Information about the action
+- `message`: Contains information if the action was successful or not
 - **Example:**
+
 ```JSON
-{
-    "acknowledged": true,
-    "deletedCount": 1
-}
+  { 
+    "message": "User deleted !" 
+  }
 ```
 
 ## Login
@@ -153,25 +115,15 @@ This documentation provides an overview and usage guide for the backend applicat
   - `username` (string, required): The username of the user.
   - `password` (string, required): The password of the user.
 - **Response:**
-  - `id` (string): The unique ID of the created user.
-  - `username` (string): The username of the created user.
-  - `password` (string): Password of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false). 
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
-  - `LastLogin` (date): Unix timestamp
-  - `UserToken` (string): A token used for verification of the user (default is empty string).
-  - `MongoDBSystemInfo` (string): More information about the object
+  - `IsAdmin` (bool): The admin privileges (default is false).
+  - `FirstTimeLogin` (bool): in this case it is called `ShouldChangePassword` ,
+  - `UserToken` (string): A token used for verification of the user.
 - **Example:**
+
 ```Json
-    {
-        "Username": "Jhon Doe",
-        "Password": "gxgmgmpm",
-        "ID": "6",
-        "IsAdmin": false,
-        "FirstTimeLogin": true,
-        "LastLogin": "2038-05-18T07:19:36.103Z",
-        "_id": "6465d2dab1dda60f48ef10e3",
-        "UserToken": "d86csp57mnl1ZV8QI9HS3O",
-        "__v": 0
-    }
+  {
+    "token": "5j6TBd4GhvJBkiPNwBoKrr",
+    "isAdmin": "false",
+    "ShouldChangePassword": "true"
+  }
 ```

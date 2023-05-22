@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
-const axios = require("axios");
 const https = require("https");
 const fs = require("fs");
 
@@ -16,12 +15,30 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-const userRoute = require("./routes/user");
-const loginRoute = require("./routes/login");
+const userRoute = require("./routes/user_routes/user");
+const loginRoute = require("./routes/user_routes/login");
+const newUserRoute = require("./routes/user_routes/new-user");
+const logoutRoute = require("./routes/user_routes/logout");
+const tokenRoute = require("./routes/user_routes/tokens");
+
+const entryRoute = require("./routes/entry_routes/new-entry");
+const deleteEntryRoute = require("./routes/entry_routes/delete");
+const entriesRoute = require("./routes/entry_routes/entries");
 
 // Sites
 app.use("/users", userRoute);
 app.use("/login", loginRoute);
+app.use("/new-user", newUserRoute);
+app.use("/logout", logoutRoute);
+app.use("/tokens", tokenRoute);
+
+app.use("/new-entry", entryRoute);
+app.use("/delete-entry", deleteEntryRoute);
+app.use("/entries", entriesRoute);
+
+app.use("*", (req, res) => {
+	res.send("404 Not Found");
+});
 
 /* SECURE SERVER
 
