@@ -22,7 +22,9 @@ router.get("/", async (req, res) => {
 		};
 	});
 
-	const sortedResult = result.sort((a, b) => new Date(a.DeadLine) - new Date(b.DeadLine));
+	const sortedResult = result.sort(
+		(a, b) => new Date(a.DeadLine) - new Date(b.DeadLine)
+	);
 
 	res.json(sortedResult);
 });

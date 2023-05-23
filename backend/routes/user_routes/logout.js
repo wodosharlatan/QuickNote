@@ -7,7 +7,7 @@ const AuthenticateUser = require("../../functions");
 require("dotenv").config();
 
 // Delete token for a specific user by Token on logout
-router.patch("/logout", async (req, res) => {
+router.patch("/", async (req, res) => {
 	try {
 		if (!(await AuthenticateUser(req.body.token))) {
 			res.json({ message: "Unauthorized" });

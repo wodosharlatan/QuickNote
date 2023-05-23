@@ -5,43 +5,36 @@ const axios = require("axios");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
 const saltedSha256 = require("salted-sha256");
+const AuthenticateAdmin = require("../../functions");
 
 // Add env variables
 require("dotenv").config();
 
 // Make new user
 router.post("/", async (req, res) => {
-	const username = req.body.username.trim();
+	try {
+		if (!(await AuthenticateAdmin(req.body.token))) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
 
-	// Get all usernames
-	nameList = [];
+		// Check if username already exists
+		const username = req.body.username.trim();
 
-	await axios
-		.get(`http://localhost:${process.env.PORT}/users`)
-		.then((response) => {
-			for (let i = 0; i < response.data.length; i++) {
-				nameList.push(response.data[i].Username);
-			}
-		})
-		.catch((error) => {
-			console.log(error);
+		const oneUser = await User.findOne({ Username: username });
+		if (oneUser.username === username) {
+			res.json({ message: "Username already exists!" });
+			return;
+		}
+
+		const uid = await uidgen.generate();
+
+		// Create new user
+		const user = new User({
+			Username: username,
+			Password: saltedSha256(`${uid}`, "SUPER-SALT"),
 		});
 
-	// Check if username already exists
-	if (nameList.includes(username)) {
-		res.json({ message: "Username already exists!" });
-		return;
-	}
-
-	const uid = await uidgen.generate();
-
-	// Create new user
-	const user = new User({
-		Username: username,
-		Password: saltedSha256(`${uid}`, "SUPER-SALT"),
-	});
-
-	try {
 		await user.save();
 		res.json({
 			message: `User created with temporary password: ${uid}.`,
