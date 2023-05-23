@@ -3,14 +3,26 @@
     <p class="textStyle1">QuickNote - {{ $route.name }}</p>
     <div class="menubar-container">
       <div class="menubar">
-        <button v-if="isAdmin" @click="goTo('Admin')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }">
+        <button
+          v-if="isAdmin"
+          @click="goTo('Admin')"
+          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }"
+        >
           Admin
         </button>
-        <button @click="goTo('Private')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Private' }">
+        <button
+          @click="goTo('Private')"
+          :class="{
+            ui_ElementT1: true,
+            selectedPage: $route.name == 'Private',
+          }"
+        >
           Private
         </button>
-        <button @click="goTo('Public')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }">
+        <button
+          @click="goTo('Public')"
+          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }"
+        >
           Public
         </button>
         <button @click="logout" class="ui_ElementT1 logoutButton">↲</button>
@@ -20,33 +32,33 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
-import { useLoginStore } from '@/stores/login'
-import { onMounted } from 'vue'
+import { useRouter } from "vue-router";
+import { useLoginStore } from "@/stores/login";
+import { onMounted } from "vue";
 
 export default {
   setup() {
-    const router = useRouter()
-    const loginStore = useLoginStore()
+    const router = useRouter();
+    const loginStore = useLoginStore();
     const isAdmin = loginStore.admin;
 
     const logout = () => {
-      const loginStore = useLoginStore()
-      loginStore.Logout()
-      router.push({ name: 'Login' })
-    }
+      const loginStore = useLoginStore();
+      loginStore.Logout();
+      router.push({ name: "Login" });
+    };
 
     const goTo = (page) => {
-      router.push({ name: page })
-    }
+      router.push({ name: page });
+    };
 
     onMounted(() => {
       //ADD ANIMATION EFFECT
-    })
+    });
 
-    return { logout, goTo, router, isAdmin }
-  }
-}
+    return { logout, goTo, router, isAdmin };
+  },
+};
 </script>
 
 <style scoped>

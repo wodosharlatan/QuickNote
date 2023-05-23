@@ -1,9 +1,9 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import NavPanel from '@/components/NavPanel.vue'
-import Background01 from '@/components/Background01.vue'
+import { RouterView } from "vue-router";
+import NavPanel from "@/components/NavPanel.vue";
+import Background01 from "@/components/Background01.vue";
 
-const changePage = window.changePage
+const changePage = window.changePage;
 </script>
 
 <template>

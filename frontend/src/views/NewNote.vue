@@ -1,7 +1,12 @@
 <template>
   <div class="recBG_0">
     <h2>Title</h2>
-    <input class="ui_ElementT1" type="text" placeholder="" v-model="text" /><br />
+    <input
+      class="ui_ElementT1"
+      type="text"
+      placeholder=""
+      v-model="text"
+    /><br />
     <h2>Text</h2>
     <textarea
       class="ui_ElementT1"
@@ -22,19 +27,19 @@
 </template>
 
 <script>
-import UrgencySelect from '@/components/NewNote/UrgencySelect.vue'
-import DeadlineSelect from '@/components/NewNote/DeadlineSelect.vue'
-import VisibilitySelect from '@/components/NewNote/VisibilitySelect.vue'
-import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '@/stores/login'
+import UrgencySelect from "@/components/NewNote/UrgencySelect.vue";
+import DeadlineSelect from "@/components/NewNote/DeadlineSelect.vue";
+import VisibilitySelect from "@/components/NewNote/VisibilitySelect.vue";
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useLoginStore } from "@/stores/login";
 
 export default {
   components: { UrgencySelect, DeadlineSelect, VisibilitySelect },
   setup() {
-    return {}
-  }
-}
+    return {};
+  },
+};
 </script>
 <style scoped>
 .createButton {
@@ -48,7 +53,7 @@ h2 {
   user-select: none;
 }
 
-input[type='text']:focus {
+input[type="text"]:focus {
   outline: none;
 }
 

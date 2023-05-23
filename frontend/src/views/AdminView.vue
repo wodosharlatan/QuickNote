@@ -1,9 +1,7 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button @click="addUser()" class="ui_ElementT1 roundButton">
-        +
-      </button>
+      <button @click="addUser()" class="ui_ElementT1 roundButton">+</button>
     </div>
     <div class="users" v-if="users">
       <UserT1 :user="user" v-for="user in users" class="user" />
@@ -12,28 +10,28 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import UserT1 from '@/components/UserT1.vue'
-import { useRouter, useRoute } from 'vue-router'
-import { getJsonServer } from '@/scripts/getData.js'
+import { ref } from "vue";
+import UserT1 from "@/components/UserT1.vue";
+import { useRouter, useRoute } from "vue-router";
+import { getJsonServer } from "@/scripts/getData.js";
 
 export default {
   components: { UserT1 },
   setup() {
-    const router = useRouter()
+    const router = useRouter();
     const users = ref();
     const getUsers = async () => {
       users.value = await getJsonServer("users");
-    }
+    };
     getUsers();
 
     const addUser = () => {
-      router.push({ name:'New User'});
-    }
+      router.push({ name: "New User" });
+    };
 
-    return { users,addUser}
-  }
-}
+    return { users, addUser };
+  },
+};
 </script>
 
 <style scoped>

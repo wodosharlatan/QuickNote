@@ -1,6 +1,11 @@
 <template>
   <div :class="['deadline', 'ui_ElementT1']">
-    <input type="text" :placeholder="curDate.getDate()" v-model="day" @focusout="checkDate()" />
+    <input
+      type="text"
+      :placeholder="curDate.getDate()"
+      v-model="day"
+      @focusout="checkDate()"
+    />
     <input
       type="text"
       :placeholder="curDate.getMonth() + 1"
@@ -17,68 +22,68 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 export default {
   setup() {
-    const curDate = new Date()
-    const day = ref()
-    const month = ref()
-    const year = ref()
+    const curDate = new Date();
+    const day = ref();
+    const month = ref();
+    const year = ref();
 
     const checkDate = () => {
-      const chk1 = checkYear()
-      const chk2 = checkMonth()
-      const chk3 = checkDay()
-    }
+      const chk1 = checkYear();
+      const chk2 = checkMonth();
+      const chk3 = checkDay();
+    };
 
     const checkDay = () => {
       if (isNaN(day.value)) {
-        day.value = curDate.getDate()
-        return false
+        day.value = curDate.getDate();
+        return false;
       }
-      const daysInMonth = new Date(year.value, month.value, 0).getDate()
+      const daysInMonth = new Date(year.value, month.value, 0).getDate();
       if (day.value < 1 || day.value > daysInMonth) {
-        day.value = curDate.getDate()
-        return false
+        day.value = curDate.getDate();
+        return false;
       }
-      return true
-    }
+      return true;
+    };
 
     const checkMonth = () => {
       if (isNaN(month.value)) {
-        month.value = curDate.getMonth() + 1
-        return false
+        month.value = curDate.getMonth() + 1;
+        return false;
       }
       if (month.value < 1 || month.value > 12) {
-        month.value = curDate.getMonth() + 1
-        return false
+        month.value = curDate.getMonth() + 1;
+        return false;
       }
-      return true
-    }
+      return true;
+    };
 
     const checkYear = () => {
       if (isNaN(year.value)) {
-        year.value = curDate.getFullYear()
-        return false
+        year.value = curDate.getFullYear();
+        return false;
       }
       if (year.value < curDate.getFullYear()) {
-        year.value = curDate.getFullYear()
-        return false
+        year.value = curDate.getFullYear();
+        return false;
       }
-      return true
-    }
+      return true;
+    };
 
-    checkDate()
+    checkDate();
     return {
       curDate,
       checkDate,
       day,
       month,
-      year
-    }
-  }
-}
+      year,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -99,7 +104,7 @@ input {
   text-align: center;
 }
 
-input[type='text']:focus {
+input[type="text"]:focus {
   outline: none;
 }
 </style>

@@ -4,10 +4,12 @@
       <p>{{ user.Username }}</p>
     </div>
     <div class="buttonMenu">
-      <button @click="deleteUser()" class="ui_ElementT1 roundButton">
-        🗑
-      </button>
-      <button v-if="!user.IsAdmin" @click="setUserAdmin()" class="ui_ElementT1 roundButton">
+      <button @click="deleteUser()" class="ui_ElementT1 roundButton">🗑</button>
+      <button
+        v-if="!user.IsAdmin"
+        @click="setUserAdmin()"
+        class="ui_ElementT1 roundButton"
+      >
         👤
       </button>
     </div>
@@ -15,28 +17,34 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { deleteJsonServer, getJsonServer } from '@/scripts/getData.js'
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import { deleteJsonServer, getJsonServer } from "@/scripts/getData.js";
 
 export default {
-  props: ['user'],
+  props: ["user"],
   setup(props) {
-    const router = useRouter()
+    const router = useRouter();
 
     const deleteUser = async () => {
-      console.log(await deleteJsonServer("users",{ username: props.user.Username}));
-      router.go({ Name: 'Admin'})
-    }
+      console.log(
+        await deleteJsonServer("users", { username: props.user.Username })
+      );
+      router.go({ Name: "Admin" });
+    };
 
     const setUserAdmin = async () => {
-      console.log(await getJsonServer("users/set-admin",{ username: props.user.Username}));
-      router.go({ Name: 'Admin'})
-    }
+      console.log(
+        await getJsonServer("users/set-admin", {
+          username: props.user.Username,
+        })
+      );
+      router.go({ Name: "Admin" });
+    };
 
-    return { deleteUser, setUserAdmin }
-  }
-}
+    return { deleteUser, setUserAdmin };
+  },
+};
 </script>
 
 <style scoped>

@@ -7,25 +7,25 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 export default {
   setup() {
-    const visibility = ref(true)
+    const visibility = ref(true);
     const visibilityText = () => {
-      if (visibility.value) return 'Public 👁'
-      return 'Private'
-    }
+      if (visibility.value) return "Public 👁";
+      return "Private";
+    };
 
     const changeVisibility = () => {
-      visibility.value = !visibility.value
-    }
+      visibility.value = !visibility.value;
+    };
     return {
       visibilityText,
-      changeVisibility
-    }
-  }
-}
+      changeVisibility,
+    };
+  },
+};
 </script>
 
 <style scoped>

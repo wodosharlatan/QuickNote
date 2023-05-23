@@ -12,34 +12,34 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
-  props: ['note'],
+  props: ["note"],
   setup() {
-    const router = useRouter()
+    const router = useRouter();
 
     const viewNote = (id) => {
       if (!id) {
-        router.push({ name: '404' })
-        return
+        router.push({ name: "404" });
+        return;
       }
-      router.push({ name: 'Note', params: { id: id } })
-    }
+      router.push({ name: "Note", params: { id: id } });
+    };
     const urgencyText = (id) => {
-      const urgency = ['Minor task', 'Crucial task', 'Top-priority task !']
-      return urgency[id - 1]
-    }
+      const urgency = ["Minor task", "Crucial task", "Top-priority task !"];
+      return urgency[id - 1];
+    };
 
     const shortenText = (text, len) => {
-      if (text.length > len) return text.substring(0, len) + ' . . .'
-      return text
-    }
+      if (text.length > len) return text.substring(0, len) + " . . .";
+      return text;
+    };
 
-    return { urgencyText, shortenText, viewNote }
-  }
-}
+    return { urgencyText, shortenText, viewNote };
+  },
+};
 </script>
 
 <style scoped>
@@ -107,10 +107,18 @@ export default {
 }
 
 .urgnt2 {
-  background-image: linear-gradient(to bottom right, rgb(255, 187, 0), rgb(229, 255, 0));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 187, 0),
+    rgb(229, 255, 0)
+  );
 }
 
 .urgnt1 {
-  background-image: linear-gradient(to bottom right, rgb(134, 248, 3), rgb(10, 194, 4));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(134, 248, 3),
+    rgb(10, 194, 4)
+  );
 }
 </style>

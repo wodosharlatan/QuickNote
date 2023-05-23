@@ -1,7 +1,10 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button @click="$router.push({ name: 'New Note' })" class="ui_ElementT1 roundButton">
+      <button
+        @click="$router.push({ name: 'New Note' })"
+        class="ui_ElementT1 roundButton"
+      >
         +
       </button>
     </div>
@@ -12,10 +15,10 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '../stores/login'
-import NoteT1 from '@/components/NoteT1.vue'
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useLoginStore } from "../stores/login";
+import NoteT1 from "@/components/NoteT1.vue";
 
 export default {
   components: { NoteT1 },
@@ -24,15 +27,15 @@ export default {
       {
         id: 256,
         urgent: 3,
-        date: '2.5.2025',
-        title: 'SomeTextAAA544',
-        text: 'Lorem Impsum'
-      }
-    ]
+        date: "2.5.2025",
+        title: "SomeTextAAA544",
+        text: "Lorem Impsum",
+      },
+    ];
 
-    return { testNotes }
-  }
-}
+    return { testNotes };
+  },
+};
 </script>
 
 <style scoped>

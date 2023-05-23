@@ -1,5 +1,8 @@
 <template>
-  <div :class="['urgency', 'ui_ElementT1', 'urgnt' + urgency]" @click="changeUrgency()">
+  <div
+    :class="['urgency', 'ui_ElementT1', 'urgnt' + urgency]"
+    @click="changeUrgency()"
+  >
     <p>
       {{ urgencyText(urgency) }}
     </p>
@@ -7,28 +10,28 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
 export default {
   setup() {
     const urgencyText = (id) => {
-      const urgency = ['Minor task', 'Crucial task', 'Top-priority task !']
-      return urgency[id - 1]
-    }
+      const urgency = ["Minor task", "Crucial task", "Top-priority task !"];
+      return urgency[id - 1];
+    };
 
-    const urgency = ref(1)
+    const urgency = ref(1);
 
     const changeUrgency = () => {
-      if (urgency.value > 2) urgency.value = 0
-      urgency.value++
-    }
+      if (urgency.value > 2) urgency.value = 0;
+      urgency.value++;
+    };
     return {
       urgency,
       urgencyText,
-      changeUrgency
-    }
-  }
-}
+      changeUrgency,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -53,10 +56,18 @@ export default {
 }
 
 .urgnt2 {
-  background-image: linear-gradient(to bottom right, rgb(255, 187, 0), rgb(229, 255, 0));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 187, 0),
+    rgb(229, 255, 0)
+  );
 }
 
 .urgnt1 {
-  background-image: linear-gradient(to bottom right, rgb(134, 248, 3), rgb(10, 194, 4));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(134, 248, 3),
+    rgb(10, 194, 4)
+  );
 }
 </style>

@@ -1,25 +1,39 @@
 <template>
   <div :class="{ exiting: exiting, login: true, recBG_0: true }">
     <p class="textStyle1">Login</p>
-    <input class="ui_ElementT1" type="text" placeholder="Username" v-model="username" /><br />
-    <input class="ui_ElementT1" type="password" placeholder="Password" v-model="password" /><br />
-    <button class="ui_ElementT1" @click="login" :disabled="canLogin">Login</button>
+    <input
+      class="ui_ElementT1"
+      type="text"
+      placeholder="Username"
+      v-model="username"
+    /><br />
+    <input
+      class="ui_ElementT1"
+      type="password"
+      placeholder="Password"
+      v-model="password"
+    /><br />
+    <button class="ui_ElementT1" @click="login" :disabled="canLogin">
+      Login
+    </button>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { login as loginToServer } from '@/scripts/login.js'
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { login as loginToServer } from "@/scripts/login.js";
 
 export default {
   setup() {
-    const username = ref('')
-    const password = ref('')
-    const canLogin = computed(() => !(username.value != '' && password.value != ''))
-    const exiting = ref(false)
+    const username = ref("");
+    const password = ref("");
+    const canLogin = computed(
+      () => !(username.value != "" && password.value != "")
+    );
+    const exiting = ref(false);
 
-    const router = useRouter()
+    const router = useRouter();
 
     const login = async () => {
       const login = await loginToServer(username.value, password.value);
@@ -27,16 +41,16 @@ export default {
         alert(login);
         return;
       }
-      exiting.value = true
-      router.push({ name: 'Public' })
-    }
+      exiting.value = true;
+      router.push({ name: "Public" });
+    };
 
     //tombos4
     //6t1uewa3
 
-    return { username, password, canLogin, login, exiting }
-  }
-}
+    return { username, password, canLogin, login, exiting };
+  },
+};
 </script>
 
 <style scoped>
@@ -66,7 +80,7 @@ export default {
   margin-bottom: 20px;
 }
 
-.login input[type='text'] {
+.login input[type="text"] {
   width: 100%;
   height: 35px;
   background-color: #d9d9d9;
@@ -74,7 +88,7 @@ export default {
   margin-top: 10px;
 }
 
-.login input[type='password'] {
+.login input[type="password"] {
   width: 100%;
   height: 35px;
   background-color: #d9d9d9;
@@ -82,12 +96,12 @@ export default {
   margin-top: 10px;
 }
 
-.login input[type='text']:focus {
+.login input[type="text"]:focus {
   outline: none;
   background-color: #ffffff;
 }
 
-.login input[type='password']:focus {
+.login input[type="password"]:focus {
   outline: none;
   background-color: #ffffff;
 }

@@ -11,42 +11,42 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '@/stores/login'
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useLoginStore } from "@/stores/login";
 
 export default {
-  props: ['id'],
+  props: ["id"],
   setup(props) {
-    window.changePage.value = true
+    window.changePage.value = true;
     const urgencyText = (id) => {
-      const urgency = ['Minor task', 'Crucial task', 'Top-priority task !']
-      return urgency[id - 1]
-    }
+      const urgency = ["Minor task", "Crucial task", "Top-priority task !"];
+      return urgency[id - 1];
+    };
 
-    const note = ref(null)
+    const note = ref(null);
 
     const fetchNote = async () => {
       if (!window.useBackend) {
         const noteData = {
           id: props.id,
           urgent: 3,
-          date: '2.5.2025',
-          title: 'SomeTextAAA544',
-          text: 'Lorem Impsum LONG TEXT \nfsdgsdfgdfg\nfsdgsdfgdfg\nfsdgsdfgdfg sdfgsdfgsdfg'
-        }
+          date: "2.5.2025",
+          title: "SomeTextAAA544",
+          text: "Lorem Impsum LONG TEXT \nfsdgsdfgdfg\nfsdgsdfgdfg\nfsdgsdfgdfg sdfgsdfgsdfg",
+        };
         //Test delay
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        note.value = noteData
-        window.changePage.value = false
-        return
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        note.value = noteData;
+        window.changePage.value = false;
+        return;
       }
-    }
+    };
 
-    fetchNote()
-    return { note, urgencyText }
-  }
-}
+    fetchNote();
+    return { note, urgencyText };
+  },
+};
 </script>
 
 <style scoped>
@@ -82,10 +82,18 @@ pre {
 }
 
 .urgnt2 {
-  background-image: linear-gradient(to bottom right, rgb(255, 187, 0), rgb(229, 255, 0));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 187, 0),
+    rgb(229, 255, 0)
+  );
 }
 
 .urgnt1 {
-  background-image: linear-gradient(to bottom right, rgb(134, 248, 3), rgb(10, 194, 4));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(134, 248, 3),
+    rgb(10, 194, 4)
+  );
 }
 </style>
