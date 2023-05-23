@@ -17,8 +17,12 @@
         const router = useRouter();
         const username = ref();
         const createUser = async () => {
+            console.log(username.value);
             const response = await getJsonServer("new-user",{ username: username.value });
-            console.log(response);
+            console.log(response.message);
+            alert(response.message);
+            router.push({name:'Admin'});
+
         }
       return {
         createUser,username
