@@ -18,11 +18,11 @@ router.post("/", async (req, res) => {
 			return;
 		}
 
-		// Check if username already exists
-		const username = req.body.username.trim();
+		const username = req.body.username;
 
 		const oneUser = await User.findOne({ Username: username });
-		if (oneUser.username === username) {
+
+		if (oneUser !== null) {
 			res.json({ message: "Username already exists!" });
 			return;
 		}
