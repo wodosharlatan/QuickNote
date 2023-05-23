@@ -18,5 +18,6 @@ export const login = async (username, password) => {
 
     const loginStore = useLoginStore()
     loginStore.loginToken = response.Token
+    loginStore.admin = response.IsAdmin;
     return "LoggedIn"
 }

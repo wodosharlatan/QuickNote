@@ -3,22 +3,14 @@
     <p class="textStyle1">QuickNote - {{ $route.name }}</p>
     <div class="menubar-container">
       <div class="menubar">
-        <button
-          @click="goTo('Admin')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }"
-        >
+        <button v-if="isAdmin" @click="goTo('Admin')"
+          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }">
           Admin
         </button>
-        <button
-          @click="goTo('Private')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Private' }"
-        >
+        <button @click="goTo('Private')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Private' }">
           Private
         </button>
-        <button
-          @click="goTo('Public')"
-          :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }"
-        >
+        <button @click="goTo('Public')" :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }">
           Public
         </button>
         <button @click="logout" class="ui_ElementT1 logoutButton">↲</button>
@@ -35,6 +27,8 @@ import { onMounted } from 'vue'
 export default {
   setup() {
     const router = useRouter()
+    const loginStore = useLoginStore()
+    const isAdmin = loginStore.admin;
 
     const logout = () => {
       const loginStore = useLoginStore()
@@ -50,7 +44,7 @@ export default {
       //ADD ANIMATION EFFECT
     })
 
-    return { logout, goTo, router }
+    return { logout, goTo, router, isAdmin }
   }
 }
 </script>
