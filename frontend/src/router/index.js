@@ -7,6 +7,7 @@ import PublicView from '@/views/PublicView.vue'
 import PrivateView from '@/views/PrivateView.vue'
 import NoteView from '@/views/NoteView.vue'
 import NewNote from '@/views/NewNote.vue'
+import NewUser from '@/views/NewUser.vue'
 import AdminView from '@/views/AdminView.vue'
 import LoginView from '@/views/LoginView.vue'
 import PageNotFound from '@/views/PageNotFound.vue'
@@ -37,8 +38,12 @@ const router = createRouter({
     {
       path: '/new_note',
       name: 'New Note',
-      component: NewNote,
-      props: true
+      component: NewNote
+    },
+    {
+      path: '/new_user',
+      name: 'New User',
+      component: NewUser
     },
     {
       path: '/admin',
