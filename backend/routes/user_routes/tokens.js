@@ -26,21 +26,6 @@ router.patch("/:Token/change-password", async (req, res) => {
 	}
 });
 
-// Change Last Login for a specific user by Token
-router.patch("/:Token/change-last-login", async (req, res) => {
-	try {
-		const updatedUser = await User.updateMany(
-			{ UserToken: req.params.Token },
-			{ $set: { LastLogin: Date.now() } }
-		);
-		res.json(updatedUser);
-	} catch (error) {
-		res.json({ message: error.toString() });
-	}
-});
-
-
-
 // Make user Admin
 router.patch("/:Token/admin", async (req, res) => {
 	try {
@@ -49,20 +34,6 @@ router.patch("/:Token/admin", async (req, res) => {
 			{ $set: { IsAdmin: true } }
 		);
 		res.json({ message: "Admin privileges granted !" });
-	} catch (error) {
-		res.json({ message: error.toString() });
-	}
-});
-
-// Generate Token for a specific user by Username on login
-router.patch("/:Username", async (req, res) => {
-	try {
-		const token = await uidgen.generate();
-		await User.updateMany(
-			{ Username: req.params.Username },
-			{ $set: { UserToken: token } }
-		);
-		res.json({ message: "Token Generated !" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
