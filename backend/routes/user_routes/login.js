@@ -53,7 +53,6 @@ router.post("/", async (req, res) => {
 			IsAdmin: oneUser.IsAdmin,
 			LastLogin: oneUser.LastLogin,
 			FirstTimeLogin: oneUser.FirstTimeLogin,
-			UserToken: oneUser.UserToken,
 		};
 
 		res.json(result);

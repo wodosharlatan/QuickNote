@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user_model");
-
+const AuthenticateAdmin = require("../../functions");
 // Add env variables
 require("dotenv").config();
 
 // Get all users
 router.get("/", async (req, res) => {
 	try {
+		if (!(await AuthenticateAdmin(req.body.token))) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
 		const users = await User.find();
 
 		const result = users.map((user) => {
@@ -17,7 +22,6 @@ router.get("/", async (req, res) => {
 				IsAdmin: user.IsAdmin,
 				LastLogin: user.LastLogin,
 				FirstTimeLogin: user.FirstTimeLogin,
-				UserToken: user.UserToken,
 			};
 		});
 
@@ -30,6 +34,11 @@ router.get("/", async (req, res) => {
 // Get a specific user by username
 router.get("/:Username", async (req, res) => {
 	try {
+		if (!(await AuthenticateAdmin(req.body.token))) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
 		const oneUser = await User.findOne({ Username: req.params.Username });
 
 		const result = {
@@ -37,7 +46,6 @@ router.get("/:Username", async (req, res) => {
 			IsAdmin: oneUser.IsAdmin,
 			LastLogin: oneUser.LastLogin,
 			FirstTimeLogin: oneUser.FirstTimeLogin,
-			UserToken: oneUser.UserToken,
 		};
 
 		res.json(result);
@@ -47,9 +55,14 @@ router.get("/:Username", async (req, res) => {
 });
 
 // Delete a specific user by username
-router.delete("/:Username", async (req, res) => {
+router.delete("/", async (req, res) => {
 	try {
-		await User.deleteOne({ Username: req.params.Username });
+		if (!(await AuthenticateAdmin(req.body.token))) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
+		await User.deleteOne({ Username: req.body.username });
 		res.json({ message: "User deleted !" });
 	} catch (error) {
 		res.json({ message: error.toString() });

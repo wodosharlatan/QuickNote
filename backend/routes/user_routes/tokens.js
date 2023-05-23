@@ -4,15 +4,21 @@ const User = require("../../models/user_model");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
 const saltedSha256 = require("salted-sha256");
+const { AuthenticateUser, AuthenticateAdmin } = require("../../functions");
 
 // Add env variables
 require("dotenv").config();
 
 // Change Password for a specific user by Token
-router.patch("/:Token/change-password", async (req, res) => {
+router.patch("/change-password", async (req, res) => {
 	try {
+		if (!(await AuthenticateUser(req.body.token))) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
 		await User.updateMany(
-			{ UserToken: req.params.Token },
+			{ UserToken: req.body.username },
 			{
 				$set: {
 					Password: saltedSha256(`${req.body.password}`, "SUPER-SALT"),
@@ -27,10 +33,15 @@ router.patch("/:Token/change-password", async (req, res) => {
 });
 
 // Make user Admin
-router.patch("/:Token/admin", async (req, res) => {
+router.patch("/admin", async (req, res) => {
 	try {
+		if (!(await AuthenticateAdmin(req.body.token))) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
 		await User.updateMany(
-			{ UserToken: req.params.Token },
+			{ UserToken: req.body.username },
 			{ $set: { IsAdmin: true } }
 		);
 		res.json({ message: "Admin privileges granted !" });
