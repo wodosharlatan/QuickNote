@@ -9,7 +9,6 @@ import App from './App.vue'
 import router from './router'
 
 // TEMPORARY !!!
-window.backendServer = '10.59.1.131:3000'
 window.useBackend = false
 
 //Setup vue + addons

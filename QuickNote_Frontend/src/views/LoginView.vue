@@ -35,7 +35,7 @@ export default {
         loginStore.loginToken = 'TESTTOKEN456454'
         return true
       }
-      const responseServer = await fetch('http://' + window.backendServer + '/login', {
+      const responseServer = await fetch('http://' + import.meta.env.VITE_BACKEND_SERVER + '/login', {
         method: 'POST',
         body: JSON.stringify({ username: username, password: password }),
         headers: {
