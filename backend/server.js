@@ -36,7 +36,7 @@ app.use("/new-entry", entryRoute);
 app.use("/delete-entry", deleteEntryRoute);
 app.use("/entries", entriesRoute);
 
-app.use("*", (req, res) => {
+app.use("*", (req,res) => {
 	res.send("404 Not Found");
 });
 
@@ -63,4 +63,7 @@ app.listen(port, () => {
 });
 
 // Connect to MongoDB
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true });
+mongoose
+	.connect(process.env.DB_CONNECTION, { useNewUrlParser: true })
+	.then(console.log("Connected to MongoDB !"))
+	.catch((err) => console.log(err));
