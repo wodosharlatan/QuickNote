@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Entry = require("../../models/entry_model");
+const User = require("../../models/user_model");
+const AuthenticateUser = require("../../functions");
 
 // Add env variables
 require("dotenv").config();
@@ -31,18 +33,25 @@ router.get("/", async (req, res) => {
 		(a, b) => new Date(a.DeadLine) - new Date(b.DeadLine)
 	);
 
-	res.json(sortedResult);
+	// Check if is private
+	const filteredResult = sortedResult.filter((entry) => {
+		if (entry.IsPrivate === false) {
+			return entry;
+		}
+	});
+
+	res.json(filteredResult);
 });
 
 // Get All Private entries
 router.post("/", async (req, res) => {
-
-	if (!req.body.token) {
+	if ((await AuthenticateUser(req.body.token)) === false) {
 		res.json({ message: "Unauthorized" });
 		return;
 	}
 
-	const oneUser = await User.findOne({ Username: req.body.username });
+	const oneUser = await User.findOne({ UserToken: req.body.token });
+	Username = oneUser.Username;
 
 	const entires = await Entry.find();
 
@@ -63,8 +72,23 @@ router.post("/", async (req, res) => {
 		(a, b) => new Date(a.DeadLine) - new Date(b.DeadLine)
 	);
 
-	res.json(sortedResult);
+	// Check if Username matches AddedBy
+	const filteredResult = sortedResult.filter((entry) => {
+		if (entry.AddedBy === Username) {
+			return entry;
+		}
+	});
+
+	// Check if is private
+	const filteredResult2 = filteredResult.filter((entry) => {
+		if (entry.IsPrivate === true) {
+			return entry;
+		}
+	});
+
+	res.json(filteredResult2);
 });
+
 
 // Get Entry by ID
 router.get("/:ID", async (req, res) => {

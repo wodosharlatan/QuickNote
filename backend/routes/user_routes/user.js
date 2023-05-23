@@ -63,6 +63,8 @@ router.delete("/", async (req, res) => {
 			return;
 		}
 
+		
+
 
 		await User.deleteOne({ Username: req.body.username });
 		res.json({ message: "User deleted !" });
