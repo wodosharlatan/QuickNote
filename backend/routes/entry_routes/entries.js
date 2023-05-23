@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 	const entires = await Entry.find();
 
 	const result = entires.map((entires) => {
-		// Return only necessary info for each user As JSON
+		// Return only necessary info for each entry As JSON
 		return {
 			ID: entires.ID,
 			Urgency: entires.Urgency,

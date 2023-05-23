@@ -6,30 +6,30 @@ const axios = require("axios");
 // Add env variables
 require("dotenv").config();
 
-// Make new Entry
-router.post("/", async (req, res) => {
-	async function generateID() {
-		let newID = 0;
+async function generateID() {
+	let newID = 0;
 
-		await axios
-			.get(`http://localhost:${process.env.PORT}/entries`)
-			.then((response) => {
-				const ID_List = [];
+	const entires = await Entry.find();
 
-				// Get all the current entry id's
-				for (let i = 0; i < response.data.length; i++) {
-					ID_List.push(response.data[i].ID);
-				}
+	// get all the id's
+	const result = entires.map((entires) => {
+		return {
+			ID: entires.ID,
+		};
+	});
 
-				// check if the new id is already in the database
-				while (ID_List.includes(newID)) {
-					newID++;
-				}
-			});
-
-		return newID;
+	// check if the new id is already in the database
+	while (result.includes(newID)) {
+		newID++;
 	}
 
+	return newID;
+}
+
+// Make new Entry
+router.post("/", async (req, res) => {
+	
+	// Check if the deadline is in the past
 	const deadline = new Date(req.body.deadline);
 	const today = new Date();
 

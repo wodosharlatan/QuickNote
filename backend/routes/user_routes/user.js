@@ -6,7 +6,7 @@ const AuthenticateAdmin = require("../../functions");
 require("dotenv").config();
 
 // Get all users
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
 	try {
 		if (!(await AuthenticateAdmin(req.body.token))) {
 			res.json({ message: "Unauthorized" });
@@ -32,14 +32,14 @@ router.get("/", async (req, res) => {
 });
 
 // Get a specific user by username
-router.get("/:Username", async (req, res) => {
+router.post("/specific", async (req, res) => {
 	try {
 		if (!(await AuthenticateAdmin(req.body.token))) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}
 
-		const oneUser = await User.findOne({ Username: req.params.Username });
+		const oneUser = await User.findOne({ Username: req.body.username });
 
 		const result = {
 			Username: oneUser.Username,
