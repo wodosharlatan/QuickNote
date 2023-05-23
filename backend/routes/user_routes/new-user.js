@@ -5,7 +5,7 @@ const axios = require("axios");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
 const saltedSha256 = require("salted-sha256");
-const AuthenticateAdmin = require("../../functions");
+const { AuthenticateAdmin } = require("../../functions");
 
 // Add env variables
 require("dotenv").config();

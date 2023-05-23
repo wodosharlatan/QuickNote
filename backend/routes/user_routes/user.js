@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user_model");
-const AuthenticateAdmin = require("../../functions");
+const { AuthenticateAdmin } = require("../../functions");
 // Add env variables
 require("dotenv").config();
 
 // Get all users
 router.post("/", async (req, res) => {
 	try {
-		if (await AuthenticateAdmin(req.body.token) === false) {
+		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}
@@ -34,11 +34,10 @@ router.post("/", async (req, res) => {
 // Get a specific user by username
 router.post("/specific", async (req, res) => {
 	try {
-		if (await AuthenticateAdmin(req.body.token) === false) {
+		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}
-
 
 		const oneUser = await User.findOne({ Username: req.body.username });
 
@@ -58,13 +57,10 @@ router.post("/specific", async (req, res) => {
 // Delete a specific user by username
 router.delete("/", async (req, res) => {
 	try {
-		if (await AuthenticateAdmin(req.body.token) === false) {
+		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}
-
-
-
 
 		await User.deleteOne({ Username: req.body.username });
 		res.json({ message: "User deleted !" });
@@ -72,7 +68,6 @@ router.delete("/", async (req, res) => {
 		res.json({ message: error.toString() });
 	}
 });
-
 
 // Make user Admin
 router.post("/set-admin", async (req, res) => {

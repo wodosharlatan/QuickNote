@@ -19,6 +19,8 @@ async function AuthenticateAdmin(token) {
 	try {
 		const oneUser = await User.findOne({ UserToken: token });
 
+        console.log(oneUser);
+
 		if (oneUser.IsAdmin === false) {
 			return false;
 		} else {
@@ -29,4 +31,7 @@ async function AuthenticateAdmin(token) {
 	}
 }
 
-module.exports = AuthenticateUser, AuthenticateAdmin;
+module.exports ={
+    AuthenticateUser: AuthenticateUser,
+    AuthenticateAdmin: AuthenticateAdmin
+}
