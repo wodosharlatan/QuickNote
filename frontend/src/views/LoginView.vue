@@ -11,6 +11,7 @@
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useLoginStore } from '@/stores/login'
+import { login as loginToServer } from '@/scripts/login.js'
 
 export default {
   setup() {
@@ -22,41 +23,18 @@ export default {
     const router = useRouter()
 
     const login = async () => {
-      if (!(await loginToServer(username.value, password.value))) return
+      const login = await loginToServer(username.value, password.value);
+      if (login != "LoggedIn") {
+        alert(login);
+        return;
+      }
       exiting.value = true
       router.push({ name: 'Public' })
     }
 
     //tombos4
     //6t1uewa3
-    async function loginToServer(username, password) {
-      if (!window.useBackend) {
-        const loginStore = useLoginStore()
-        loginStore.loginToken = 'TESTTOKEN456454'
-        return true
-      }
-      const responseServer = await fetch('http://' + import.meta.env.VITE_BACKEND_SERVER + '/login', {
-        method: 'POST',
-        body: JSON.stringify({ username: username, password: password }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const response = await responseServer.json()
 
-      if (response.message) {
-        alert(response.message)
-        return false
-      }
-      if (!response.token || response.token.length != 22) {
-        alert('Server ERROR!!!')
-        return false
-      }
-      console.log(response)
-      const loginStore = useLoginStore()
-      loginStore.loginToken = response.token
-      return true
-    }
     return { username, password, canLogin, login, exiting }
   }
 }
