@@ -33,22 +33,4 @@ router.patch("/change-password", async (req, res) => {
 	}
 });
 
-// Make user Admin
-router.patch("/admin", async (req, res) => {
-	try {
-		if ((await AuthenticateAdmin(req.body.token)) === false) {
-			res.json({ message: "Unauthorized" });
-			return;
-		}
-
-		await User.updateMany(
-			{ UserToken: req.body.username },
-			{ $set: { IsAdmin: true } }
-		);
-		res.json({ message: "Admin privileges granted !" });
-	} catch (error) {
-		res.json({ message: error.toString() });
-	}
-});
-
 module.exports = router;

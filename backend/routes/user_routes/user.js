@@ -63,11 +63,30 @@ router.delete("/", async (req, res) => {
 			return;
 		}
 
-		
+
 
 
 		await User.deleteOne({ Username: req.body.username });
 		res.json({ message: "User deleted !" });
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+});
+
+
+// Make user Admin
+router.patch("/set-admin", async (req, res) => {
+	try {
+		if ((await AuthenticateAdmin(req.body.token)) === false) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
+		await User.updateMany(
+			{ Username: req.body.username },
+			{ $set: { IsAdmin: true } }
+		);
+		res.json({ message: "Admin privileges granted !" });
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
