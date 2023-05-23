@@ -13,18 +13,18 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '../stores/login'
+import { useLoginStore } from '@/stores/login'
 
 export default {
-  props: ["id"],
+  props: ['id'],
   setup(props) {
-    window.changePage.value = true;
+    window.changePage.value = true
     const urgencyText = (id) => {
       const urgency = ['Minor task', 'Crucial task', 'Top-priority task !']
       return urgency[id - 1]
     }
 
-    const note = ref(null);
+    const note = ref(null)
 
     const fetchNote = async () => {
       if (!window.useBackend) {
@@ -36,30 +36,30 @@ export default {
           text: 'Lorem Impsum LONG TEXT \nfsdgsdfgdfg\nfsdgsdfgdfg\nfsdgsdfgdfg sdfgsdfgsdfg'
         }
         //Test delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        note.value = noteData;
-        window.changePage.value = false;
-        return;
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        note.value = noteData
+        window.changePage.value = false
+        return
       }
     }
 
-    fetchNote();
+    fetchNote()
     return { note, urgencyText }
   }
 }
 </script>
 
 <style scoped>
-.wrapper{
+.wrapper {
   padding: 10px;
 }
 .noteBar {
   opacity: 80%;
   border-radius: 10px 10px 0px 0px;
   padding: 10px;
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
-.noteBar h1{
+.noteBar h1 {
   font-weight: 500;
 }
 
@@ -74,8 +74,8 @@ h2 {
   font-weight: 500;
 }
 
-
-pre {}
+pre {
+}
 
 .urgnt3 {
   background-image: linear-gradient(to bottom right, red, rgb(255, 72, 0));

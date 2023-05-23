@@ -10,7 +10,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '../stores/login'
+import { useLoginStore } from '@/stores/login'
 
 export default {
   setup() {

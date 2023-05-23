@@ -1,7 +1,9 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button @click="$router.push({ name: 'New Note' })" class="ui_ElementT1 roundButton">+</button>
+      <button @click="$router.push({ name: 'New Note' })" class="ui_ElementT1 roundButton">
+        +
+      </button>
     </div>
     <div class="users">
       <UserT1 :user="user" v-for="user in testUsers" class="user" />
@@ -12,22 +14,23 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '../stores/login'
-import UserT1 from '../components/UserT1.vue'
+import { useLoginStore } from '@/stores/login'
+import UserT1 from '@/components/UserT1.vue'
 
 export default {
   components: { UserT1 },
   setup() {
     const testUsers = [
       {
-        username: "TestUser1",
+        username: 'TestUser1',
         isAdmin: true
       },
       {
-        username: "TestUser2",
+        username: 'TestUser2',
         isAdmin: false
-      },{
-        username: "TestUser2",
+      },
+      {
+        username: 'TestUser2',
         isAdmin: false
       }
     ]
@@ -38,13 +41,13 @@ export default {
 </script>
 
 <style scoped>
-.menubar{
+.menubar {
   display: flex;
   flex-flow: row-reverse;
   border-width: 0px 0px 1px 0px;
   border-color: rgba(255, 255, 255, 0.76);
   border-style: solid;
-  padding-bottom:10px;
+  padding-bottom: 10px;
 }
 
 .roundButton {
@@ -57,7 +60,7 @@ export default {
 }
 .users {
   padding: 0;
-  padding-top:10px;
+  padding-top: 10px;
   margin: auto;
 
   /* make the in line but start adding them from left */
@@ -66,7 +69,7 @@ export default {
   flex-flow: column;
   justify-content: start;
   align-items: flex-start;
-  gap:10px;
+  gap: 10px;
 }
 
 .user {

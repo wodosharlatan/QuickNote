@@ -1,10 +1,9 @@
 <script setup>
-import { watchEffect } from 'vue'
-import { RouterLink, RouterView } from 'vue-router'
-import NavPanel from './components/NavPanel.vue'
-import Background01 from './components/Background01.vue'
+import { RouterView } from 'vue-router'
+import NavPanel from '@/components/NavPanel.vue'
+import Background01 from '@/components/Background01.vue'
 
-const changePage = window.changePage;
+const changePage = window.changePage
 </script>
 
 <template>
@@ -54,4 +53,5 @@ const changePage = window.changePage;
   .routerMain {
     height: calc(100vh - 100px - 40px);
   }
-}</style>
+}
+</style>

@@ -18,11 +18,14 @@ import { useRouter } from 'vue-router'
 export default {
   props: ['note'],
   setup() {
-    const router = useRouter();
+    const router = useRouter()
 
     const viewNote = (id) => {
-      if (!id) { router.push({ name: '404' }); return; }
-      router.push({ name: 'Note', params: { id: id } });
+      if (!id) {
+        router.push({ name: '404' })
+        return
+      }
+      router.push({ name: 'Note', params: { id: id } })
     }
     const urgencyText = (id) => {
       const urgency = ['Minor task', 'Crucial task', 'Top-priority task !']

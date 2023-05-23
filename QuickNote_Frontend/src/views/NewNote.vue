@@ -3,8 +3,14 @@
     <h2>Title</h2>
     <input class="ui_ElementT1" type="text" placeholder="" v-model="text" /><br />
     <h2>Text</h2>
-    <textarea class="ui_ElementT1" type="text" placeholder="" v-model="text"
-      oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea><br />
+    <textarea
+      class="ui_ElementT1"
+      type="text"
+      placeholder=""
+      v-model="text"
+      oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+    ></textarea
+    ><br />
     <h2>Urgency</h2>
     <UrgencySelect></UrgencySelect>
     <h2>Deadline</h2>
@@ -14,14 +20,14 @@
     <button class="ui_ElementT1 createButton">Create Note</button>
   </div>
 </template>
-  
+
 <script>
-import UrgencySelect from '../components/Custom/UrgencySelect.vue'
-import DeadlineSelect from '../components/Custom/DeadlineSelect.vue'
-import VisibilitySelect from '../components/Custom/VisibilitySelect.vue'
+import UrgencySelect from '@/components/NewNote/UrgencySelect.vue'
+import DeadlineSelect from '@/components/NewNote/DeadlineSelect.vue'
+import VisibilitySelect from '@/components/NewNote/VisibilitySelect.vue'
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '../stores/login'
+import { useLoginStore } from '@/stores/login'
 
 export default {
   components: { UrgencySelect, DeadlineSelect, VisibilitySelect },
@@ -56,4 +62,3 @@ textarea:focus {
   outline: none;
 }
 </style>
-  
