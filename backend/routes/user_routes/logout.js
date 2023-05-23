@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/user_model");
-const { AuthenticateUser } = require("../../functions");
+const AuthenticateUser = require("../../functions");
 
 // Add env variables
 require("dotenv").config();

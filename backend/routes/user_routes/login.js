@@ -33,6 +33,7 @@ router.post("/", async (req, res) => {
 		}
 	} catch (error) {
 		res.json({ message: "Invalid username or password" });
+		return;
 	}
 
 	try {

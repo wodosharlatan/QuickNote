@@ -4,7 +4,8 @@ const User = require("../../models/user_model");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
 const saltedSha256 = require("salted-sha256");
-const { AuthenticateUser, AuthenticateAdmin } = require("../../functions");
+const AuthenticateUser  = require("../../functions");
+const AuthenticateAdmin = require("../../functions");
 
 // Add env variables
 require("dotenv").config();
