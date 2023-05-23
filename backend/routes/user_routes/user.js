@@ -75,7 +75,7 @@ router.delete("/", async (req, res) => {
 
 
 // Make user Admin
-router.patch("/set-admin", async (req, res) => {
+router.post("/set-admin", async (req, res) => {
 	try {
 		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });

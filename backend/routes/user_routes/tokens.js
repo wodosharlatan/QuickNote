@@ -11,7 +11,7 @@ const AuthenticateAdmin = require("../../functions");
 require("dotenv").config();
 
 // Change Password for a specific user by Token
-router.patch("/change-password", async (req, res) => {
+router.post("/change-password", async (req, res) => {
 	try {
 		if ((await AuthenticateUser(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });

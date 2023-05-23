@@ -89,10 +89,17 @@ router.post("/", async (req, res) => {
 	res.json(filteredResult2);
 });
 
-
 // Get Entry by ID
-router.get("/:ID", async (req, res) => {
+router.post("/:ID", async (req, res) => {
 	try {
+		if ((await AuthenticateUser(req.body.token)) === false) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
+		const oneUser = await User.findOne({ UserToken: req.body.token });
+		Username = oneUser.Username;
+
 		const oneEntry = await Entry.findOne({ ID: req.params.ID });
 
 		const json = {
@@ -104,6 +111,13 @@ router.get("/:ID", async (req, res) => {
 			IsPrivate: oneEntry.IsPrivate,
 			AddedBy: oneEntry.AddedBy,
 		};
+
+		if (json.IsPrivate === true) {
+			if (json.AddedBy !== oneUser.Username) {
+				res.json({ message: "Entry is Private And Doesn't Belong to you" });
+				return;
+			}
+		}
 
 		res.json(json);
 	} catch (error) {
