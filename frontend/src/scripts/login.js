@@ -1,3 +1,5 @@
+import { useLoginStore } from '@/stores/login'
+
 export const login = async (username, password) => {
     // Send login request to server
     const responseServer = await fetch('http://' + import.meta.env.VITE_BACKEND_SERVER + '/login', {
@@ -11,11 +13,10 @@ export const login = async (username, password) => {
 
     if (response.message)
         return response.message
-    console.log(response);
-    if (!response.token || response.token.length != 22)
+    if (!response.Token || response.Token.length != 22)
         return "SERVER ERROR!!!"
 
     const loginStore = useLoginStore()
-    loginStore.loginToken = response.token
+    loginStore.loginToken = response.Token
     return "LoggedIn"
 }

@@ -5,37 +5,28 @@
         +
       </button>
     </div>
-    <div class="users">
-      <UserT1 :user="user" v-for="user in testUsers" class="user" />
+    <div class="users" v-if="users">
+      <UserT1 :user="user" v-for="user in users" class="user" />
     </div>
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import { useLoginStore } from '@/stores/login'
+import { ref } from 'vue'
 import UserT1 from '@/components/UserT1.vue'
+import { getJsonServer } from '@/scripts/getData.js'
 
 export default {
   components: { UserT1 },
   setup() {
-    const testUsers = [
-      {
-        username: 'TestUser1',
-        isAdmin: true
-      },
-      {
-        username: 'TestUser2',
-        isAdmin: false
-      },
-      {
-        username: 'TestUser2',
-        isAdmin: false
-      }
-    ]
+    const users = ref();
+    const getUsers = async () => {
+      users.value = await getJsonServer("users");
+      console.log(users.value);
+    }
+    getUsers();
 
-    return { testUsers }
+    return { users }
   }
 }
 </script>
