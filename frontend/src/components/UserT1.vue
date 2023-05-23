@@ -30,7 +30,7 @@ export default {
     }
 
     const setUserAdmin = async () => {
-      console.log(await getJsonServer("users/set_admin",{ username: props.user.Username}));
+      console.log(await getJsonServer("users/set-admin",{ username: props.user.Username}));
       router.go({ Name: 'Admin'})
     }
 
