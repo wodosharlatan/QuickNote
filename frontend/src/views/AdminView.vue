@@ -14,11 +14,13 @@
 <script>
 import { ref } from 'vue'
 import UserT1 from '@/components/UserT1.vue'
+import { useRouter, useRoute } from 'vue-router'
 import { getJsonServer } from '@/scripts/getData.js'
 
 export default {
   components: { UserT1 },
   setup() {
+    const router = useRouter()
     const users = ref();
     const getUsers = async () => {
       users.value = await getJsonServer("users");
@@ -26,7 +28,7 @@ export default {
     getUsers();
 
     const addUser = () => {
-
+      router.push({ name:'New User'});
     }
 
     return { users,addUser}
