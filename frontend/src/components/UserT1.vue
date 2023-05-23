@@ -1,11 +1,14 @@
 <template>
   <div class="user ui_ElementT1">
     <div class="userInfo">
-      <p>{{ user.username + ' ' + user.isAdmin }}</p>
+      <p>{{ user.Username }}</p>
     </div>
     <div class="buttonMenu">
-      <button @click="$router.push({ name: 'New Note' })" class="ui_ElementT1 roundButton">
-        +
+      <button @click="deleteUser()" class="ui_ElementT1 roundButton">
+        🗑
+      </button>
+      <button v-if="!user.IsAdmin" @click="setUserAdmin()" class="ui_ElementT1 roundButton">
+        👤
       </button>
     </div>
   </div>
@@ -14,13 +17,24 @@
 <script>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { deleteJsonServer, getJsonServer } from '@/scripts/getData.js'
 
 export default {
   props: ['user'],
-  setup() {
+  setup(props) {
     const router = useRouter()
 
-    return {}
+    const deleteUser = async () => {
+      console.log(await deleteJsonServer("users",{ username: props.user.Username}));
+      router.go({ Name: 'Admin'})
+    }
+
+    const setUserAdmin = async () => {
+      console.log(await getJsonServer("users/set_admin",{ username: props.user.Username}));
+      router.go({ Name: 'Admin'})
+    }
+
+    return { deleteUser, setUserAdmin }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button @click="$router.push({ name: 'New Note' })" class="ui_ElementT1 roundButton">
+      <button @click="addUser()" class="ui_ElementT1 roundButton">
         +
       </button>
     </div>
@@ -22,11 +22,14 @@ export default {
     const users = ref();
     const getUsers = async () => {
       users.value = await getJsonServer("users");
-      console.log(users.value);
     }
     getUsers();
 
-    return { users }
+    const addUser = () => {
+
+    }
+
+    return { users,addUser}
   }
 }
 </script>
