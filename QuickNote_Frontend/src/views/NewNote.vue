@@ -5,30 +5,41 @@
     <h2>Text</h2>
     <textarea class="ui_ElementT1" type="text" placeholder="" v-model="text"
       oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea><br />
-      <h2>Urgency</h2>
-      <UrgencySelect></UrgencySelect>
-      <h2>Deadline</h2>
-      <DeadlineSelect></DeadlineSelect>
+    <h2>Urgency</h2>
+    <UrgencySelect></UrgencySelect>
+    <h2>Deadline</h2>
+    <DeadlineSelect></DeadlineSelect>
+    <h2>Visibility</h2>
+    <VisibilitySelect></VisibilitySelect>
+    <button class="ui_ElementT1 createButton">Create Note</button>
   </div>
 </template>
   
 <script>
 import UrgencySelect from '../components/Custom/UrgencySelect.vue'
 import DeadlineSelect from '../components/Custom/DeadlineSelect.vue'
+import VisibilitySelect from '../components/Custom/VisibilitySelect.vue'
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useLoginStore } from '../stores/login'
 
 export default {
-  components: { UrgencySelect,DeadlineSelect },
+  components: { UrgencySelect, DeadlineSelect, VisibilitySelect },
   setup() {
     return {}
   }
 }
 </script>
 <style scoped>
-h2{
-  user-select:none;
+.createButton {
+  margin-top: 20px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+h2 {
+  user-select: none;
 }
 
 input[type='text']:focus {

@@ -17,17 +17,14 @@ export default {
         const year = ref();
 
         const checkDate = () => {
-            checkYear();
-            checkMonth();
-            checkDay();
-
-            console.log(day.value + " " + month.value + " " + year.value);
+            const chk1 = checkYear();
+            const chk2 = checkMonth();
+            const chk3 = checkDay();
         }
 
         const checkDay = () => {
             if (isNaN(day.value)) { day.value = curDate.getDate(); return false; }
-            const daysInMonth = new Date(year, month, 0).getDate();
-            console.log(daysInMonth)
+            const daysInMonth = new Date(year.value, month.value, 0).getDate();
             if (day.value < 1 || day.value > daysInMonth) { day.value = curDate.getDate(); return false; }
             return true;
         }
@@ -40,7 +37,7 @@ export default {
 
         const checkYear = () => {
             if (isNaN(year.value)) { year.value = curDate.getFullYear(); return false; }
-            if (year.value < curDate.getFullYear()) { curDate.getFullYear(); return false; }
+            if (year.value < curDate.getFullYear()) { year.value = curDate.getFullYear(); return false; }
             return true;
         }
 
