@@ -50,10 +50,7 @@ router.post("/", async (req, res) => {
 		const oneUser = await User.findOne({ Username: authorizedUsername });
  
 		const result = {
-			Username: oneUser.Username,
-			IsAdmin: oneUser.IsAdmin,
-			LastLogin: oneUser.LastLogin,
-			FirstTimeLogin: oneUser.FirstTimeLogin,
+			Token: oneUser.UserToken,
 		};
 
 		res.json(result);
