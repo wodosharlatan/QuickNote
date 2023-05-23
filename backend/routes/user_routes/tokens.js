@@ -22,7 +22,7 @@ router.post("/change-password", async (req, res) => {
 			{ UserToken: req.body.username },
 			{
 				$set: {
-					Password: saltedSha256(`${req.body.password}`, "SUPER-SALT"),
+					Password: saltedSha256(`${req.body.password}`, "SALT"),
 					FirstTimeLogin: false,
 				},
 			}

@@ -12,6 +12,7 @@ require("dotenv").config();
 router.post("/", async (req, res) => {
 	// Find one user with the username
 
+
 	authorizedUsername = "";
 
 	try {
@@ -24,7 +25,7 @@ router.post("/", async (req, res) => {
 
 		if (
 			result.Username === req.body.username &&
-			result.Password === saltedSha256(`${req.body.password}`, "SUPER-SALT")
+			result.Password === saltedSha256(`${req.body.password}`, "SALT")
 		) {
 			authorizedUsername = result.Username;
 		} else {

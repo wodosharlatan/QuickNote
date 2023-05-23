@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 		// Create new user
 		const user = new User({
 			Username: username,
-			Password: saltedSha256(`${uid}`, "SUPER-SALT"),
+			Password: saltedSha256(`${uid}`, "SALT"),
 		});
 
 		await user.save();
