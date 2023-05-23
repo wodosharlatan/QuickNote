@@ -51,6 +51,7 @@ router.post("/", async (req, res) => {
  
 		const result = {
 			Token: oneUser.UserToken,
+			IsAdmin: oneUser.IsAdmin,
 		};
 
 		res.json(result);
