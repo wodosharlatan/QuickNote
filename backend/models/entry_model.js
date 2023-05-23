@@ -13,7 +13,7 @@ const entrySchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    Description: {
+    Title: {
         type: String,
         required: true
     },
@@ -21,7 +21,7 @@ const entrySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    IsPrivate: {
+    IsPublic: {
         type: Boolean,
         required: true
     },

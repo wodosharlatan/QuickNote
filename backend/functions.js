@@ -6,7 +6,7 @@ async function AuthenticateUser(token) {
 		const oneUser = await User.findOne({ UserToken: token });
 
 		if (!oneUser) {
-			return;
+			return false;
 		} else {
 			return true;
 		}
@@ -20,7 +20,7 @@ async function AuthenticateAdmin(token) {
 		const oneUser = await User.findOne({ UserToken: token });
 
 		if (oneUser.IsAdmin === false) {
-			return;
+			return false;
 		} else {
 			return true;
 		}

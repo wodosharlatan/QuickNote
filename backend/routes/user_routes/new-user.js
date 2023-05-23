@@ -13,7 +13,7 @@ require("dotenv").config();
 // Make new user
 router.post("/", async (req, res) => {
 	try {
-		if (!(await AuthenticateAdmin(req.body.token))) {
+		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}

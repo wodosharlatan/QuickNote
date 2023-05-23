@@ -4,7 +4,7 @@ const User = require("../../models/user_model");
 const UIDGenerator = require("uid-generator");
 const uidgen = new UIDGenerator();
 const saltedSha256 = require("salted-sha256");
-const AuthenticateUser  = require("../../functions");
+const AuthenticateUser = require("../../functions");
 const AuthenticateAdmin = require("../../functions");
 
 // Add env variables
@@ -13,7 +13,7 @@ require("dotenv").config();
 // Change Password for a specific user by Token
 router.patch("/change-password", async (req, res) => {
 	try {
-		if (!(await AuthenticateUser(req.body.token))) {
+		if ((await AuthenticateUser(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}
@@ -36,7 +36,7 @@ router.patch("/change-password", async (req, res) => {
 // Make user Admin
 router.patch("/admin", async (req, res) => {
 	try {
-		if (!(await AuthenticateAdmin(req.body.token))) {
+		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
 			return;
 		}
