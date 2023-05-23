@@ -58,7 +58,6 @@ export default {
 }
 .recBG_0 {
   background-color: #a195c594;
-  height: 100%;
 }
 .notes {
   padding: 0;

@@ -68,9 +68,9 @@ export default {
 .login {
   width: 275px;
   position: fixed;
-  top: 50vh;
-  left: 50vw;
-  transform: translate(-50%, -75%) scale(1, 1);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1, 1);
   border-radius: 30px;
 }
 
