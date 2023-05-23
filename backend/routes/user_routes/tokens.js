@@ -9,7 +9,7 @@ const saltedSha256 = require("salted-sha256");
 require("dotenv").config();
 
 // Change Password for a specific user by Token
-router.patch("/:Token/ChangePassword", async (req, res) => {
+router.patch("/:Token/change-password", async (req, res) => {
 	try {
 		await User.updateMany(
 			{ UserToken: req.params.Token },
@@ -27,7 +27,7 @@ router.patch("/:Token/ChangePassword", async (req, res) => {
 });
 
 // Change Last Login for a specific user by Token
-router.patch("/:Token/ChangeLastLogin", async (req, res) => {
+router.patch("/:Token/change-last-login", async (req, res) => {
 	try {
 		const updatedUser = await User.updateMany(
 			{ UserToken: req.params.Token },
@@ -42,7 +42,7 @@ router.patch("/:Token/ChangeLastLogin", async (req, res) => {
 
 
 // Make user Admin
-router.patch("/:Token/Admin", async (req, res) => {
+router.patch("/:Token/admin", async (req, res) => {
 	try {
 		await User.updateMany(
 			{ UserToken: req.params.Token },

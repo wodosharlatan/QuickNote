@@ -37,12 +37,13 @@ router.post("/", async (req, res) => {
 	const textlength = req.body.text.trim().length;
 	const descriptionlength = req.body.description.trim().length;
 
-	if(textlength < 10 || textlength > 1000){
+	// Check if the text and description are between 10 and 1000 characters
+	if (textlength < 10 || textlength > 1000) {
 		res.json({ message: "Text must be between 10 and 1000 characters" });
 		return;
 	}
 
-	if(descriptionlength < 5 || descriptionlength > 50){
+	if (descriptionlength < 5 || descriptionlength > 50) {
 		res.json({ message: "Description must be between 5 and 50 characters" });
 		return;
 	}
@@ -59,6 +60,19 @@ router.post("/", async (req, res) => {
 		return;
 	}
 
+	// Check if user exists
+	const addedby = await axios
+		.get(`http://localhost:${process.env.PORT}/users`)
+		.then((response) => {
+			for (let i = 0; i < response.data.length; i++) {
+				if (response.data[i].Username === req.body.addedby.trim()) {
+					return response.data[i].Username;
+				}
+			}
+			res.json({ message: "User does not exist" });
+			return;
+		});
+
 	// Create new Entry
 	const entry = new Entry({
 		ID: await generateID(),
@@ -67,7 +81,7 @@ router.post("/", async (req, res) => {
 		Description: req.body.description.trim(),
 		Text: req.body.text.trim(),
 		IsPrivate: req.body.isprivate,
-		AddedBy: req.body.addedby.trim(),
+		AddedBy: addedby,
 	});
 
 	try {
