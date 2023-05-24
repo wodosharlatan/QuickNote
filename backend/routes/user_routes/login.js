@@ -53,6 +53,7 @@ router.post("/", async (req, res) => {
 		const result = {
 			Token: oneUser.UserToken,
 			IsAdmin: oneUser.IsAdmin,
+			FirstTimeLogin: oneUser.FirstTimeLogin
 		};
 
 		res.json(result);

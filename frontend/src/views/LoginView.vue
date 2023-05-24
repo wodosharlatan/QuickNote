@@ -23,6 +23,7 @@
 import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { login as loginToServer } from "@/scripts/login.js";
+import { useLoginStore } from "@/stores/login";
 
 export default {
   setup() {
@@ -41,8 +42,12 @@ export default {
         alert(login);
         return;
       }
+      const loginStore = useLoginStore();
       exiting.value = true;
-      router.push({ name: "Public" });
+      if(loginStore.firstLogin)
+        router.push({ name: "Change Password" });
+      else
+        router.push({ name: "Public" });
     };
 
     //tombos4

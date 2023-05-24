@@ -1,3 +1,0 @@
-npm run format
-npm run dev
-https://pastebin.com/qBFNbT5x

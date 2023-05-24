@@ -11,7 +11,7 @@ const changePage = window.changePage;
   <div class="wrapper1">
     <div class="wrapper2">
       <div class="padding1"></div>
-      <div v-if="$route.name != 'Login'">
+      <div v-if="$route.name != 'Login' && $route.name != 'Change Password'">
         <NavPanel />
       </div>
       <div class="padding1"></div>

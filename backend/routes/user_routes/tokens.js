@@ -18,7 +18,7 @@ router.post("/change-password", async (req, res) => {
 		}
 
 		await User.updateMany(
-			{ UserToken: req.body.username },
+			{ UserToken: req.body.token },
 			{
 				$set: {
 					Password: saltedSha256(`${req.body.password}`, "SALT"),

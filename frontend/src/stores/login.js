@@ -5,6 +5,7 @@ export const useLoginStore = defineStore("login", () => {
   //Global variable for login token
   const loginToken = ref(localStorage.getItem("loginToken"));
   const admin = ref(localStorage.getItem("admin"));
+  const firstLogin = ref();
   //Computed variable for loggedIn
   const loggedIn = computed(
     () => loginToken.value != null && loginToken.value != "null"
@@ -16,5 +17,5 @@ export const useLoginStore = defineStore("login", () => {
   function Logout() {
     loginToken.value = null;
   }
-  return { loginToken, admin, loggedIn, Logout };
+  return { loginToken, admin,firstLogin, loggedIn, Logout };
 });

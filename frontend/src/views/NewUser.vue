@@ -7,7 +7,7 @@
       placeholder=""
       v-model="username"
     /><br />
-    <button class="ui_ElementT1 createButton" @click="createUser()">
+    <button class="ui_ElementT1 createButton" @click="createUser()" :disabled="!canSend">
       Create User
     </button>
   </div>
@@ -23,6 +23,9 @@ export default {
   setup() {
     const router = useRouter();
     const username = ref();
+    const canSend = computed(() => {
+      return username.value && username.value.length > 2;
+    });
     const createUser = async () => {
       console.log(username.value);
       const response = await getJsonServer("new-user", {
@@ -35,6 +38,7 @@ export default {
     return {
       createUser,
       username,
+      canSend
     };
   },
 };

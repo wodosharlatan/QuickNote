@@ -11,6 +11,7 @@ import NewUser from "@/views/NewUser.vue";
 import AdminView from "@/views/AdminView.vue";
 import LoginView from "@/views/LoginView.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
+import ChangePass from "@/views/ChangePass.vue";
 
 // Global variable for animation
 window.changePage = ref(false);
@@ -44,6 +45,11 @@ const router = createRouter({
       path: "/new_user",
       name: "New User",
       component: NewUser,
+    },
+    {
+      path: "/change_pass",
+      name: "Change Password",
+      component: ChangePass,
     },
     {
       path: "/admin",
