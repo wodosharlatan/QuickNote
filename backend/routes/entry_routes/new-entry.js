@@ -52,10 +52,7 @@ router.post("/", async (req, res) => {
 	try {
 		// Check if the deadline is in the past
 		const deadline = req.body.deadLine;
-		const parts = deadline.split(".");
-		const deadline_day = parts[0];
-		const deadline_month = parts[1];
-		const deadline_year = parts[2];
+		const [deadline_day, deadline_month, deadline_year] = deadline.split(".");
 
 		const formattedDealine = `${deadline_year}-${deadline_month}-${deadline_day}`;
 
