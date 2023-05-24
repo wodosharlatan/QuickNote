@@ -70,7 +70,7 @@ export default {
         ispublic: visibility.value,
       });
       alert(response.message);
-      //router.push({ name: "Public" });
+      router.push({ name: "Public" });
     };
 
     return {
