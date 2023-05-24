@@ -6,7 +6,7 @@ const Entry = require("../../models/entry_model");
 require("dotenv").config();
 
 // Delete Entry by ID
-router.delete("/", async (req, res) => {
+router.post("/", async (req, res) => {
 	try {
 		await Entry.deleteOne({ ID: req.body.id });
 		res.json({ message: "Entry deleted !" });

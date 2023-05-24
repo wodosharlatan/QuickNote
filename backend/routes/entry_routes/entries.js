@@ -8,7 +8,13 @@ const AuthenticateUser = require("../../functions");
 require("dotenv").config();
 
 // Get All Public entries
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
+
+	if ((await AuthenticateUser(req.body.token)) === false) {
+		res.json({ message: "Unauthorized" });
+		return;
+	}
+
 	const entires = await Entry.find();
 
 	const result = entires.map((entires) => {
@@ -44,7 +50,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get All Private entries
-router.post("/", async (req, res) => {
+router.post("/private", async (req, res) => {
 	if ((await AuthenticateUser(req.body.token)) === false) {
 		res.json({ message: "Unauthorized" });
 		return;
