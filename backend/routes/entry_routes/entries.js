@@ -2,20 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Entry = require("../../models/entry_model");
 const User = require("../../models/user_model");
-const AuthenticateUser = require("../../functions");
+const { AuthenticateUser } = require("../../functions");
 
 // Add env variables
 require("dotenv").config();
 
 // Get All Public entries
 router.post("/", async (req, res) => {
-
 	if ((await AuthenticateUser(req.body.token)) === false) {
 		res.json({ message: "Unauthorized" });
 		return;
 	}
 
-	const entires = await Entry.find();
+	const entires = await Entry.find({ IsPublic: true });
 
 	const result = entires.map((entires) => {
 		// Return only necessary info for each entry As JSON
@@ -39,14 +38,7 @@ router.post("/", async (req, res) => {
 		(a, b) => new Date(a.DeadLine) - new Date(b.DeadLine)
 	);
 
-	// Check if is private
-	const filteredResult = sortedResult.filter((entry) => {
-		if (entry.IsPublic === false) {
-			return entry;
-		}
-	});
-
-	res.json(filteredResult);
+	res.json(sortedResult);
 });
 
 // Get All Private entries
@@ -59,7 +51,7 @@ router.post("/private", async (req, res) => {
 	const oneUser = await User.findOne({ UserToken: req.body.token });
 	Username = oneUser.Username;
 
-	const entires = await Entry.find();
+	const entires = await Entry.find({ AddedBy: Username });
 
 	const result = entires.map((entires) => {
 		// Return only necessary info for each entry As JSON
