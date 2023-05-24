@@ -8,15 +8,8 @@
         +
       </button>
     </div>
-    <div
-      v-if="notes"
-      class="notes"
-    >
-      <NoteT1
-        v-for="note in notes"
-        :note="note"
-        class="note"
-      />
+    <div v-if="notes" class="notes">
+      <NoteT1 v-for="note in notes" :note="note" class="note" />
     </div>
   </div>
 </template>
@@ -32,6 +25,7 @@ export default {
   components: { NoteT1 },
   setup() {
     const notes = ref(null);
+    // Get public notes from server
     const getNotes = async () => {
       notes.value = await getJsonServer("entries");
     };

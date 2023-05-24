@@ -4,12 +4,7 @@
       <p>{{ user.Username }}</p>
     </div>
     <div class="buttonMenu">
-      <button
-        class="ui_ElementT1 roundButton"
-        @click="deleteUser()"
-      >
-        🗑
-      </button>
+      <button class="ui_ElementT1 roundButton" @click="deleteUser()">🗑</button>
       <button
         v-if="!user.IsAdmin"
         class="ui_ElementT1 roundButton"
@@ -32,18 +27,18 @@ export default {
     const router = useRouter();
 
     const deleteUser = async () => {
-      console.log(
-        await getJsonServer("users/delete", { username: props.user.Username })
-      );
+      // Send request to server for deletion of a user
+      const response = await getJsonServer("users/delete", {
+        username: props.user.Username,
+      });
       router.go({ Name: "Admin" });
     };
 
     const setUserAdmin = async () => {
-      console.log(
-        await getJsonServer("users/set-admin", {
-          username: props.user.Username,
-        })
-      );
+      // Send request to server for setting user as admin
+      const response = await getJsonServer("users/set-admin", {
+        username: props.user.Username,
+      });
       router.go({ Name: "Admin" });
     };
 

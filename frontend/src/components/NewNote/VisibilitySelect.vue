@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="['visibility', 'ui_ElementT1']"
-    @click="changeVisibility()"
-  >
+  <div :class="['visibility', 'ui_ElementT1']" @click="changeVisibility()">
     <p>
       {{ visibilityText() }}
     </p>

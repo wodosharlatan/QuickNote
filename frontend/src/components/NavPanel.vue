@@ -1,8 +1,6 @@
 <template>
   <div class="navigation recBG_0">
-    <p class="textStyle1">
-      QuickNote - {{ $route.name }}
-    </p>
+    <p class="textStyle1">QuickNote - {{ $route.name }}</p>
     <div class="menubar-container">
       <div class="menubar">
         <button
@@ -27,12 +25,7 @@
         >
           Public
         </button>
-        <button
-          class="ui_ElementT1 logoutButton"
-          @click="logout"
-        >
-          ↲
-        </button>
+        <button class="ui_ElementT1 logoutButton" @click="logout">↲</button>
       </div>
     </div>
   </div>
@@ -41,7 +34,6 @@
 <script>
 import { useRouter } from "vue-router";
 import { useLoginStore } from "@/stores/login";
-import { onMounted } from "vue";
 
 export default {
   setup() {
@@ -49,19 +41,17 @@ export default {
     const loginStore = useLoginStore();
     const isAdmin = loginStore.admin;
 
+    // Logout function , send user to login page
     const logout = () => {
       const loginStore = useLoginStore();
       loginStore.Logout();
       router.push({ name: "Login" });
     };
 
+    // Go to page function
     const goTo = (page) => {
       router.push({ name: page });
     };
-
-    onMounted(() => {
-      //ADD ANIMATION EFFECT
-    });
 
     return { logout, goTo, router, isAdmin };
   },

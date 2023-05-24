@@ -6,15 +6,15 @@
       class="ui_ElementT1"
       type="text"
       placeholder=""
-    ><br>
+    /><br />
     <h2>Text</h2>
     <textarea
       v-model="text"
       class="ui_ElementT1"
       type="text"
       placeholder=""
-      oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + &quot;px&quot;"
-    /><br>
+      oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+    /><br />
     <h2>Urgency</h2>
     <UrgencySelect v-model="urgency" />
     <h2>Deadline</h2>

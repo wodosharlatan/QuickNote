@@ -1,22 +1,10 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button
-        class="ui_ElementT1 roundButton"
-        @click="addUser()"
-      >
-        +
-      </button>
+      <button class="ui_ElementT1 roundButton" @click="addUser()">+</button>
     </div>
-    <div
-      v-if="users"
-      class="users"
-    >
-      <UserT1
-        v-for="user in users"
-        :user="user"
-        class="user"
-      />
+    <div v-if="users" class="users">
+      <UserT1 v-for="user in users" :user="user" class="user" />
     </div>
   </div>
 </template>
@@ -32,6 +20,7 @@ export default {
   setup() {
     const router = useRouter();
     const users = ref();
+    // Get users from server
     const getUsers = async () => {
       users.value = await getJsonServer("users");
     };

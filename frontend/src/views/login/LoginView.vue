@@ -1,25 +1,19 @@
 <template>
   <div :class="{ exiting: exiting, login: true, recBG_0: true }">
-    <p class="textStyle1">
-      Login
-    </p>
+    <p class="textStyle1">Login</p>
     <input
       v-model="username"
       class="ui_ElementT1"
       type="text"
       placeholder="Username"
-    ><br>
+    /><br />
     <input
       v-model="password"
       class="ui_ElementT1"
       type="password"
       placeholder="Password"
-    ><br>
-    <button
-      class="ui_ElementT1"
-      :disabled="canLogin"
-      @click="login"
-    >
+    /><br />
+    <button class="ui_ElementT1" :disabled="canLogin" @click="login">
       Login
     </button>
   </div>
@@ -53,9 +47,6 @@ export default {
       if (loginStore.firstLogin) router.push({ name: "Change Password" });
       else router.push({ name: "Public" });
     };
-
-    //tombos4
-    //6t1uewa3
 
     return { username, password, canLogin, login, exiting };
   },

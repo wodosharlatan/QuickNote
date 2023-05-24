@@ -13,7 +13,7 @@ export const login = async (username, password) => {
     }
   );
   const response = await responseServer.json();
-
+  // Check for errors from server or incorrect format
   if (response.message) return response.message;
   if (!response.Token || response.Token.length != 22) return "SERVER ERROR!!!";
 

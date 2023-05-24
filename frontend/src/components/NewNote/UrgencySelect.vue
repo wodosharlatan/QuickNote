@@ -29,6 +29,7 @@ export default {
     const urgency = ref(1);
 
     const changeUrgency = () => {
+      // 1-3 limit
       if (urgency.value > 2) urgency.value = 0;
       urgency.value++;
       emit("update:modelValue", urgency.value);

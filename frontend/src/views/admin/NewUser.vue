@@ -6,7 +6,7 @@
       class="ui_ElementT1"
       type="text"
       placeholder=""
-    ><br>
+    /><br />
     <button
       class="ui_ElementT1 createButton"
       :disabled="!canSend"
@@ -31,11 +31,9 @@ export default {
       return username.value && username.value.length > 2;
     });
     const createUser = async () => {
-      console.log(username.value);
       const response = await getJsonServer("new-user", {
         username: username.value,
       });
-      console.log(response.message);
       alert(response.message);
       router.push({ name: "Admin" });
     };

@@ -5,19 +5,19 @@
       type="text"
       :placeholder="curDate.getDate()"
       @focusout="checkDate()"
-    >
+    />
     <input
       v-model="month"
       type="text"
       :placeholder="curDate.getMonth() + 1"
       @focusout="checkDate()"
-    >
+    />
     <input
       v-model="year"
       type="text"
       :placeholder="curDate.getFullYear()"
       @focusout="checkDate()"
-    >
+    />
   </div>
 </template>
 
@@ -39,6 +39,7 @@ export default {
     const year = ref();
 
     const checkDate = () => {
+      // Checks for if input has correct format and values
       const chk1 = checkYear();
       const chk2 = checkMonth();
       const chk3 = checkDay();

@@ -6,7 +6,7 @@
       class="ui_ElementT1"
       type="password"
       placeholder=""
-    ><br>
+    /><br />
     <button
       class="ui_ElementT1 createButton"
       :disabled="!canSend"
@@ -34,7 +34,6 @@ export default {
       const response = await getJsonServer("tokens/change-password", {
         password: password.value,
       });
-      console.log(response.message);
       alert(response.message);
       router.push({ name: "Public" });
     };

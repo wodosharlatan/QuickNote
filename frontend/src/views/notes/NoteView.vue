@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="note"
-    class="container recBG_0"
-  >
+  <div v-if="note" class="container recBG_0">
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
       <h1>
         {{ urgencyText(note.Urgency) }} -

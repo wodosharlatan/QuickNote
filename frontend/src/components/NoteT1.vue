@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="note"
-    @click="viewNote(note.ID)"
-  >
+  <div class="note" @click="viewNote(note.ID)">
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
       <h3>{{ urgencyText(note.Urgency) }}</h3>
       <h3>{{ formatDate(new Date(note.DeadLine)) }}</h3>
@@ -30,6 +27,7 @@ export default {
     };
 
     const viewNote = (id) => {
+      // Case for if id is not a number
       if (isNaN(id)) {
         router.push({ name: "404" });
         return;
