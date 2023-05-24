@@ -72,7 +72,7 @@ router.post("/private", async (req, res) => {
 
 	// Check if is private
 	const filteredResult = sortedResult.filter((entry) => {
-		if (entry.IsPublic === true) {
+		if (entry.IsPublic === false) {
 			return entry;
 		}
 	});
@@ -83,11 +83,6 @@ router.post("/private", async (req, res) => {
 // Get Entry by ID
 router.post("/:ID", async (req, res) => {
 	try {
-		if ((await AuthenticateUser(req.body.token)) === false) {
-			res.json({ message: "Unauthorized" });
-			return;
-		}
-
 		const oneUser = await User.findOne({ UserToken: req.body.token });
 		Username = oneUser.Username;
 
@@ -103,11 +98,16 @@ router.post("/:ID", async (req, res) => {
 			AddedBy: oneEntry.AddedBy,
 		};
 
-		if (json.IsPublic === true) {
+		if (json.IsPublic === false) {
 			if (json.AddedBy !== oneUser.Username) {
 				res.json({ message: "Entry is Private And Doesn't Belong to you" });
 				return;
 			}
+		}
+
+		if ((await AuthenticateUser(req.body.token)) === false) {
+			res.json({ message: "Unauthorized" });
+			return;
 		}
 
 		res.json(json);
