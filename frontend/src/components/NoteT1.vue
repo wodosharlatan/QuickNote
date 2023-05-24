@@ -1,12 +1,12 @@
 <template>
-  <div class="note" @click="viewNote(note.id)">
-    <div :class="['noteBar', 'urgnt' + note.urgent]">
-      <h3>{{ urgencyText(note.urgent) }}</h3>
-      <h3>{{ note.date }}</h3>
+  <div class="note" @click="viewNote(note.ID)">
+    <div :class="['noteBar', 'urgnt' + note.Urgency]">
+      <h3>{{ urgencyText(note.Urgency) }}</h3>
+      <h3>{{ note.DeadLine }}</h3>
     </div>
     <div class="noteBottom">
-      <h3>{{ shortenText(note.title, 10) }}</h3>
-      <p class="noteText">{{ shortenText(note.text, 57) }}</p>
+      <h3>{{ shortenText(note.Title, 10) }}</h3>
+      <p class="noteText">{{ shortenText(note.Text, 57) }}</p>
     </div>
   </div>
 </template>
@@ -21,7 +21,8 @@ export default {
     const router = useRouter();
 
     const viewNote = (id) => {
-      if (!id) {
+      console.log(id);
+      if (isNaN(id)) {
         router.push({ name: "404" });
         return;
       }
