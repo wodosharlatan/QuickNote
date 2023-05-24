@@ -1,11 +1,11 @@
 <template>
   <div class="container recBG_0" v-if="note">
-    <div :class="['noteBar', 'urgnt' + note.urgent]">
-      <h1>{{ urgencyText(note.urgent) }} - {{ note.date }}</h1>
+    <div :class="['noteBar', 'urgnt' + note.Urgency]">
+      <h1>{{ urgencyText(note.Urgency) }} - {{ note.DateTime }}</h1>
     </div>
     <div class="wrapper">
-      <h2>{{ note.title }} - {{ note.id }}</h2>
-      <pre>{{ note.text }}</pre>
+      <h2>{{ note.Title }} - {{ note.ID }}</h2>
+      <pre>{{ note.Text }}</pre>
     </div>
   </div>
 </template>
@@ -14,6 +14,7 @@
 import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useLoginStore } from "@/stores/login";
+import { getJsonServer } from "@/scripts/getData.js";
 
 export default {
   props: ["id"],
@@ -27,20 +28,13 @@ export default {
     const note = ref(null);
 
     const fetchNote = async () => {
-      if (!window.useBackend) {
-        const noteData = {
-          id: props.id,
-          urgent: 3,
-          date: "2.5.2025",
-          title: "SomeTextAAA544",
-          text: "Lorem Impsum LONG TEXT \nfsdgsdfgdfg\nfsdgsdfgdfg\nfsdgsdfgdfg sdfgsdfgsdfg",
-        };
-        //Test delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const noteData = await getJsonServer("entries/" + props.id);
+        if(noteData.message)
+          {alert(noteData.message);return;}
         note.value = noteData;
         window.changePage.value = false;
         return;
-      }
+    
     };
 
     fetchNote();
