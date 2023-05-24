@@ -37,6 +37,9 @@ export default {
 </script>
 
 <style scoped>
+.recBG_0 {
+  transition: 1s;
+}
 .menubar {
   display: flex;
   flex-flow: row-reverse;

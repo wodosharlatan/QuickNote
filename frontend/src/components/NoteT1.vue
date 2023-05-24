@@ -50,6 +50,17 @@ export default {
 </script>
 
 <style scoped>
+@keyframes load {
+  from {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
 .noteBottom {
   padding: 10px;
 }
@@ -79,6 +90,8 @@ export default {
   border-radius: 10px 10px 5px 5px;
 
   margin: 10px;
+
+  animation: load 1s;
 }
 
 .noteBar {

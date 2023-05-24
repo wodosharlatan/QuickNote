@@ -48,6 +48,18 @@ export default {
 </script>
 
 <style scoped>
+@keyframes load {
+  from {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
 .buttonMenu {
   width: 50%;
   float: left;
@@ -67,6 +79,7 @@ export default {
   height: 40px;
   padding: 5px;
   background-color: white;
+  animation: load 1s;
 }
 
 .roundButton {
