@@ -2,7 +2,7 @@
   <div class="note" @click="viewNote(note.ID)">
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
       <h3>{{ urgencyText(note.Urgency) }}</h3>
-      <h3>{{ note.DeadLine }}</h3>
+      <h3>{{ formatDate(new Date(note.DeadLine)) }}</h3>
     </div>
     <div class="noteBottom">
       <h3>{{ shortenText(note.Title, 10) }}</h3>
@@ -20,8 +20,11 @@ export default {
   setup() {
     const router = useRouter();
 
+    const formatDate = (date) => {
+      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+    };
+
     const viewNote = (id) => {
-      console.log(id);
       if (isNaN(id)) {
         router.push({ name: "404" });
         return;
@@ -38,7 +41,7 @@ export default {
       return text;
     };
 
-    return { urgencyText, shortenText, viewNote };
+    return { urgencyText, shortenText, viewNote, formatDate };
   },
 };
 </script>

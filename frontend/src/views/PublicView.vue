@@ -9,7 +9,7 @@
       </button>
     </div>
     <div class="notes" v-if="notes">
-      <NoteT1 :note="note" v-for="note in notes" class="note"/>
+      <NoteT1 :note="note" v-for="note in notes" class="note" />
     </div>
   </div>
 </template>
@@ -27,10 +27,8 @@ export default {
     const notes = ref(null);
     const getNotes = async () => {
       notes.value = await getJsonServer("entries");
-      console.log(notes.value);
     };
     getNotes();
-
 
     return { notes };
   },

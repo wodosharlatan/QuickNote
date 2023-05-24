@@ -21,6 +21,7 @@ async function generateID() {
 	while (result.includes(newID)) {
 		newID++;
 	}
+	console.log(newID);
 	return newID;
 }
 

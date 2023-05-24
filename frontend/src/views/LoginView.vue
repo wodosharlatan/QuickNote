@@ -44,10 +44,8 @@ export default {
       }
       const loginStore = useLoginStore();
       exiting.value = true;
-      if(loginStore.firstLogin)
-        router.push({ name: "Change Password" });
-      else
-        router.push({ name: "Public" });
+      if (loginStore.firstLogin) router.push({ name: "Change Password" });
+      else router.push({ name: "Public" });
     };
 
     //tombos4

@@ -25,7 +25,9 @@
 import { ref, computed } from "vue";
 
 export default {
-  setup() {
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
     const curDate = new Date();
     const day = ref();
     const month = ref();
@@ -35,6 +37,7 @@ export default {
       const chk1 = checkYear();
       const chk2 = checkMonth();
       const chk3 = checkDay();
+      emit("update:modelValue", `${day.value}.${month.value}.${year.value}`);
     };
 
     const checkDay = () => {

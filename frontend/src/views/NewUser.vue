@@ -7,7 +7,11 @@
       placeholder=""
       v-model="username"
     /><br />
-    <button class="ui_ElementT1 createButton" @click="createUser()" :disabled="!canSend">
+    <button
+      class="ui_ElementT1 createButton"
+      @click="createUser()"
+      :disabled="!canSend"
+    >
       Create User
     </button>
   </div>
@@ -38,7 +42,7 @@ export default {
     return {
       createUser,
       username,
-      canSend
+      canSend,
     };
   },
 };
