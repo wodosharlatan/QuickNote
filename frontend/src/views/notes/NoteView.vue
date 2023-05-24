@@ -74,7 +74,7 @@ export default {
 
 .container {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   padding: 0px;
   border-radius: 10px 10px 1px 1px;
 }
@@ -84,6 +84,11 @@ h2 {
 }
 
 pre {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
 }
 
 .urgnt3 {

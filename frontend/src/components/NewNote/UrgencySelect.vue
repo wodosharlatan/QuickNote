@@ -26,7 +26,7 @@ export default {
       return urgency[id - 1];
     };
 
-    const urgency = ref(1);
+    const urgency = ref(0);
 
     const changeUrgency = () => {
       // 1-3 limit
@@ -35,6 +35,7 @@ export default {
       emit("update:modelValue", urgency.value);
     };
 
+    changeUrgency();
     return {
       urgency,
       urgencyText,

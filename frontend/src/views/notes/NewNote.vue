@@ -54,9 +54,11 @@ export default {
     const canSend = computed(() => {
       return (
         title.value &&
-        title.value.length > 2 &&
+        title.value.length > 4 &&
+        title.value.length <= 50 &&
         text.value &&
-        text.value.length > 2
+        text.value.length > 9 &&
+        text.value.length <= 1000
       );
     });
 
@@ -68,7 +70,8 @@ export default {
         deadline: deadline.value,
         ispublic: visibility.value,
       });
-      alert(response.message);
+      if (response.message != "Entry successfully created")
+        alert(response.message);
       router.push({ name: "Public" });
     };
 
