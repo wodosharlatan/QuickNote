@@ -8,8 +8,8 @@
         +
       </button>
     </div>
-    <div class="notes">
-      <NoteT1 :note="note" v-for="note in testNotes" class="note" />
+    <div class="notes" v-if="notes">
+      <NoteT1 :note="note" v-for="note in notes" class="note" />
     </div>
   </div>
 </template>
@@ -19,21 +19,18 @@ import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useLoginStore } from "../stores/login";
 import NoteT1 from "@/components/NoteT1.vue";
-
+import { getJsonServer } from "@/scripts/getData.js";
 export default {
   components: { NoteT1 },
   setup() {
-    const testNotes = [
-      {
-        id: 256,
-        urgent: 3,
-        date: "2.5.2025",
-        title: "SomeTextAAA544",
-        text: "Lorem Impsum",
-      },
-    ];
+    const notes = ref(null);
+    const getNotes = async () => {
+      notes.value = await getJsonServer("entries/private");
+      console.log(notes.value);
+    };
+    getNotes();
 
-    return { testNotes };
+    return { notes };
   },
 };
 </script>
