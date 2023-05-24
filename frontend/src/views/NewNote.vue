@@ -62,7 +62,7 @@ export default {
     });
 
     const createNote = async () => {
-      const response = await getJsonServer("entries/new-entry", {
+      const response = await getJsonServer("new-entry", {
         title: title.value,
         text: text.value,
         urgency: urgency.value,
