@@ -1,31 +1,20 @@
-const axios = require("axios");
 const User = require("./models/user_model");
 
 async function AuthenticateUser(token) {
 	try {
 		const oneUser = await User.findOne({ UserToken: token });
-
-		if (!oneUser) {
-			return false;
-		} else {
-			return true;
-		}
+		return !!oneUser; // Returns true if oneUser exists, false otherwise
 	} catch (error) {
-		console.log(error);
+		return false;
 	}
 }
 
 async function AuthenticateAdmin(token) {
 	try {
 		const oneUser = await User.findOne({ UserToken: token });
-
-		if (oneUser.IsAdmin === false) {
-			return false;
-		} else {
-			return true;
-		}
+		return !!(oneUser && oneUser.IsAdmin); // Returns true if oneUser exists and IsAdmin is true, false otherwise
 	} catch (error) {
-		console.log(error);
+		return false;
 	}
 }
 

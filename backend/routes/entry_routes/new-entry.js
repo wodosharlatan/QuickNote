@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Entry = require("../../models/entry_model");
 const axios = require("axios");
+const { AuthenticateUser } = require("../../functions");
 
 // Add env variables
 require("dotenv").config();
@@ -29,6 +30,26 @@ async function generateID() {
 // Make new Entry
 router.post("/", async (req, res) => {
 	
+	// Check if user exists
+	const addedby = "";
+
+	try {
+		if ((await AuthenticateUser(req.body.token)) === false) {
+			res.json({ message: "Unauthorized" });
+			return;
+		}
+
+		const oneUser = await User.findOne({ Username: req.body.username });
+
+		if (oneUser.Username === req.body.username) {
+			addedby = oneUser.Username;
+		} else {
+			res.json({ message: "User does not exist" });
+		}
+	} catch (error) {
+		res.json({ message: error.toString() });
+	}
+
 	// Check if the deadline is in the past
 	const deadline = new Date(req.body.deadline);
 	const today = new Date();
@@ -59,19 +80,6 @@ router.post("/", async (req, res) => {
 		res.json({ message: "Deadline is in the past" });
 		return;
 	}
-
-	// Check if user exists
-	const addedby = await axios
-		.get(`http://localhost:${process.env.PORT}/users`)
-		.then((response) => {
-			for (let i = 0; i < response.data.length; i++) {
-				if (response.data[i].Username === req.body.addedby.trim()) {
-					return response.data[i].Username;
-				}
-			}
-			res.json({ message: "User does not exist" });
-			return;
-		});
 
 	// Create new Entry
 	const entry = new Entry({
