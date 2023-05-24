@@ -13,18 +13,23 @@
 import { ref, computed } from "vue";
 
 export default {
-  setup() {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  setup(props,{ emit }) {
     const urgencyText = (id) => {
       const urgency = ["Minor task", "Crucial task", "Top-priority task !"];
       return urgency[id - 1];
     };
 
-    const urgency = ref(1);
+    const urgency = ref(0);
 
     const changeUrgency = () => {
       if (urgency.value > 2) urgency.value = 0;
       urgency.value++;
+      emit('update:modelValue',urgency.value);
     };
+    changeUrgency();
+    
     return {
       urgency,
       urgencyText,

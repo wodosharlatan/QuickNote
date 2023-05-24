@@ -5,7 +5,7 @@
       class="ui_ElementT1"
       type="text"
       placeholder=""
-      v-model="text"
+      v-model="title"
     /><br />
     <h2>Text</h2>
     <textarea
@@ -17,12 +17,12 @@
     ></textarea
     ><br />
     <h2>Urgency</h2>
-    <UrgencySelect></UrgencySelect>
+    <UrgencySelect v-model="urgency"></UrgencySelect>
     <h2>Deadline</h2>
     <DeadlineSelect></DeadlineSelect>
     <h2>Visibility</h2>
     <VisibilitySelect></VisibilitySelect>
-    <button class="ui_ElementT1 createButton">Create Note</button>
+    <button class="ui_ElementT1 createButton" @click="createNote()">Create Note</button>
   </div>
 </template>
 
@@ -33,11 +33,35 @@ import VisibilitySelect from "@/components/NewNote/VisibilitySelect.vue";
 import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useLoginStore } from "@/stores/login";
+import { getJsonServer } from "@/scripts/getData.js";
 
 export default {
   components: { UrgencySelect, DeadlineSelect, VisibilitySelect },
   setup() {
-    return {};
+    const title = ref();
+    const text = ref();
+    const urgency = ref();
+    const deadline = ref();
+    const visibility = ref();
+    
+    const createNote = async () => {
+      console.log(text.value);
+      console.log(urgency.value);
+      /*const response = await getJsonServer("entries/new-entry", {
+        username: username.value,
+      });
+      alert(response.message);
+      router.push({ name: "Public" });*/
+    };
+
+    return {
+      createNote,
+      title,
+      text,
+      urgency,
+      deadline,
+      visibility
+    };
   },
 };
 </script>
