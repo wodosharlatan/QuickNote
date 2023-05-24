@@ -16,8 +16,6 @@ router.post("/", async (req, res) => {
 
 	const entires = await Entry.find({ IsPublic: true });
 
-	console.log(entires);
-
 	const result = entires.map((entires) => {
 		// Return only necessary info for each entry As JSON
 

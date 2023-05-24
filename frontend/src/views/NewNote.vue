@@ -19,10 +19,10 @@
     <h2>Urgency</h2>
     <UrgencySelect v-model="urgency"></UrgencySelect>
     <h2>Deadline</h2>
-    <DeadlineSelect></DeadlineSelect>
+    <DeadlineSelect v-model="deadline"></DeadlineSelect>
     <h2>Visibility</h2>
-    <VisibilitySelect></VisibilitySelect>
-    <button class="ui_ElementT1 createButton" @click="createNote()">Create Note</button>
+    <VisibilitySelect v-model="visibility"></VisibilitySelect>
+    <button class="ui_ElementT1 createButton" @click="createNote()" :disabled="!canSend">Create Note</button>
   </div>
 </template>
 
@@ -38,24 +38,33 @@ import { getJsonServer } from "@/scripts/getData.js";
 export default {
   components: { UrgencySelect, DeadlineSelect, VisibilitySelect },
   setup() {
+    const router = useRouter();
+    
     const title = ref();
     const text = ref();
     const urgency = ref();
     const deadline = ref();
     const visibility = ref();
+
+    const canSend = computed(() => {
+      return title.value && title.value.length > 2 && text.value && text.value.length > 2;
+    });
     
     const createNote = async () => {
-      console.log(text.value);
-      console.log(urgency.value);
-      /*const response = await getJsonServer("entries/new-entry", {
-        username: username.value,
+      const response = await getJsonServer("entries/new-entry", {
+        title: title.value,
+        text: text.value,
+        urgency: urgency.value,
+        deadline: deadline.value,
+        ispublic: visibility.value
       });
       alert(response.message);
-      router.push({ name: "Public" });*/
+      router.push({ name: "Public" });
     };
 
     return {
       createNote,
+      canSend,
       title,
       text,
       urgency,

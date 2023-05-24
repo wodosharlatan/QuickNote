@@ -27,7 +27,6 @@ export default {
     const notes = ref(null);
     const getNotes = async () => {
       notes.value = await getJsonServer("entries");
-      console.log(notes.value);
     };
     getNotes();
 

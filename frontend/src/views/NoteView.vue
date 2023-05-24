@@ -1,10 +1,10 @@
 <template>
   <div class="container recBG_0" v-if="note">
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
-      <h1>{{ urgencyText(note.Urgency) }} - {{ note.DateTime }}</h1>
+      <h1>{{ urgencyText(note.Urgency) }} - {{ formatDate(new Date(note.DeadLine)) }}</h1>
     </div>
     <div class="wrapper">
-      <h2>{{ note.Title }} - {{ note.ID }}</h2>
+      <h2>{{ note.Title }}</h2>
       <pre>{{ note.Text }}</pre>
     </div>
   </div>
@@ -19,6 +19,10 @@ import { getJsonServer } from "@/scripts/getData.js";
 export default {
   props: ["id"],
   setup(props) {
+    const formatDate = (date) => {
+      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+    };
+
     window.changePage.value = true;
     const urgencyText = (id) => {
       const urgency = ["Minor task", "Crucial task", "Top-priority task !"];
@@ -38,7 +42,7 @@ export default {
     };
 
     fetchNote();
-    return { note, urgencyText };
+    return { note, urgencyText, formatDate };
   },
 };
 </script>
