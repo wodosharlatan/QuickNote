@@ -44,6 +44,7 @@ app.use("*", (req, res) => {
 
 /* SECURE SERVER
 
+
 // Start server
 https
 	.createServer(
@@ -52,16 +53,16 @@ https
 		{
 			key: fs.readFileSync("key.pem"),
 			cert: fs.readFileSync("cert.pem"),
-		},
-		app
-	).listen(port, () => {
-	console.log(`Server is running on http://localhost:${port} !`);
-});
+		}
+	)
+	.app.listen(PORT, HOST, () => {
+		console.log(`Backend server is running on http://${HOST}:${PORT} !`);
+	});
 
 */
 
 app.listen(PORT, HOST, () => {
-	console.log(`Server is running on http://${HOST}:${PORT} !`);
+	console.log(`Backend server is running on http://${HOST}:${PORT} !`);
 });
 
 // Connect to MongoDB
