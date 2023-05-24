@@ -70,21 +70,14 @@ router.post("/private", async (req, res) => {
 		(a, b) => new Date(a.DeadLine) - new Date(b.DeadLine)
 	);
 
-	// Check if Username matches AddedBy
-	const filteredResult = sortedResult.filter((entry) => {
-		if (entry.AddedBy === Username) {
-			return entry;
-		}
-	});
-
 	// Check if is private
-	const filteredResult2 = filteredResult.filter((entry) => {
+	const filteredResult = sortedResult.filter((entry) => {
 		if (entry.IsPublic === true) {
 			return entry;
 		}
 	});
 
-	res.json(filteredResult2);
+	res.json(filteredResult);
 });
 
 // Get Entry by ID
