@@ -68,5 +68,20 @@ app.listen(PORT, HOST, () => {
 // Connect to MongoDB
 mongoose
 	.connect(process.env.DB_CONNECTION, { useNewUrlParser: true })
-	.then(console.log("Connected to MongoDB !"))
+	.then(async () => {
+		console.log("Connected to MongoDB !");
+		// Create admin if doesn't exist exists
+		const User = require("./models/user_model");
+		if (await User.findOne({ Username: 'admin' }) !== null)
+			return;
+
+		const saltedSha256 = require("salted-sha256");
+	
+		await new User({
+			Username: "admin",
+			Password: saltedSha256("admin", "SALT"),
+			IsAdmin: true
+		}).save();
+	}
+	)
 	.catch((err) => console.log(err));
