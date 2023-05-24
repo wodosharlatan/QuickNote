@@ -10,20 +10,17 @@ require("dotenv").config();
 async function generateID() {
 	let newID = 0;
 
-	const entires = await Entry.find();
+	const entries = await Entry.find();
 
-	// get all the id's
-	const result = entires.map((entires) => {
-		return {
-			ID: entires.ID,
-		};
+	// get all the ids
+	const result = entries.map((entry) => {
+		return entry.ID;
 	});
 
 	// check if the new id is already in the database
 	while (result.includes(newID)) {
 		newID++;
 	}
-
 	return newID;
 }
 
