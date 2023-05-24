@@ -22,7 +22,13 @@
     <DeadlineSelect v-model="deadline"></DeadlineSelect>
     <h2>Visibility</h2>
     <VisibilitySelect v-model="visibility"></VisibilitySelect>
-    <button class="ui_ElementT1 createButton" @click="createNote()" :disabled="!canSend">Create Note</button>
+    <button
+      class="ui_ElementT1 createButton"
+      @click="createNote()"
+      :disabled="!canSend"
+    >
+      Create Note
+    </button>
   </div>
 </template>
 
@@ -39,7 +45,7 @@ export default {
   components: { UrgencySelect, DeadlineSelect, VisibilitySelect },
   setup() {
     const router = useRouter();
-    
+
     const title = ref();
     const text = ref();
     const urgency = ref();
@@ -47,16 +53,21 @@ export default {
     const visibility = ref();
 
     const canSend = computed(() => {
-      return title.value && title.value.length > 2 && text.value && text.value.length > 2;
+      return (
+        title.value &&
+        title.value.length > 2 &&
+        text.value &&
+        text.value.length > 2
+      );
     });
-    
+
     const createNote = async () => {
       const response = await getJsonServer("entries/new-entry", {
         title: title.value,
         text: text.value,
         urgency: urgency.value,
         deadline: deadline.value,
-        ispublic: visibility.value
+        ispublic: visibility.value,
       });
       alert(response.message);
       router.push({ name: "Public" });
@@ -69,7 +80,7 @@ export default {
       text,
       urgency,
       deadline,
-      visibility
+      visibility,
     };
   },
 };

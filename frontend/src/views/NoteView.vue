@@ -1,7 +1,10 @@
 <template>
   <div class="container recBG_0" v-if="note">
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
-      <h1>{{ urgencyText(note.Urgency) }} - {{ formatDate(new Date(note.DeadLine)) }}</h1>
+      <h1>
+        {{ urgencyText(note.Urgency) }} -
+        {{ formatDate(new Date(note.DeadLine)) }}
+      </h1>
     </div>
     <div class="wrapper">
       <h2>{{ note.Title }}</h2>
@@ -20,7 +23,7 @@ export default {
   props: ["id"],
   setup(props) {
     const formatDate = (date) => {
-      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+      return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     };
 
     window.changePage.value = true;
@@ -32,13 +35,14 @@ export default {
     const note = ref(null);
 
     const fetchNote = async () => {
-        const noteData = await getJsonServer("entries/" + props.id);
-        if(noteData.message)
-          {alert(noteData.message);return;}
-        note.value = noteData;
-        window.changePage.value = false;
+      const noteData = await getJsonServer("entries/" + props.id);
+      if (noteData.message) {
+        alert(noteData.message);
         return;
-    
+      }
+      note.value = noteData;
+      window.changePage.value = false;
+      return;
     };
 
     fetchNote();

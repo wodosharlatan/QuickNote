@@ -20,6 +20,6 @@ export const login = async (username, password) => {
   const loginStore = useLoginStore();
   loginStore.loginToken = response.Token;
   loginStore.admin = response.IsAdmin;
-  loginStore.firstLogin = response.FirstTimeLogin
+  loginStore.firstLogin = response.FirstTimeLogin;
   return "LoggedIn";
 };

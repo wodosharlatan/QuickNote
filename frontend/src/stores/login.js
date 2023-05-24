@@ -17,5 +17,5 @@ export const useLoginStore = defineStore("login", () => {
   function Logout() {
     loginToken.value = null;
   }
-  return { loginToken, admin,firstLogin, loggedIn, Logout };
+  return { loginToken, admin, firstLogin, loggedIn, Logout };
 });
