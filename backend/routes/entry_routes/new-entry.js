@@ -21,16 +21,11 @@ async function generateID() {
 	while (result.includes(newID)) {
 		newID++;
 	}
-	console.log(newID);
 	return newID;
 }
 
 // Make new Entry
 router.post("/", async (req, res) => {
-
-
-
-	console.log(req.body);
 
 	// Check if user exists
 	let validateUsername = "";
@@ -56,7 +51,8 @@ router.post("/", async (req, res) => {
 
 	try {
 		// Check if the deadline is in the past
-		const deadline = req.body.deadLine;
+		const deadline = req.body.deadline.trim();
+
 		const [deadline_day, deadline_month, deadline_year] = deadline.split(".");
 
 		const formattedDealine = `${deadline_year}-${deadline_month}-${deadline_day}`;
@@ -97,7 +93,7 @@ router.post("/", async (req, res) => {
 
 		const title = req.body.title.trim();
 		const text = req.body.text.trim();
-		const ispublic = req.body.ispublic.trim();
+		const ispublic = req.body.ispublic;
 
 		// Create new Entry
 		const entry = new Entry({
