@@ -10,7 +10,9 @@
 import { ref, computed } from "vue";
 
 export default {
-  setup() {
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+  setup(props,{ emit }) {
     const visibility = ref(true);
     const visibilityText = () => {
       if (visibility.value) return "Public 👁";
@@ -19,7 +21,9 @@ export default {
 
     const changeVisibility = () => {
       visibility.value = !visibility.value;
+      emit('update:modelValue',visibility.value);
     };
+    emit('update:modelValue',visibility.value);
     return {
       visibilityText,
       changeVisibility,
