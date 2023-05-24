@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Entry = require("../../models/entry_model");
-const axios = require("axios");
+const User = require("../../models/user_model");
 const { AuthenticateUser } = require("../../functions");
 
 // Add env variables
@@ -29,9 +29,8 @@ async function generateID() {
 
 // Make new Entry
 router.post("/", async (req, res) => {
-	
 	// Check if user exists
-	const addedby = "";
+	let addedby = "";
 
 	try {
 		if ((await AuthenticateUser(req.body.token)) === false) {
@@ -45,9 +44,11 @@ router.post("/", async (req, res) => {
 			addedby = oneUser.Username;
 		} else {
 			res.json({ message: "User does not exist" });
+			return;
 		}
 	} catch (error) {
 		res.json({ message: error.toString() });
+		return;
 	}
 
 	// Check if the deadline is in the past
@@ -56,16 +57,16 @@ router.post("/", async (req, res) => {
 
 	const urgency = req.body.urgency;
 	const textlength = req.body.text.trim().length;
-	const descriptionlength = req.body.description.trim().length;
+	const titlelength = req.body.title.trim().length;
 
-	// Check if the text and description are between 10 and 1000 characters
+	// Check if the text and title are between 10 and 1000 characters
 	if (textlength < 10 || textlength > 1000) {
 		res.json({ message: "Text must be between 10 and 1000 characters" });
 		return;
 	}
 
-	if (descriptionlength < 5 || descriptionlength > 50) {
-		res.json({ message: "Description must be between 5 and 50 characters" });
+	if (titlelength < 5 || titlelength > 50) {
+		res.json({ message: "Title must be between 5 and 50 characters" });
 		return;
 	}
 
@@ -81,22 +82,28 @@ router.post("/", async (req, res) => {
 		return;
 	}
 
+	const title = req.body.title.trim();
+	const text = req.body.text.trim();
+	const ispublic = req.body.ispublic.trim();
+
 	// Create new Entry
 	const entry = new Entry({
 		ID: await generateID(),
 		Urgency: urgency,
 		DeadLine: deadline,
-		Description: req.body.description.trim(),
-		Text: req.body.text.trim(),
-		IsPrivate: req.body.isprivate,
+		Title: title,
+		Text: text,
+		IsPublic: ispublic,
 		AddedBy: addedby,
 	});
 
 	try {
 		await entry.save();
 		res.json({ message: "Entry successfully created" });
+		return;
 	} catch (err) {
 		res.json({ message: err.toString() });
+		return;
 	}
 });
 

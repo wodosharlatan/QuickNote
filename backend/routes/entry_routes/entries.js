@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 	const result = entires.map((entires) => {
 		// Return only necessary info for each entry As JSON
 
-		if (entires.IsPrivate) {
+		if (entires.IsPublic) {
 			return;
 		}
 
@@ -22,9 +22,9 @@ router.get("/", async (req, res) => {
 			ID: entires.ID,
 			Urgency: entires.Urgency,
 			DeadLine: entires.DeadLine,
-			Description: entires.Description,
+			Title: entires.Title,
 			Text: entires.Text,
-			IsPrivate: entires.IsPrivate,
+			IsPublic: entires.IsPublic,
 			AddedBy: entires.AddedBy,
 		};
 	});
@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
 
 	// Check if is private
 	const filteredResult = sortedResult.filter((entry) => {
-		if (entry.IsPrivate === false) {
+		if (entry.IsPublic === false) {
 			return entry;
 		}
 	});
@@ -61,9 +61,9 @@ router.post("/", async (req, res) => {
 			ID: entires.ID,
 			Urgency: entires.Urgency,
 			DeadLine: entires.DeadLine,
-			Description: entires.Description,
+			Title: entires.Title,
 			Text: entires.Text,
-			IsPrivate: entires.IsPrivate,
+			IsPublic: entires.IsPublic,
 			AddedBy: entires.AddedBy,
 		};
 	});
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
 
 	// Check if is private
 	const filteredResult2 = filteredResult.filter((entry) => {
-		if (entry.IsPrivate === true) {
+		if (entry.IsPublic === true) {
 			return entry;
 		}
 	});
@@ -106,13 +106,13 @@ router.post("/:ID", async (req, res) => {
 			ID: oneEntry.ID,
 			Urgency: oneEntry.Urgency,
 			DeadLine: oneEntry.DeadLine,
-			Description: oneEntry.Description,
+			Title: oneEntry.Title,
 			Text: oneEntry.Text,
-			IsPrivate: oneEntry.IsPrivate,
+			IsPublic: oneEntry.IsPublic,
 			AddedBy: oneEntry.AddedBy,
 		};
 
-		if (json.IsPrivate === true) {
+		if (json.IsPublic === true) {
 			if (json.AddedBy !== oneUser.Username) {
 				res.json({ message: "Entry is Private And Doesn't Belong to you" });
 				return;
