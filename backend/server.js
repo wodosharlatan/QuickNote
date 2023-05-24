@@ -3,10 +3,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || "localhost";
 const https = require("https");
 const fs = require("fs");
-
 
 // Add env variables
 require("dotenv").config();
@@ -37,7 +37,7 @@ app.use("/new-entry", entryRoute);
 app.use("/delete-entry", deleteEntryRoute);
 app.use("/entries", entriesRoute);
 
-app.use("*", (req,res) => {
+app.use("*", (req, res) => {
 	res.send("404 Not Found");
 });
 
@@ -59,8 +59,8 @@ https
 
 */
 
-app.listen(port, () => {
-	console.log(`Server is running on http://localhost:${port} !`);
+app.listen(PORT, HOST, () => {
+	console.log(`Server is running on http://${HOST}:${PORT} !`);
 });
 
 // Connect to MongoDB
