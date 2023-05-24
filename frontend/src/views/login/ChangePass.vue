@@ -1,18 +1,18 @@
 <template>
   <div class="recBG_0">
-    <h2>Username</h2>
+    <h2>New password</h2>
     <input
+      v-model="password"
       class="ui_ElementT1"
-      type="text"
+      type="password"
       placeholder=""
-      v-model="username"
-    /><br />
+    ><br>
     <button
       class="ui_ElementT1 createButton"
-      @click="createUser()"
       :disabled="!canSend"
+      @click="changePass()"
     >
-      Create User
+      Change Password
     </button>
   </div>
 </template>
@@ -26,22 +26,21 @@ export default {
   components: {},
   setup() {
     const router = useRouter();
-    const username = ref();
+    const password = ref();
     const canSend = computed(() => {
-      return username.value && username.value.length > 2;
+      return password.value && password.value.length > 2;
     });
-    const createUser = async () => {
-      console.log(username.value);
-      const response = await getJsonServer("new-user", {
-        username: username.value,
+    const changePass = async () => {
+      const response = await getJsonServer("tokens/change-password", {
+        password: password.value,
       });
       console.log(response.message);
       alert(response.message);
-      router.push({ name: "Admin" });
+      router.push({ name: "Public" });
     };
     return {
-      createUser,
-      username,
+      changePass,
+      password,
       canSend,
     };
   },

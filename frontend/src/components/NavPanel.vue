@@ -1,31 +1,38 @@
 <template>
   <div class="navigation recBG_0">
-    <p class="textStyle1">QuickNote - {{ $route.name }}</p>
+    <p class="textStyle1">
+      QuickNote - {{ $route.name }}
+    </p>
     <div class="menubar-container">
       <div class="menubar">
         <button
           v-if="isAdmin"
-          @click="goTo('Admin')"
           :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }"
+          @click="goTo('Admin')"
         >
           Admin
         </button>
         <button
-          @click="goTo('Private')"
           :class="{
             ui_ElementT1: true,
             selectedPage: $route.name == 'Private',
           }"
+          @click="goTo('Private')"
         >
           Private
         </button>
         <button
-          @click="goTo('Public')"
           :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }"
+          @click="goTo('Public')"
         >
           Public
         </button>
-        <button @click="logout" class="ui_ElementT1 logoutButton">↲</button>
+        <button
+          class="ui_ElementT1 logoutButton"
+          @click="logout"
+        >
+          ↲
+        </button>
       </div>
     </div>
   </div>

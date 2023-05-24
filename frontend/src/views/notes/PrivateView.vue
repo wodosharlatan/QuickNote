@@ -2,14 +2,21 @@
   <div class="recBG_0">
     <div class="menubar">
       <button
-        @click="$router.push({ name: 'New Note' })"
         class="ui_ElementT1 roundButton"
+        @click="$router.push({ name: 'New Note' })"
       >
         +
       </button>
     </div>
-    <div class="notes" v-if="notes">
-      <NoteT1 :note="note" v-for="note in notes" class="note" />
+    <div
+      v-if="notes"
+      class="notes"
+    >
+      <NoteT1
+        v-for="note in notes"
+        :note="note"
+        class="note"
+      />
     </div>
   </div>
 </template>
@@ -17,7 +24,7 @@
 <script>
 import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useLoginStore } from "../stores/login";
+import { useLoginStore } from "@/stores/login";
 import NoteT1 from "@/components/NoteT1.vue";
 import { getJsonServer } from "@/scripts/getData.js";
 export default {

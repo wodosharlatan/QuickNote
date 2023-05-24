@@ -4,11 +4,16 @@
       <p>{{ user.Username }}</p>
     </div>
     <div class="buttonMenu">
-      <button @click="deleteUser()" class="ui_ElementT1 roundButton">🗑</button>
+      <button
+        class="ui_ElementT1 roundButton"
+        @click="deleteUser()"
+      >
+        🗑
+      </button>
       <button
         v-if="!user.IsAdmin"
-        @click="setUserAdmin()"
         class="ui_ElementT1 roundButton"
+        @click="setUserAdmin()"
       >
         👤
       </button>

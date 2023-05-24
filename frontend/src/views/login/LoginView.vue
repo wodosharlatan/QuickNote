@@ -1,19 +1,25 @@
 <template>
   <div :class="{ exiting: exiting, login: true, recBG_0: true }">
-    <p class="textStyle1">Login</p>
+    <p class="textStyle1">
+      Login
+    </p>
     <input
+      v-model="username"
       class="ui_ElementT1"
       type="text"
       placeholder="Username"
-      v-model="username"
-    /><br />
+    ><br>
     <input
+      v-model="password"
       class="ui_ElementT1"
       type="password"
       placeholder="Password"
-      v-model="password"
-    /><br />
-    <button class="ui_ElementT1" @click="login" :disabled="canLogin">
+    ><br>
+    <button
+      class="ui_ElementT1"
+      :disabled="canLogin"
+      @click="login"
+    >
       Login
     </button>
   </div>

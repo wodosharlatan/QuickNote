@@ -2,30 +2,29 @@
   <div class="recBG_0">
     <h2>Title</h2>
     <input
+      v-model="title"
       class="ui_ElementT1"
       type="text"
       placeholder=""
-      v-model="title"
-    /><br />
+    ><br>
     <h2>Text</h2>
     <textarea
+      v-model="text"
       class="ui_ElementT1"
       type="text"
       placeholder=""
-      v-model="text"
-      oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
-    ></textarea
-    ><br />
+      oninput="this.style.height = &quot;&quot;;this.style.height = this.scrollHeight + &quot;px&quot;"
+    /><br>
     <h2>Urgency</h2>
-    <UrgencySelect v-model="urgency"></UrgencySelect>
+    <UrgencySelect v-model="urgency" />
     <h2>Deadline</h2>
-    <DeadlineSelect v-model="deadline"></DeadlineSelect>
+    <DeadlineSelect v-model="deadline" />
     <h2>Visibility</h2>
-    <VisibilitySelect v-model="visibility"></VisibilitySelect>
+    <VisibilitySelect v-model="visibility" />
     <button
       class="ui_ElementT1 createButton"
-      @click="createNote()"
       :disabled="!canSend"
+      @click="createNote()"
     >
       Create Note
     </button>

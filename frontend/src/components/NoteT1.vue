@@ -1,12 +1,17 @@
 <template>
-  <div class="note" @click="viewNote(note.ID)">
+  <div
+    class="note"
+    @click="viewNote(note.ID)"
+  >
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
       <h3>{{ urgencyText(note.Urgency) }}</h3>
       <h3>{{ formatDate(new Date(note.DeadLine)) }}</h3>
     </div>
     <div class="noteBottom">
       <h3>{{ shortenText(note.Title, 10) }}</h3>
-      <p class="noteText">{{ shortenText(note.Text, 57) }}</p>
+      <p class="noteText">
+        {{ shortenText(note.Text, 57) }}
+      </p>
     </div>
   </div>
 </template>

@@ -1,5 +1,8 @@
 <template>
-  <div :class="['visibility', 'ui_ElementT1']" @click="changeVisibility()">
+  <div
+    :class="['visibility', 'ui_ElementT1']"
+    @click="changeVisibility()"
+  >
     <p>
       {{ visibilityText() }}
     </p>
@@ -10,7 +13,7 @@
 import { ref, computed } from "vue";
 
 export default {
-  props: ["modelValue"],
+  props: { modelValue: Boolean },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
     const visibility = ref(true);

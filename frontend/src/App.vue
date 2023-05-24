@@ -10,11 +10,11 @@ const changePage = window.changePage;
   <Background01 />
   <div class="wrapper1">
     <div class="wrapper2">
-      <div class="padding1"></div>
+      <div class="padding1" />
       <div v-if="$route.name != 'Login' && $route.name != 'Change Password'">
         <NavPanel />
       </div>
-      <div class="padding1"></div>
+      <div class="padding1" />
       <div :class="{ routerMain: true, changePage: changePage }">
         <RouterView />
       </div>

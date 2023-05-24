@@ -13,7 +13,12 @@
 import { ref, computed } from "vue";
 
 export default {
-  props: ["modelValue"],
+  props: {
+    modelValue: {
+      type: Number,
+      default: 1,
+    },
+  },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
     const urgencyText = (id) => {
@@ -21,14 +26,13 @@ export default {
       return urgency[id - 1];
     };
 
-    const urgency = ref(0);
+    const urgency = ref(1);
 
     const changeUrgency = () => {
       if (urgency.value > 2) urgency.value = 0;
       urgency.value++;
       emit("update:modelValue", urgency.value);
     };
-    changeUrgency();
 
     return {
       urgency,
@@ -51,9 +55,12 @@ export default {
   text-align: center;
   color: white;
   line-height: 0;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
 }
 
 .urgnt3 {

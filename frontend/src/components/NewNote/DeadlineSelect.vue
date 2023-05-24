@@ -1,23 +1,23 @@
 <template>
   <div :class="['deadline', 'ui_ElementT1']">
     <input
+      v-model="day"
       type="text"
       :placeholder="curDate.getDate()"
-      v-model="day"
       @focusout="checkDate()"
-    />
+    >
     <input
+      v-model="month"
       type="text"
       :placeholder="curDate.getMonth() + 1"
-      v-model="month"
       @focusout="checkDate()"
-    />
+    >
     <input
+      v-model="year"
       type="text"
       :placeholder="curDate.getFullYear()"
-      v-model="year"
       @focusout="checkDate()"
-    />
+    >
   </div>
 </template>
 
@@ -25,7 +25,12 @@
 import { ref, computed } from "vue";
 
 export default {
-  props: ["modelValue"],
+  props: {
+    modelValue: {
+      type: String,
+      default: "",
+    },
+  },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
     const curDate = new Date();

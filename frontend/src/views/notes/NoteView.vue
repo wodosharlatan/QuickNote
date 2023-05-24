@@ -1,5 +1,8 @@
 <template>
-  <div class="container recBG_0" v-if="note">
+  <div
+    v-if="note"
+    class="container recBG_0"
+  >
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
       <h1>
         {{ urgencyText(note.Urgency) }} -
@@ -20,7 +23,12 @@ import { useLoginStore } from "@/stores/login";
 import { getJsonServer } from "@/scripts/getData.js";
 
 export default {
-  props: ["id"],
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
   setup(props) {
     const formatDate = (date) => {
       return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
@@ -55,12 +63,14 @@ export default {
 .wrapper {
   padding: 10px;
 }
+
 .noteBar {
   opacity: 80%;
   border-radius: 10px 10px 0px 0px;
   padding: 10px;
   color: rgb(255, 255, 255);
 }
+
 .noteBar h1 {
   font-weight: 500;
 }

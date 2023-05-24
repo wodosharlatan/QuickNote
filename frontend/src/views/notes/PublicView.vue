@@ -1,35 +1,43 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button @click="addUser()" class="ui_ElementT1 roundButton">+</button>
+      <button
+        class="ui_ElementT1 roundButton"
+        @click="$router.push({ name: 'New Note' })"
+      >
+        +
+      </button>
     </div>
-    <div class="users" v-if="users">
-      <UserT1 :user="user" v-for="user in users" class="user" />
+    <div
+      v-if="notes"
+      class="notes"
+    >
+      <NoteT1
+        v-for="note in notes"
+        :note="note"
+        class="note"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-import UserT1 from "@/components/UserT1.vue";
+import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useLoginStore } from "@/stores/login";
+import NoteT1 from "@/components/NoteT1.vue";
 import { getJsonServer } from "@/scripts/getData.js";
 
 export default {
-  components: { UserT1 },
+  components: { NoteT1 },
   setup() {
-    const router = useRouter();
-    const users = ref();
-    const getUsers = async () => {
-      users.value = await getJsonServer("users");
+    const notes = ref(null);
+    const getNotes = async () => {
+      notes.value = await getJsonServer("entries");
     };
-    getUsers();
+    getNotes();
 
-    const addUser = () => {
-      router.push({ name: "New User" });
-    };
-
-    return { users, addUser };
+    return { notes };
   },
 };
 </script>
@@ -52,21 +60,18 @@ export default {
   width: 30px;
   height: 30px;
 }
-.users {
+.notes {
   padding: 0;
-  padding-top: 10px;
   margin: auto;
 
   /* make the in line but start adding them from left */
   display: flex;
   flex-wrap: wrap;
-  flex-flow: column;
-  justify-content: start;
+  justify-content: center;
   align-items: flex-start;
-  gap: 10px;
 }
 
-.user {
+.note {
   flex: none;
 }
 </style>

@@ -3,15 +3,23 @@ import { useLoginStore } from "../stores/login";
 import { ref } from "vue";
 
 // Import views
-import PublicView from "@/views/PublicView.vue";
-import PrivateView from "@/views/PrivateView.vue";
-import NoteView from "@/views/NoteView.vue";
-import NewNote from "@/views/NewNote.vue";
-import NewUser from "@/views/NewUser.vue";
-import AdminView from "@/views/AdminView.vue";
-import LoginView from "@/views/LoginView.vue";
-import PageNotFound from "@/views/PageNotFound.vue";
-import ChangePass from "@/views/ChangePass.vue";
+
+// Notes
+import PublicView from "@/views/notes/PublicView.vue";
+import PrivateView from "@/views/notes/PrivateView.vue";
+import NoteView from "@/views/notes/NoteView.vue";
+import NewNote from "@/views/notes/NewNote.vue";
+
+// Admin
+import NewUser from "@/views/admin/NewUser.vue";
+import AdminView from "@/views/admin/AdminView.vue";
+
+// Login
+import LoginView from "@/views/login/LoginView.vue";
+import ChangePass from "@/views/login/ChangePass.vue";
+
+// Other
+import PageNotFound from "@/views/other/PageNotFound.vue";
 
 // Global variable for animation
 window.changePage = ref(false);
