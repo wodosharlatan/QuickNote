@@ -19,7 +19,7 @@
 <script>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import { deleteJsonServer, getJsonServer } from "@/scripts/getData.js";
+import { getJsonServer } from "@/scripts/getData.js";
 
 export default {
   props: ["user"],
@@ -28,7 +28,7 @@ export default {
 
     const deleteUser = async () => {
       console.log(
-        await deleteJsonServer("users", { username: props.user.Username })
+        await getJsonServer("users/delete", { username: props.user.Username })
       );
       router.go({ Name: "Admin" });
     };
