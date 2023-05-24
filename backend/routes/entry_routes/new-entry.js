@@ -27,6 +27,11 @@ async function generateID() {
 
 // Make new Entry
 router.post("/", async (req, res) => {
+
+
+
+	console.log(req.body);
+
 	// Check if user exists
 	let validateUsername = "";
 
@@ -36,9 +41,9 @@ router.post("/", async (req, res) => {
 			return;
 		}
 
-		const oneUser = await User.findOne({ Username: req.body.addedby });
+		const oneUser = await User.findOne({ UserToken: req.body.token });
 
-		if (oneUser.Username === req.body.addedby) {
+		if (oneUser.Username) {
 			validateUsername = oneUser.Username;
 		} else {
 			res.json({ message: "User does not exist" });
