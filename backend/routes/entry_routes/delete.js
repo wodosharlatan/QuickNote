@@ -25,7 +25,14 @@ router.post("/:ID", async (req, res) => {
 		const oneUser = await User.findOne({ UserToken: req.body.token });
 		Username = oneUser.Username;
 
-		// Check if the entry was created by the authenticated user
+		// check if entry is private
+		if (entry.IsPublic === true) {
+			await Entry.deleteOne({ ID: req.params.ID });
+			res.json({ message: "Entry deleted !" });
+			return;
+		}
+
+		// check if user is the owner of the entry
 		if (entry.AddedBy !== Username) {
 			res.json({ message: "Not authorized to delete this entry" });
 			return;
@@ -33,6 +40,7 @@ router.post("/:ID", async (req, res) => {
 
 		await Entry.deleteOne({ ID: req.params.ID });
 		res.json({ message: "Entry deleted !" });
+		return;
 	} catch (error) {
 		res.json({ message: error.toString() });
 	}
