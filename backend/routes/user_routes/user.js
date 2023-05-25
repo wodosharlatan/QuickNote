@@ -56,7 +56,7 @@ router.post("/specific", async (req, res) => {
 });
 
 // Delete a specific user by username
-router.get("/delete", async (req, res) => {
+router.post("/delete", async (req, res) => {
 	try {
 		if ((await AuthenticateAdmin(req.body.token)) === false) {
 			res.json({ message: "Unauthorized" });
