@@ -23,9 +23,11 @@ Follow these steps to set up and run the server:
 4. Create a `.env` file in the project root directory and provide the necessary environment variables. Here's an example of the required variables:
 
 ```.env
-  DB_CONNECTION=<MongoDB connection string>
-  PORT=<Server port number>
-  HOST=<Server hostname>
+  PORT = <Your backend port>
+  HOST = <Your backend host>
+  DB_CONNECTION = <MongoDB connection string>
+  ADMIN_USERNAME = <Admin username>
+  ADMIN_PASSWORD = <Admin password>
 ```
 
 5. Start The Backend server by running the following command:
@@ -326,7 +328,7 @@ The server provides the following API endpoints:
 - **Description**: Deletes an entry based on its ID.
 - **Request Body**:
   - `token` (string, required): Token for authentication as a user.
-- **Path Parameter**:
+- **URL Parameter**:
   - `ID` (string, required): ID of the entry to delete.
 - **Response**:
 
@@ -359,5 +361,79 @@ The server provides the following API endpoints:
     ```json
     {
     	"message": "Entry deleted!"
+    }
+    ```
+
+### Get Entry by ID
+
+- **Endpoint**: `/entries/:ID`
+- **Method**: `POST`
+- **Description**: Retrieves an entry by its ID.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as a user.
+- **URL Parameter**:
+  - `ID` (string, required): ID of the entry.
+- **Response**:
+
+- If the entry is private and doesn't belong to the user:
+
+  ```json
+  {
+  	"message": "Entry is Private And Doesn't Belong to you"
+  }
+  ```
+
+- If the authentication fails:
+
+  ```JSON
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+- If the authentication succeeds and the entry is found:
+
+  ```JSON
+
+  {
+    "ID": "entry_id",
+    "Urgency": "entry_urgency",
+    "DeadLine": "entry_deadline",
+    "Title": "entry_title",
+    "Text": "entry_text",
+    "IsPublic": "entry_is_public",
+    "AddedBy": "entry_added_by"
+  }
+
+  ```
+
+### Get all public entries
+
+- **Endpoint**: `/entries`
+- **Method**: `POST`
+- **Description**: Retrieves public all entries.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as a user.
+- **Response**:
+
+  - If the authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If the authentication succeeds and the entries are found:
+
+    ```json
+    {
+    	"ID": 12,
+    	"Urgency": 3,
+    	"DeadLine": "25.6.3045",
+    	"Title": "Some title",
+    	"Text": "Some text within the entry",
+    	"IsPublic": true,
+    	"AddedBy": "user"
     }
     ```
