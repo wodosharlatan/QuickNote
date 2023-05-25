@@ -13,7 +13,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_SERVER=localhost:${BACKEND_PORT}
+        - VITE_BACKEND_SERVER=${VITE_BACKEND_SERVER}
     ports:
       - 4000:4000
     environment:

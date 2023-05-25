@@ -6,6 +6,11 @@
 npm install
 ```
 
+### Set enviroment variables in .env
+```
+VITE_PORT=< port >
+VITE_BACKEND_SERVER=< ip:port >
+```
 ### Compile and Hot-Reload for Development
 
 ```sh
@@ -23,3 +28,11 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Format
+
+```sh
+npm run format
+```
+
+
