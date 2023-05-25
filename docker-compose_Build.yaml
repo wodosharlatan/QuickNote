@@ -7,14 +7,22 @@ services:
     ports:
       - 27017
   frontend:
-    image: < Prosím image adresu zde >
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_SERVER=${VITE_BACKEND_SERVER}
+    image: frontend
     ports:
       - 4000:4000
     environment:
       - FRONTEND_PORT=${FRONTEND_PORT}
       - FRONTEND_HOST=${FRONTEND_HOST}
   backend:
-    image: < Prosím image adresu zde >
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
       - BACKEND_HOST=${BACKEND_HOST}
