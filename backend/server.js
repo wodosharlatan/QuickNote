@@ -6,13 +6,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "localhost";
-const saltedSha256 = require("salted-sha256");
-const User = require("./models/user_model");
-const AdminUsername = process.env.ADMIN_USERNAME;
-const AdminPassword = process.env.ADMIN_PASSWORD;
-
+const PORT = process.env.BACKEND_PORT || 3000;
+const HOST = process.env.BACKEND_HOST || "localhost";
 
 const https = require("https");
 const fs = require("fs");

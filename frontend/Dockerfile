@@ -1,7 +1,9 @@
 # Base image
 FROM node:18
 
-WORKDIR /usr/src/app
+RUN npm install -g http-server
+
+WORKDIR /usr/src/app/build
 
 COPY package*.json ./
 
@@ -11,6 +13,12 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 4000
+WORKDIR /usr/src/app/
 
-CMD [ "npm", "run", "dev" ]
+RUN mv build/dist dist
+
+RUN rm -r build
+
+EXPOSE 8080
+
+CMD [ "http-server","-P http://localhost:8080?", "dist" ]

@@ -5,16 +5,34 @@ services:
     image: mongo
     restart: always
     ports:
-      - 27017:27017
+      - 27017
+    networks:
+      - backend
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_BACKEND_SERVER=localhost:3000
     ports:
-      - 4000:4000
+      - 4000:8080
+    networks:
+      - frontend
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    environment:
+      - BACKEND_PORT=3000
+      - BACKEND_HOST=0.0.0.0
+      - DB_CONNECTION=mongodb://mongo:27017/QuickNoteDB
     ports:
-      - 3000:3000 
+      - 3000:3000
+    networks:
+      - frontend
+      - backend
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
