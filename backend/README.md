@@ -437,3 +437,36 @@ The server provides the following API endpoints:
     	"AddedBy": "user"
     }
     ```
+
+
+### Get all private entries
+
+- **Endpoint**: `/entries/private`
+- **Method**: `POST`
+- **Description**: Retrieves public private entries that belongs to user associated with the token.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as a user.
+- **Response**:
+
+  - If the authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If the authentication succeeds and the entries are found:
+
+    ```json
+    {
+    	"ID": 71,
+    	"Urgency": 32,
+    	"DeadLine": "2.7.2048",
+    	"Title": "Some title",
+    	"Text": "Some text within the entry",
+    	"IsPublic": false,
+    	"AddedBy": "another user"
+    }
+    ```
+
