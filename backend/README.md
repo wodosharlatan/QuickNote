@@ -280,3 +280,84 @@ The server provides the following API endpoints:
     	"FirstTimeLogin": true
     }
     ```
+
+### Create New Entry
+
+- **Endpoint**: `/new-entry`
+- **Method**: `POST`
+- **Description**: Creates a new entry with the provided details.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as a user.
+  - `deadline` (string, required): Deadline for the entry in the format "dd.mm.yyyy".
+  - `urgency` (number, required): Urgency level of the entry (1, 2, or 3).
+  - `title` (string, required): Title of the entry.
+  - `text` (string, required): Text content of the entry.
+  - `ispublic` (boolean, optional): Indicates whether the entry is public or not.
+- **Response**:
+
+  - If the authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If the validation fails for the entry fields:
+
+    ```json
+    {
+    	"message": "<validation_error_message>"
+    }
+    ```
+
+  - If the entry is successfully created:
+
+    ```json
+    {
+    	"message": "Entry successfully created"
+    }
+    ```
+
+### Delete Entry by ID
+
+- **Endpoint**: `/delete-entry/:ID`
+- **Method**: `POST`
+- **Description**: Deletes an entry based on its ID.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as a user.
+- **Path Parameter**:
+  - `ID` (string, required): ID of the entry to delete.
+- **Response**:
+
+  - If the authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If the entry is not found:
+
+    ```json
+    {
+    	"message": "Entry not found"
+    }
+    ```
+
+  - If the user is not authorized to delete the entry:
+
+    ```json
+    {
+    	"message": "Not authorized to delete this entry"
+    }
+    ```
+
+  - If the entry is successfully deleted:
+
+    ```json
+    {
+    	"message": "Entry deleted!"
+    }
+    ```
