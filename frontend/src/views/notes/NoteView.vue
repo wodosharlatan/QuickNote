@@ -4,6 +4,7 @@
       <h1>
         {{ urgencyText(note.Urgency) }} -
         {{ formatDate(new Date(note.DeadLine)) }}
+        <button class="roundButton" @click="completeNote()">✓</button>
       </h1>
     </div>
     <div class="wrapper">
@@ -27,6 +28,8 @@ export default {
     },
   },
   setup(props) {
+    const router = useRouter();
+
     const formatDate = (date) => {
       return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     };
@@ -51,7 +54,12 @@ export default {
     };
 
     fetchNote();
-    return { note, urgencyText, formatDate };
+
+    const completeNote = async () => {
+      const response = await getJsonServer("delete-entry/" + props.id);
+      router.push({ name: "Public" });
+    };
+    return { note, urgencyText, formatDate, completeNote };
   },
 };
 </script>
@@ -109,5 +117,18 @@ pre {
     rgb(134, 248, 3),
     rgb(10, 194, 4)
   );
+}
+
+.roundButton {
+  background-color: rgba(255, 255, 255, 0.692);
+  margin-right: 10px;
+  padding: 0 10px;
+  border-radius: 50%;
+  border-color: transparent;
+  position: relative;
+  top: 8px;
+  width: 30px;
+  height: 30px;
+  float: right;
 }
 </style>
