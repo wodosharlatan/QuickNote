@@ -6,6 +6,8 @@ services:
     restart: always
     ports:
       - 27017
+    volumes:
+      - './data:/data/db'
   frontend:
     image: < Prosím image adresu zde >
     ports:
