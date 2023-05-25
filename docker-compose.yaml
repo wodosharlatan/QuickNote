@@ -13,12 +13,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_SERVER=localhost:3000
+        - VITE_BACKEND_SERVER=localhost:${BACKEND_PORT}
     ports:
       - 4000:4000
     environment:
-      - FRONTEND_PORT=4000
-      - FRONTEND_HOST=0.0.0.0
+      - FRONTEND_PORT=${FRONTEND_PORT}
+      - FRONTEND_HOST=${FRONTEND_HOST}
     networks:
       - frontend
   backend:
@@ -26,11 +26,11 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      - BACKEND_PORT=3000
-      - BACKEND_HOST=0.0.0.0
-      - DB_CONNECTION=mongodb://mongo:27017/QuickNoteDB
+      - BACKEND_PORT=${BACKEND_PORT}
+      - BACKEND_HOST=${BACKEND_HOST}
+      - DB_CONNECTION=${DB_CONNECTION}
     ports:
-      - 3000:3000
+      - ${BACKEND_PORT}:${BACKEND_PORT}
     networks:
       - frontend
       - backend
@@ -39,3 +39,4 @@ networks:
     driver: bridge
   backend:
     driver: bridge
+
