@@ -9,14 +9,14 @@ services:
     volumes:
       - './data:/data/db'
   frontend:
-    image: < Prosím image adresu zde >
+    image: wodosharlatan/quick_note:frontend
     ports:
       - 4000:4000
     environment:
       - FRONTEND_PORT=${FRONTEND_PORT}
       - FRONTEND_HOST=${FRONTEND_HOST}
   backend:
-    image: < Prosím image adresu zde >
+    image: wodosharlatan/quick_note:backend
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
       - BACKEND_HOST=${BACKEND_HOST}
