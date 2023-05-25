@@ -1,129 +1,54 @@
-# Backend Documentation
+## Server Documentation
 
-This documentation provides an overview and usage guide for the backend application. It covers the API endpoints and instructions.
+### Introduction
 
-## API Endpoints
+This Node.js server provides an API for a user authentication system and an entry management system. It uses the Express framework to handle HTTP requests and MongoDB as the database for storing user and entry data.
 
-## Users
+### Prerequisites
 
-### Create a User
+Before running the server, make sure you have the following prerequisites installed:
 
-- **Endpoint:** `/users`
-- **Method:** `POST`
-- **Request Body:**
-- `username` (string, required): The username of the user.
-- **Response:** 
--`message`: Contains information if the action was successful or not
-- **Example:**
+- Node.js
+- MongoDB
 
-```Json
-  {
-    "message": "User created with temporary password: A6VbzvLwHVZFW3c46MiEXo."
-  }
+### Installation
+
+Follow these steps to set up and run the server:
+
+1. Clone the repository or download the server code to your local machine.
+2. Open a terminal and navigate to the project directory.
+3. Install the required dependencies by running the following command:
+
+```shell
+  npm install
 ```
 
-### Get All Users
+4. Create a `.env` file in the project root directory and provide the necessary environment variables. Here's an example of the required variables:
 
-- **Endpoint:** `/users`
-- **Method:** `GET`
-- **Response:**
-  - Array of user objects, each containing:
-  - `username` (string): The username of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false).
-  - `LastLogin` (date): Unix timestamp
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
-  - `UserToken` (string): A token used for verification of the user (default is empty string).
-- **Example:**
-
-```JSON
-[
-    {
-        "Username": "blob",
-        "IsAdmin": false,
-        "LastLogin": "2023-05-19T09:14:42.494Z",
-        "FirstTimeLogin": true,
-        "UserToken": ""
-    },
-    {
-        "Username": "ben",
-        "IsAdmin": false,
-        "LastLogin": "2023-05-19T10:47:33.965Z",
-        "FirstTimeLogin": true,
-        "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
-    }
-]
+```.env
+  DB_CONNECTION=<MongoDB connection string>
+  PORT=<Server port number>
+  HOST=<Server hostname>
 ```
 
-### Get a User by Username
+5. Start The Backend server by running the following command:
 
-- **Endpoint:** `/users/{Username}`
-- **Method:** `GET`
-- **Response:**
-  - `username` (string): The username of the created user.
-  - `IsAdmin` (bool): The admin privileges (default is false).
-  - `LastLogin` (date): Unix timestamp
-  - `FirstTimeLogin` (bool): Returns true if user never logged in,
-  - `UserToken` (string): A token used for verification of the user (default is empty string).
-- **Example:**
-
-```Json
-  {
-    "Username": "ben",
-    "IsAdmin": false,
-    "LastLogin": "2023-05-19T10:47:33.965Z",
-    "FirstTimeLogin": true,
-    "UserToken": "UW1qMMqkTD4wjLskbVu8B9"
-  }
+```shell
+  npm start
 ```
+The server should now be running and listening for incoming requests.
 
-### Update User Password
-- **Endpoint:** `/tokens/{Token}`
-- **Method:** `PATCH`
-- **Request Body:**
-  - `password` (string, required): The new password for the user.
-- **Response:**
-- `message`: Contains information if the action was successful or not
-- **Example:**
 
-```JSON
-  { 
-    "message": "Password changed !" 
-  }
-```
+### API Endpoints
+The server provides the following API endpoints:
 
-### Delete a User
+#### User Authentication System
+- `POST /login`: User login. Requires a JSON payload with the user's credentials (username and password). Returns a JSON response with a token if the login is successful.
+- `POST /new-user`: User registration. Requires a JSON payload with the user's credentials (username and password). Returns a JSON response with a success message if the registration is successful.
+- `POST /logout`: User logout. Requires a JSON payload with the user's token. Returns a JSON response with a success message if the logout is successful.
+- `GET /tokens`: Get all user tokens. Returns a JSON response with an array of user tokens.
 
-- **Endpoint:** `/users/{Username}`
-- **Method:** `DELETE`
-- **Response:**
-- `message`: Contains information if the action was successful or not
-- **Example:**
-
-```JSON
-  { 
-    "message": "User deleted !" 
-  }
-```
-
-## Login
-
-### Authenticate User
-
-- **Endpoint:** `/login`
-- **Method:** `POST`
-- **Request Body:**
-  - `username` (string, required): The username of the user.
-  - `password` (string, required): The password of the user.
-- **Response:**
-  - `IsAdmin` (bool): The admin privileges (default is false).
-  - `FirstTimeLogin` (bool): in this case it is called `ShouldChangePassword` ,
-  - `UserToken` (string): A token used for verification of the user.
-- **Example:**
-
-```Json
-  {
-    "token": "5j6TBd4GhvJBkiPNwBoKrr",
-    "isAdmin": "false",
-    "ShouldChangePassword": "true"
-  }
-```
+#### Entry Management System
+- `POST /new-entry`: Create a new entry. Requires a JSON payload with the entry details. Returns a JSON response with the created entry if successful.
+- `DELETE /delete-entry`: Delete an entry. Requires a JSON payload with the entry details. Returns a JSON response with a success message if the deletion is successful.
+- `GET /entries`: Get all entries. Returns a JSON response with an array of entries.

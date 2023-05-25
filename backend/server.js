@@ -8,6 +8,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "localhost";
+const saltedSha256 = require("salted-sha256");
+const User = require("./models/user_model");
 
 const https = require("https");
 const fs = require("fs");
@@ -71,17 +73,13 @@ mongoose
 	.then(async () => {
 		console.log("Connected to MongoDB !");
 		// Create admin if doesn't exist exists
-		const User = require("./models/user_model");
-		if (await User.findOne({ Username: 'admin' }) !== null)
-			return;
+		
+		if ((await User.findOne({ Username: "admin" })) !== null) return;
 
-		const saltedSha256 = require("salted-sha256");
-	
 		await new User({
 			Username: "admin",
 			Password: saltedSha256("admin", "SALT"),
-			IsAdmin: true
+			IsAdmin: true,
 		}).save();
-	}
-	)
+	})
 	.catch((err) => console.log(err));
