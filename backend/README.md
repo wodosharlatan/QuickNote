@@ -141,3 +141,89 @@ The server provides the following API endpoints:
     	"message": "Admin privileges granted!"
     }
     ```
+
+### Delete a Specific User by Username
+
+- **Endpoint**: `/users/delete`
+- **Method**: `POST`
+- **Description**: Deletes a specific user based on their username.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as an admin user.
+  - `username` (string, required): Username of the user to delete.
+- **Response**:
+
+  - If authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If authentication succeeds and the user is deleted:
+
+    ```json
+    {
+    	"message": "User deleted!"
+    }
+    ```
+
+### Change Password for a Specific User by Token
+
+- **Endpoint**: `/tokens/change-password`
+- **Method**: `POST`
+- **Description**: Changes the password for a specific user based on their token.
+- **Request Body**:
+  - `token` (string, required): Token for user authentication.
+  - `password` (string, required): New password for the user.
+- **Response**:
+
+  - If authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If authentication succeeds and the password is changed:
+
+    ```json
+    {
+    	"message": "Password changed!"
+    }
+    ```
+
+### Make New User
+
+- **Endpoint**: `/new-user`
+- **Method**: `POST`
+- **Description**: Creates a new user with a temporary password.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as an admin user.
+  - `username` (string, required): Username for the new user.
+- **Response**:
+
+  - If authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If the username already exists:
+
+    ```json
+    {
+    	"message": "Username already exists!"
+    }
+    ```
+
+  - If the user is created successfully:
+
+    ```json
+    {
+    	"message": "User created with temporary password: <temporary_password>"
+    }
+    ```

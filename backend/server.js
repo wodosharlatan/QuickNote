@@ -73,7 +73,7 @@ mongoose
 	.then(async () => {
 		console.log("Connected to MongoDB !");
 		// Create admin if doesn't exist exists
-		
+
 		if ((await User.findOne({ Username: "admin" })) !== null) return;
 
 		await new User({
