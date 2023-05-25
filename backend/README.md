@@ -227,3 +227,56 @@ The server provides the following API endpoints:
     	"message": "User created with temporary password: <temporary_password>"
     }
     ```
+
+### Logout: Delete Token for a Specific User by Token
+
+- **Endpoint**: `/logout`
+- **Method**: `POST`
+- **Description**: Deletes the token for a specific user based on their authentication token, effectively logging them out.
+- **Request Body**:
+  - `token` (string, required): Token for user authentication.
+- **Response**:
+
+  - If authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If authentication succeeds and the token is deleted:
+
+    ```json
+    {
+    	"message": "Logged out! Token Deleted"
+    }
+    ```
+
+### Login: Authenticate User and Generate Token
+
+- **Endpoint**: `/login`
+- **Method**: `POST`
+- **Description**: Authenticates a user by their username and password, generates a token for authentication, and returns the token along with user details.
+- **Request Body**:
+  - `username` (string, required): Username of the user.
+  - `password` (string, required): Password of the user.
+- **Response**:
+
+  - If the username or password is invalid:
+
+    ```json
+    {
+    	"message": "Invalid username or password"
+    }
+    ```
+
+  - If the authentication succeeds and the token is generated:
+
+    ```json
+    {
+    	"Token": "<generated_token>",
+    	"IsAdmin": true,
+    	"FirstTimeLogin": true
+    }
+    ```
