@@ -10,7 +10,7 @@ docker-compose up
 
 ### Docker build and run
 ``
-docker-compose -f docker-compose_Build.yaml build
+docker-compose -f docker-compose_Build.yaml build 
 docker-compose -f docker-compose_Build.yaml up
 ``
 
