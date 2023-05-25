@@ -11,6 +11,8 @@ RUN npm install
 
 COPY . .
 
+ARG VITE_BACKEND_SERVER
+
 RUN npm run build
 
 WORKDIR /usr/src/app/
@@ -19,6 +21,6 @@ RUN mv build/dist dist
 
 RUN rm -r build
 
-EXPOSE 8080
+EXPOSE 4000
 
-CMD [ "http-server","-P http://localhost:8080?", "dist" ]
+CMD http-server -a ${FRONTEND_HOST} -p ${FRONTEND_PORT} -P http://${FRONTEND_HOST}:${FRONTEND_PORT}? dist

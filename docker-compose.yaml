@@ -13,25 +13,24 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_SERVER=${VITE_BACKEND_SERVER}
-      env_file:
-        - .env
+        - VITE_BACKEND_SERVER=localhost:3000
     ports:
-      - "${FRONTEND_PORT}:8080"
+      - 4000:4000
+    environment:
+      - FRONTEND_PORT=4000
+      - FRONTEND_HOST=0.0.0.0
     networks:
       - frontend
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      env_file:
-        - .env
     environment:
-      - BACKEND_PORT=${BACKEND_PORT}
-      - BACKEND_HOST=${BACKEND_HOST}
-      - DB_CONNECTION=${DB_CONNECTION}
+      - BACKEND_PORT=3000
+      - BACKEND_HOST=0.0.0.0
+      - DB_CONNECTION=mongodb://mongo:27017/QuickNoteDB
     ports:
-      - "${BACKEND_PORT}:3000"
+      - 3000:3000
     networks:
       - frontend
       - backend
