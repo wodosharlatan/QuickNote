@@ -42,6 +42,21 @@ The server should now be running and listening for incoming requests.
 
 The server provides the following API endpoints:
 
+
+- [Get all users](#get-all-users)
+- [Get a Specific User by Username](#get-a-specific-user-by-username)
+- [Make User Admin](#make-user-admin)
+- [Delete a Specific User by Username](#delete-a-specific-user-by-username)
+- [Change Password for a Specific User by Token](#change-password-for-a-specific-user-by-token)
+- [Make New User](#make-new-user)
+- [Logout: Delete Token for a Specific User by Token](#logout-delete-token-for-a-specific-user-by-token)
+- [Login: Authenticate User and Generate Token](#login-authenticate-user-and-generate-token)
+- [Create New Entry](#create-new-entry)
+- [Delete Entry by ID](#delete-entry-by-id)
+- [Get Entry by ID](#get-entry-by-id)
+- [Get all public entries](#get-all-public-entries)
+- [Get all private entries](#get-all-private-entries)
+
 ### Get all users
 
 - **Endpoint**: `/users`
