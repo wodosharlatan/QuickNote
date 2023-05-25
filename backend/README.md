@@ -115,3 +115,29 @@ The server provides the following API endpoints:
     	"message": "User not found"
     }
     ```
+
+### Make User Admin
+
+- **Endpoint**: `/users/set-admin`
+- **Method**: `POST`
+- **Description**: Grants admin privileges to a user.
+- **Request Body**:
+  - `token` (string, required): Token for authentication as an admin user.
+  - `username` (string, required): Username of the user to grant admin privileges to.
+- **Response**:
+
+  - If authentication fails:
+
+    ```json
+    {
+    	"message": "Unauthorized"
+    }
+    ```
+
+  - If authentication succeeds and the user is updated:
+
+    ```json
+    {
+    	"message": "Admin privileges granted!"
+    }
+    ```
