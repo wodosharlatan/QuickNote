@@ -6,11 +6,13 @@
       class="ui_ElementT1"
       type="password"
       placeholder=""
+      name="Password"
     /><br />
     <button
       class="ui_ElementT1 createButton"
       :disabled="!canSend"
       @click="changePass()"
+      name="ChangePasswordButton"
     >
       Change Password
     </button>

@@ -6,11 +6,13 @@
       class="ui_ElementT1"
       type="text"
       placeholder=""
+      name="Username"
     /><br />
     <button
       class="ui_ElementT1 createButton"
       :disabled="!canSend"
       @click="createUser()"
+      name="CreateUserButton"
     >
       Create User
     </button>

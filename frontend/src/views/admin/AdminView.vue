@@ -1,9 +1,15 @@
 <template>
   <div class="recBG_0">
     <div class="menubar">
-      <button class="ui_ElementT1 roundButton" @click="addUser()">+</button>
+      <button
+        class="ui_ElementT1 roundButton"
+        @click="addUser()"
+        name="AddUserButton"
+      >
+        +
+      </button>
     </div>
-    <div v-if="users" class="users">
+    <div v-if="users" class="users" name="UserView">
       <UserT1 v-for="user in users" :user="user" class="user" />
     </div>
   </div>

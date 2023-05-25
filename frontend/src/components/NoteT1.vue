@@ -1,5 +1,5 @@
 <template>
-  <div class="note" @click="viewNote(note.ID)">
+  <div class="note" @click="viewNote(note.ID)" name="Note">
     <div :class="['noteBar', 'urgnt' + note.Urgency]">
       <h3>{{ urgencyText(note.Urgency) }}</h3>
       <h3>{{ formatDate(new Date(note.DeadLine)) }}</h3>

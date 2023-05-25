@@ -6,6 +6,7 @@
       class="ui_ElementT1"
       type="text"
       placeholder=""
+      name="Title"
     /><br />
     <h2>Text</h2>
     <textarea
@@ -14,6 +15,7 @@
       type="text"
       placeholder=""
       oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'
+      name="Text"
     /><br />
     <h2>Urgency</h2>
     <UrgencySelect v-model="urgency" />
@@ -25,6 +27,7 @@
       class="ui_ElementT1 createButton"
       :disabled="!canSend"
       @click="createNote()"
+      name="CreateNoteButton"
     >
       Create Note
     </button>

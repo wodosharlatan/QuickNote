@@ -4,7 +4,13 @@
       <h1>
         {{ urgencyText(note.Urgency) }} -
         {{ formatDate(new Date(note.DeadLine)) }}
-        <button class="roundButton" @click="completeNote()">✓</button>
+        <button
+          class="roundButton"
+          @click="completeNote()"
+          name="CompleteButton"
+        >
+          ✓
+        </button>
       </h1>
     </div>
     <div class="wrapper">

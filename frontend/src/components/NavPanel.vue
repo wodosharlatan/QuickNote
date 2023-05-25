@@ -7,6 +7,7 @@
           v-if="isAdmin"
           :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Admin' }"
           @click="goTo('Admin')"
+          name="GoAdminButton"
         >
           Admin
         </button>
@@ -16,16 +17,24 @@
             selectedPage: $route.name == 'Private',
           }"
           @click="goTo('Private')"
+          name="GoPrivateButton"
         >
           Private
         </button>
         <button
           :class="{ ui_ElementT1: true, selectedPage: $route.name == 'Public' }"
           @click="goTo('Public')"
+          name="GoPublicButton"
         >
           Public
         </button>
-        <button class="ui_ElementT1 logoutButton" @click="logout">↲</button>
+        <button
+          class="ui_ElementT1 logoutButton"
+          @click="logout"
+          name="LogoutButton"
+        >
+          ↲
+        </button>
       </div>
     </div>
   </div>

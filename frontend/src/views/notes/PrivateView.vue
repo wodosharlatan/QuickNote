@@ -4,11 +4,12 @@
       <button
         class="ui_ElementT1 roundButton"
         @click="$router.push({ name: 'New Note' })"
+        name="NewNoteButton"
       >
         +
       </button>
     </div>
-    <div v-if="notes" class="notes">
+    <div v-if="notes" class="notes" name="NoteView">
       <NoteT1 v-for="note in notes" :note="note" class="note" />
     </div>
   </div>

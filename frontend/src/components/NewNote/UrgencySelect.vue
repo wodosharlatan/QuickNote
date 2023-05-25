@@ -2,6 +2,7 @@
   <div
     :class="['urgency', 'ui_ElementT1', 'urgnt' + urgency]"
     @click="changeUrgency()"
+    name="UrgencyButton"
   >
     <p>
       {{ urgencyText(urgency) }}

@@ -5,18 +5,21 @@
       type="text"
       :placeholder="curDate.getDate()"
       @focusout="checkDate()"
+      name="D_Day"
     />
     <input
       v-model="month"
       type="text"
       :placeholder="curDate.getMonth() + 1"
       @focusout="checkDate()"
+      name="D_Month"
     />
     <input
       v-model="year"
       type="text"
       :placeholder="curDate.getFullYear()"
       @focusout="checkDate()"
+      name="D_Year"
     />
   </div>
 </template>

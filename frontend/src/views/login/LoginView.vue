@@ -6,14 +6,21 @@
       class="ui_ElementT1"
       type="text"
       placeholder="Username"
+      name="Username"
     /><br />
     <input
       v-model="password"
       class="ui_ElementT1"
       type="password"
       placeholder="Password"
+      name="Password"
     /><br />
-    <button class="ui_ElementT1" :disabled="canLogin" @click="login">
+    <button
+      class="ui_ElementT1"
+      :disabled="canLogin"
+      @click="login"
+      name="LoginButton"
+    >
       Login
     </button>
   </div>
